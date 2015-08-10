@@ -12,12 +12,10 @@ def sum_multiples(max_n, n):
     p = int(max_n/n)     # integer division
     return n*(p*(p+1)/2)
 
-def p001_solution(max_n):
+def solution(max_n):
     return(sum_multiples(max_n, 3) + sum_multiples(max_n, 5) - sum_multiples(max_n, 15))
 
-def test_p001():
-    assert p001_solution(9) == 24
 
-print(p001_solution(9))
-print(p001_solution(999))
+print(solution(9))
+print(solution(999))
 
