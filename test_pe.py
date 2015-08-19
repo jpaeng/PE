@@ -7,6 +7,7 @@ import p003
 import p004
 import p005
 import p006
+import p007
 
 def test_common():
     # variables
@@ -78,3 +79,10 @@ def test_p005():
 
 def test_p006():
     assert p006.solution(10) == 2640
+
+
+def test_p007():
+    assert p007.solution(6)   == 13
+    assert p007.solution(100) == 541
+    assert p007.solution(121) == 661
+    assert p007.solution(167) == 991
