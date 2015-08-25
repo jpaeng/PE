@@ -9,6 +9,8 @@ import p005
 import p006
 import p007
 
+import p010
+
 def test_common():
     # variables
     ordered_list = list(range(-10,10))
@@ -86,3 +88,8 @@ def test_p007():
     assert p007.solution(100) == 541
     assert p007.solution(121) == 661
     assert p007.solution(167) == 991
+
+
+def test_p010():
+    assert p010.solution(10) == 17
+
