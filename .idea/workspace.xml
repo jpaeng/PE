@@ -34,11 +34,21 @@
       <file leaf-file-name="test_pe.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test_pe.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8443936">
-              <caret line="106" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.79376084">
+              <caret line="110" column="0" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
               <folding>
                 <element signature="e#1#14#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="p012.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/p012.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="48" column="34" selection-start-line="48" selection-start-column="34" selection-end-line="48" selection-end-column="34" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -77,8 +87,9 @@
         <option value="$PROJECT_DIR$/p008.py" />
         <option value="$PROJECT_DIR$/p009.py" />
         <option value="$PROJECT_DIR$/p010.py" />
-        <option value="$PROJECT_DIR$/test_pe.py" />
         <option value="$PROJECT_DIR$/p011.py" />
+        <option value="$PROJECT_DIR$/p012.py" />
+        <option value="$PROJECT_DIR$/test_pe.py" />
       </list>
     </option>
   </component>
@@ -154,24 +165,7 @@
       </console-settings>
     </option>
   </component>
-  <component name="RunManager" selected="Python.p011">
-    <configuration default="false" name="p010" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="PE" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/p010.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python tests.py.test in test_pe.py">
     <configuration default="false" name="py.test in PE" type="tests" factoryName="py.test" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -259,6 +253,23 @@
       <option name="params" value="" />
       <option name="USE_PARAM" value="false" />
       <option name="USE_KEYWORD" value="true" />
+      <method />
+    </configuration>
+    <configuration default="false" name="p012" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="PE" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/p012.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
@@ -409,19 +420,19 @@
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Python tests.pe_pytests" />
-      <item index="1" class="java.lang.String" itemvalue="Python.p010" />
-      <item index="2" class="java.lang.String" itemvalue="Python tests.py.test in PE" />
-      <item index="3" class="java.lang.String" itemvalue="Python.p011" />
-      <item index="4" class="java.lang.String" itemvalue="Python tests.py.test in test_pe.py" />
-      <item index="5" class="java.lang.String" itemvalue="Python tests.py.test in test_p010" />
+      <item index="1" class="java.lang.String" itemvalue="Python tests.py.test in PE" />
+      <item index="2" class="java.lang.String" itemvalue="Python.p011" />
+      <item index="3" class="java.lang.String" itemvalue="Python tests.py.test in test_pe.py" />
+      <item index="4" class="java.lang.String" itemvalue="Python tests.py.test in test_p010" />
+      <item index="5" class="java.lang.String" itemvalue="Python.p012" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.p011" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.py.test in test_pe.py" />
-        <item index="2" class="java.lang.String" itemvalue="Python tests.py.test in test_p010" />
-        <item index="3" class="java.lang.String" itemvalue="Python tests.py.test in PE" />
-        <item index="4" class="java.lang.String" itemvalue="Python.p010" />
+        <item index="0" class="java.lang.String" itemvalue="Python tests.py.test in test_pe.py" />
+        <item index="1" class="java.lang.String" itemvalue="Python.p012" />
+        <item index="2" class="java.lang.String" itemvalue="Python.p011" />
+        <item index="3" class="java.lang.String" itemvalue="Python tests.py.test in test_p010" />
+        <item index="4" class="java.lang.String" itemvalue="Python tests.py.test in PE" />
       </list>
     </recent_temporary>
   </component>
@@ -437,7 +448,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1036" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.102380954" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -472,7 +483,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="34" />
+      <option name="time" value="36" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -482,13 +493,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/common.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -856,10 +860,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/p012.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="48" column="34" selection-start-line="48" selection-start-column="34" selection-end-line="48" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test_pe.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8443936">
-          <caret line="106" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.79376084">
+          <caret line="110" column="0" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
           <folding>
             <element signature="e#1#14#0" expanded="true" />
           </folding>

@@ -11,6 +11,7 @@ import p007
 
 import p010
 import p011
+import p012
 
 
 def test_common():
@@ -106,3 +107,9 @@ def test_p011():
     text = ' '.join(text)
     grid = p011.text_to_grid(text, 4, 4)
     assert p011.solution(grid, 4, 4, 2) == 210
+
+
+def test_p012():
+    assert p012.getFactors(1) == [1]
+    assert p012.getFactors(16) == [1, 2, 4, 8, 16]
+    assert p012.solution(5) == (28, [1, 2, 4, 7, 14, 28])
