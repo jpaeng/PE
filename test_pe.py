@@ -10,6 +10,8 @@ import p006
 import p007
 
 import p010
+import p011
+
 
 def test_common():
     # variables
@@ -93,3 +95,14 @@ def test_p007():
 def test_p010():
     assert p010.solution(10) == 17
 
+
+def test_p011():
+    text = [str(x) for x in range(16)]
+    text = ' '.join(text)
+    grid = p011.text_to_grid(text, 4, 4)
+    assert p011.solution(grid, 4, 4, 2) == 210
+
+    text = [str(x) for x in range(15,-1, -1)]
+    text = ' '.join(text)
+    grid = p011.text_to_grid(text, 4, 4)
+    assert p011.solution(grid, 4, 4, 2) == 210
