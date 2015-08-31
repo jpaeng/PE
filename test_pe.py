@@ -20,31 +20,31 @@ def test_common():
     prime_list_10 = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
 
     # indexInOrderedList
-    assert common.indexInOrderedList(-10, ordered_list) == 0
-    assert common.indexInOrderedList( -1, ordered_list) == 9
-    assert common.indexInOrderedList(  0, ordered_list) == 10
-    assert common.indexInOrderedList(  9, ordered_list) == 19
-    assert common.indexInOrderedList( 10, ordered_list) == -1
-    assert common.indexInOrderedList(-11, ordered_list) == -1
+    assert common.index_in_ordered_list(-10, ordered_list) == 0
+    assert common.index_in_ordered_list( -1, ordered_list) == 9
+    assert common.index_in_ordered_list(  0, ordered_list) == 10
+    assert common.index_in_ordered_list(  9, ordered_list) == 19
+    assert common.index_in_ordered_list( 10, ordered_list) == -1
+    assert common.index_in_ordered_list(-11, ordered_list) == -1
 
     # isInOrderedList
-    assert common.isInOrderedList(-10, ordered_list)
-    assert common.isInOrderedList( -1, ordered_list)
-    assert common.isInOrderedList(  0, ordered_list)
-    assert common.isInOrderedList(  9, ordered_list)
-    assert common.isInOrderedList( 10, ordered_list) == False
-    assert common.isInOrderedList(-11, ordered_list) == False
+    assert common.is_in_ordered_list(-10, ordered_list)
+    assert common.is_in_ordered_list( -1, ordered_list)
+    assert common.is_in_ordered_list(  0, ordered_list)
+    assert common.is_in_ordered_list(  9, ordered_list)
+    assert common.is_in_ordered_list( 10, ordered_list) == False
+    assert common.is_in_ordered_list(-11, ordered_list) == False
 
     # sieve_erathosthenes
     assert common.sieve_erathosthenes(30) == prime_list_10
     assert common.sieve_erathosthenes(30) != ordered_list
 
     # getPrimeFactors
-    assert common.getPrimeFactors(0, prime_list_10) == []
-    assert common.getPrimeFactors(2, prime_list_10) == [2]
-    assert common.getPrimeFactors(512, prime_list_10) == [2]
-    assert common.getPrimeFactors(60, prime_list_10) == [2, 3, 5]
-    assert common.getPrimeFactors(6469693230, prime_list_10) == prime_list_10
+    assert common.get_prime_factors(0, prime_list_10) == []
+    assert common.get_prime_factors(2, prime_list_10) == [2]
+    assert common.get_prime_factors(512, prime_list_10) == [2]
+    assert common.get_prime_factors(60, prime_list_10) == [2, 3, 5]
+    assert common.get_prime_factors(6469693230, prime_list_10) == prime_list_10
 
     #
 
@@ -69,9 +69,9 @@ def test_p003():
 
 
 def test_p004():
-    assert p004.isNumPalindrome(11)
-    assert p004.isNumPalindrome(909)
-    assert p004.isNumPalindrome(422) == False
+    assert p004.is_num_palindrome(11)
+    assert p004.is_num_palindrome(909)
+    assert p004.is_num_palindrome(422) == False
 
     assert p004.solution(100, 15) == (99, 11, 9)
     assert p004.solution(101, 15) == (99, 11, 9)
@@ -110,6 +110,6 @@ def test_p011():
 
 
 def test_p012():
-    assert p012.getFactors(1) == [1]
-    assert p012.getFactors(16) == [1, 2, 4, 8, 16]
+    assert p012.get_factors(1) == [1]
+    assert p012.get_factors(16) == [1, 2, 4, 8, 16]
     assert p012.solution(5) == (28, [1, 2, 4, 7, 14, 28])

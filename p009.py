@@ -5,13 +5,16 @@
 # Find the product abc.
 
 
-def solution(sum):
+def solution(pyth_sum):
+    a = 0
+    b = 0
+    c = 0
     result = -1
-    for a in range(1,int(sum/2)):
-        for c in range(int((sum-a)/2), sum-2*a):
-            b = sum - a - c
+    for a in range(1, int(pyth_sum / 2)):
+        for c in range(int((pyth_sum - a) / 2), pyth_sum - 2 * a):
+            b = pyth_sum - a - c
             if a**2 + b**2 == c**2:
-                result = a*b*c
+                result = a * b * c
                 break
         if result > 0:
             break
@@ -20,7 +23,7 @@ def solution(sum):
 
 print(solution(1000))
 if False:
-#    for n in range(5, 20):
+    # for n in range(5, 20):
     for n in range(5, 1010):
         ans = solution(n)
         if ans[3] > 0:

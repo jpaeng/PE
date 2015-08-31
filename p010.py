@@ -9,4 +9,4 @@ def solution(n):
     return sum(prime_list)
 
 
-print(solution(2000000))
+# print(solution(2000000))

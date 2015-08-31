@@ -15,7 +15,7 @@ def sum_multiples(max_n, n):
 
 
 def solution(max_n):
-    return (sum_multiples(max_n, 3) + sum_multiples(max_n, 5) - sum_multiples(max_n, 15))
+    return sum_multiples(max_n, 3) + sum_multiples(max_n, 5) - sum_multiples(max_n, 15)
 
 
 print(solution(9))

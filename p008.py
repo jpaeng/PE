@@ -47,6 +47,7 @@ def solution1(num_string, prod_count):
     max_prod = 0
     string_length = len(num_string)
     window_list = []
+    window_index = 0
     if prod_count < string_length:
         for window_index in range(prod_count):
             window_list.append(int(num_string[window_index]))
@@ -79,7 +80,8 @@ def solution2(num_string, prod_count):
             num_list.append(int(num_string[index]))
         for index in range(prod_count, string_length):
             num_list.append(int(num_string[index]))
-            max_prod = max(max_prod, num_list[index]*num_list[index-1]*num_list[index-2]*num_list[index-3]*num_list[index-4])
+            max_prod = max(max_prod, num_list[index] * num_list[index-1] * num_list[index-2] * num_list[index-3]
+                           * num_list[index-4])
     return max_prod
 
 

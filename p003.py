@@ -5,36 +5,35 @@ import math
 
 
 def solution(n):
-    if n<2:
+    if n < 2:
         return 0
 
     # Remove factor out all 2s
-    if n%2 == 0:
-        lastFactor = 2
+    if n % 2 == 0:
+        last_factor = 2
         n /= 2
-        while n%2 == 0:
+        while n % 2 == 0:
             n /= 2
     else:
-        lastFactor = 3
+        last_factor = 3
 
     # At this point, only odd factors remain
     factor = 3
-    maxFactor = int(math.sqrt(n))+1
-    while n>1 and factor<maxFactor:
-        if n%factor == 0:
+    max_factor = int(math.sqrt(n))+1
+    while n > 1 and factor < max_factor:
+        if n % factor == 0:
             n /= factor
-            lastFactor = factor
-            while n%factor == 0:
+            last_factor = factor
+            while n % factor == 0:
                 n /= factor
-            maxFactor = int(math.sqrt(n))+1
-        factor = factor + 2
+            max_factor = int(math.sqrt(n))+1
+        factor += 2
 
     if n == 1:
-        return lastFactor
+        return last_factor
     else:
         return n
 
 print(solution(5))
 print(solution(13195))
-print(solution(600851475143))
-
+#print(solution(600851475143))

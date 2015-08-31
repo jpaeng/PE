@@ -3,16 +3,16 @@
 
 import common
 
+
 def solution(maxfactor):
     product = 1
-    primeList = common.sieve_erathosthenes(maxfactor)
-    for prime in primeList:
-        primeProduct=prime
-        while primeProduct <= maxfactor:
+    prime_list = common.sieve_erathosthenes(maxfactor)
+    for prime in prime_list:
+        prime_product = prime
+        while prime_product <= maxfactor:
             product *= prime
-            primeProduct *= prime
+            prime_product *= prime
     return product
 
 print(solution(10))
 print(solution(20))
-

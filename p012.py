@@ -17,7 +17,8 @@
 
 import math
 
-def getFactors(num):        # Valid for num > 1
+
+def get_factors(num):        # Valid for num > 1
     result = [1]
     if num > 1:
         hiresult = [num]
@@ -25,7 +26,7 @@ def getFactors(num):        # Valid for num > 1
         hiresult = []
     maxcheck = int(math.sqrt(num))+1
     for n in range(2, maxcheck):
-        if num%n == 0:
+        if num % n == 0:
             n2 = int(num/n)
             result.append(n)
             if n != n2:
@@ -40,11 +41,11 @@ def solution(target_factor_count):
     while True:
         n += 1
         triangle_num += n
-        factors = getFactors(triangle_num)
+        factors = get_factors(triangle_num)
         if len(factors) > target_factor_count:
             break
     return triangle_num, factors
 
 
-triangle_num, factors = solution(5)
-print(triangle_num, len(factors), factors)
+num, factor_list = solution(5)
+print(num, len(factor_list), factor_list)

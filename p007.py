@@ -9,14 +9,14 @@ import common
 
 
 def solution(n):
-    # valid for n>=4
+    # valid for n >= 4
     search_range = (-n)*(scipy.special.lambertw(-1.0/n, -1)).real
-    primeList = common.sieve_erathosthenes(int(search_range))
-    return primeList[n-1]
+    prime_list = common.sieve_erathosthenes(int(search_range))
+    return prime_list[n-1]
 
 
 print(solution(4))
 print(solution(6))
 print(solution(10))
-print(solution(150))
-print(solution(10001))
+# print(solution(150))
+# print(solution(10001))

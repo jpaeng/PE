@@ -3,28 +3,28 @@ import math
 
 
 # = List Procedures =================================
-def indexInOrderedList(n, orderedList):      # binary search
+def index_in_ordered_list(n, ordered_list):      # binary search
     lo = 0
-    hi = len(orderedList)-1
+    hi = len(ordered_list)-1
     while (hi - lo) > 1:
         mid = int((lo+hi)/2)
-        if n == orderedList[mid]:
+        if n == ordered_list[mid]:
             return mid
-        elif n < orderedList[mid]:
+        elif n < ordered_list[mid]:
             hi = mid
         else:
             lo = mid
 
-    if n == orderedList[lo]:
+    if n == ordered_list[lo]:
         return lo
-    elif n == orderedList[hi]:
+    elif n == ordered_list[hi]:
         return hi
 
     return -1
 
 
-def isInOrderedList(n, orderedList):      # binary search
-    index = indexInOrderedList(n, orderedList)
+def is_in_ordered_list(n, ordered_list):      # binary search
+    index = index_in_ordered_list(n, ordered_list)
     if index < 0:
         return False
     else:
@@ -33,42 +33,42 @@ def isInOrderedList(n, orderedList):      # binary search
 
 # = Prime Procedures =================================
 def sieve_erathosthenes(n):
-    boolTable = [True]*(n+1)
-    boolTable[0] = False
-    boolTable[1] = False
+    bool_table = [True]*(n+1)
+    bool_table[0] = False
+    bool_table[1] = False
 
-    primeList = []
+    prime_list = []
     sqrtn = int(math.sqrt(n))
     for i in range(2, sqrtn+1):
-        if boolTable[i]:
-            primeList.append(i)
+        if bool_table[i]:
+            prime_list.append(i)
             for j in range(i**2, n+1, i):
-                boolTable[j] = False
+                bool_table[j] = False
 
-    if sqrtn%2 == 0:
+    if sqrtn % 2 == 0:
         sqrtn += 1
     else:
         sqrtn += 2
     for i in range(sqrtn, n+1, 2):
-        if boolTable[i]:
-            primeList.append(i)
+        if bool_table[i]:
+            prime_list.append(i)
 
-    return primeList
+    return prime_list
 
 
-def getPrimeFactors(num, primeList):
-    if isInOrderedList(num, primeList):
+def get_prime_factors(num, prime_list):
+    if is_in_ordered_list(num, prime_list):
         result = [num]
     else:
         result = []
         hiresult = []
         maxcheck = int(math.sqrt(num))+1
-        for n in range(2,maxcheck):
-            if num%n == 0:
+        for n in range(2, maxcheck):
+            if num % n == 0:
                 n2 = num/n
-                if isInOrderedList(n, primeList):
+                if is_in_ordered_list(n, prime_list):
                     result.append(n)
-                if isInOrderedList(n2, primeList) and (n != n2):
-                    hiresult.insert(0,num/n)
+                if is_in_ordered_list(n2, prime_list) and (n != n2):
+                    hiresult.insert(0, num/n)
         result.extend(hiresult)
-    return(result)
+    return result

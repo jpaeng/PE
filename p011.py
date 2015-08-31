@@ -1,7 +1,7 @@
 # In the 20x20 grid below, what is the greatest product of four adjacent numbers
 # in the same direction (up, down, left, right, or diagonally) in the 20x20 grid?
 
-gridText = '\
+grid_text = '\
 08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08 \
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00 \
 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65 \
@@ -24,53 +24,51 @@ gridText = '\
 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48'
 
 
-def text_to_grid(gridText, xsize, ysize):
-    gridList = gridText.split(" ")
-    for index in range(len(gridList)):
-        gridList[index] = int(gridList[index])
+def text_to_grid(text, xsize, ysize):
+    grid_list = text.split(" ")
+    for index in range(len(grid_list)):
+        grid_list[index] = int(grid_list[index])
     grid = []
     for index in range(0, xsize*ysize, ysize):
-        grid.append(gridList[index:index+xsize])
+        grid.append(grid_list[index:index+xsize])
     return grid
 
 
 def solution(grid, xsize, ysize, product_count):
-    maxProduct = -1
+    max_product = -1
     for x in range(xsize-product_count+1):
         for y in range(ysize-product_count+1):
             if grid[x][y] > 0:
                 products = [grid[x][y]]*3
-                for i in range(1,product_count):
+                for i in range(1, product_count):
                     products[0] *= grid[x+i][y]     # right product
                     products[1] *= grid[x][y+i]     # down product
                     products[2] *= grid[x+i][y+i]   # right diagonal product
-                maxProduct = max(maxProduct, max(products))
+                max_product = max(max_product, max(products))
     for x in range(product_count-1, xsize):
         for y in range(ysize-product_count+1):
             if grid[x][y] > 0:
                 product = grid[x][y]
                 for i in range(1, product_count):
                     product *= grid[x-i][y+i]       # left diagonal product
-                maxProduct = max(maxProduct, product)
+                max_product = max(max_product, product)
     y = ysize-1     # last row
     for x in range(xsize-product_count+1):
         if grid[x][y] > 0:
             product = grid[x][y]
             for i in range(1, product_count):
                 product *= grid[x+i][y]     # right product
-            maxProduct = max(maxProduct, product)
+            max_product = max(max_product, product)
     x = xsize-1     # last column
     for y in range(ysize-product_count+1):
         if grid[x][y] > 0:
             product = grid[x][y]
             for i in range(1, product_count):
                 product *= grid[x][y+i]     # down product
-            maxProduct = max(maxProduct, product)
+            max_product = max(max_product, product)
+
+    return max_product
 
 
-    return maxProduct
-
-
-grid = text_to_grid(gridText, 20, 20)
+grid = text_to_grid(grid_text, 20, 20)
 print(solution(grid, 20, 20, 4))
-

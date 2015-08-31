@@ -11,11 +11,11 @@
 def solution(max_n):
     simple_sum = 0
     sum_of_squares = 0
-    for n in range(1,max_n+1):
+    for n in range(1, max_n+1):
         simple_sum += n
         sum_of_squares += n*n
 
-    return simple_sum*simple_sum - sum_of_squares
+    return simple_sum * simple_sum - sum_of_squares
 
 
 print(solution(10))

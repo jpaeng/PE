@@ -19,13 +19,13 @@ def solution(max_n):
     n_3 = 2
     total = 10
 
-    while (n <= max_n):
+    while n <= max_n:
         n, n_3 = 4 * n + n_3, n
         total += n
 
     total -= n
 
-    return (total)
+    return total
 
 print(solution(10))
 print(solution(33))
