@@ -9,4 +9,5 @@ def solution(n):
     return sum(prime_list)
 
 
-# print(solution(2000000))
+if __name__ == '__main__':  # only if run as a script, skip when imported as module
+    print(solution(2000000))

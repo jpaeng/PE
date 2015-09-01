@@ -16,7 +16,7 @@ import p012
 
 def test_common():
     # variables
-    ordered_list = list(range(-10,10))
+    ordered_list = list(range(-10, 10))
     prime_list_10 = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
 
     # indexInOrderedList
@@ -52,7 +52,7 @@ def test_common():
 def test_p001():
     with pytest.raises(ZeroDivisionError):
         p001.sum_multiples(100, 0)
-    assert p001.sum_multiples(9, 1)==45
+    assert p001.sum_multiples(9, 1) == 45
 
     assert p001.solution(9) == 23
 
@@ -71,7 +71,7 @@ def test_p003():
 def test_p004():
     assert p004.is_num_palindrome(11)
     assert p004.is_num_palindrome(909)
-    assert p004.is_num_palindrome(422) == False
+    assert p004.is_num_palindrome(422) is False
 
     assert p004.solution(100, 15) == (99, 11, 9)
     assert p004.solution(101, 15) == (99, 11, 9)
@@ -103,7 +103,7 @@ def test_p011():
     grid = p011.text_to_grid(text, 4, 4)
     assert p011.solution(grid, 4, 4, 2) == 210
 
-    text = [str(x) for x in range(15,-1, -1)]
+    text = [str(x) for x in range(15, -1, -1)]
     text = ' '.join(text)
     grid = p011.text_to_grid(text, 4, 4)
     assert p011.solution(grid, 4, 4, 2) == 210

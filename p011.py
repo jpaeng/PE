@@ -70,5 +70,6 @@ def solution(grid, xsize, ysize, product_count):
     return max_product
 
 
-grid = text_to_grid(grid_text, 20, 20)
-print(solution(grid, 20, 20, 4))
+if __name__ == '__main__':  # only if run as a script, skip when imported as module
+    grid = text_to_grid(grid_text, 20, 20)
+    print(solution(grid, 20, 20, 4))

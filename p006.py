@@ -18,5 +18,6 @@ def solution(max_n):
     return simple_sum * simple_sum - sum_of_squares
 
 
-print(solution(10))
-print(solution(100))
+if __name__ == '__main__':  # only if run as a script, skip when imported as module
+    print(solution(10))
+    print(solution(100))

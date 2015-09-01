@@ -23,8 +23,6 @@ strnum = '73167176531330624919225119674426574742355349194934\
 05886116467109405077541002256983155200055935729725\
 71636269561882670428252483600823257530420752963450'
 
-print(len(strnum))
-
 
 def handle_zero(index, prod_count, string_length, window_list, num_string):
     prod = 1
@@ -85,11 +83,27 @@ def solution2(num_string, prod_count):
     return max_prod
 
 
-print(solution2(strnum, 5))
+def solution3(num_string, prod_count):
+    string_length = len(num_string)
+    max_prod = 0
+    if prod_count < string_length:
+        num_list = [int(num_string[i]) for i in range(string_length)]
+        for i in range(prod_count, string_length):
+            prod = 1
+            for j in range(prod_count):
+                prod *= num_list[i-j]
+            max_prod = max(max_prod, prod)
+    return max_prod
 
 
-# Time Check
-if False:
+if __name__ == '__main__':  # only if run as a script, skip when imported as module
+    print(len(strnum))
+
+    print(solution1(strnum, 5))
+    print(solution2(strnum, 5))
+    print(solution3(strnum, 5))
+
+    # Time Check
     count = 1000
     start = timer()
     for n in range(count):
@@ -98,6 +112,10 @@ if False:
     for n in range(count):
         solution2(strnum, 5)
     time2 = timer()
+    for n in range(count):
+        solution3(strnum, 5)
+    time3 = timer()
 
     print(time1-start)  # in ms
     print(time2-time1)  # in ms
+    print(time3-time2)  # in ms

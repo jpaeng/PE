@@ -47,5 +47,6 @@ def solution(target_factor_count):
     return triangle_num, factors
 
 
-num, factor_list = solution(5)
-print(num, len(factor_list), factor_list)
+if __name__ == '__main__':  # only if run as a script, skip when imported as module
+    num, factor_list = solution(5)
+    print(num, len(factor_list), factor_list)

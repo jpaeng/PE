@@ -15,8 +15,9 @@ def solution(n):
     return prime_list[n-1]
 
 
-print(solution(4))
-print(solution(6))
-print(solution(10))
-# print(solution(150))
-# print(solution(10001))
+if __name__ == '__main__':  # only if run as a script, skip when imported as module
+    print(solution(4))
+    print(solution(6))
+    print(solution(10))
+    print(solution(150))
+    print(solution(10001))

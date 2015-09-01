@@ -21,10 +21,11 @@ def solution(pyth_sum):
     return a, b, c, result
 
 
-print(solution(1000))
-if False:
-    # for n in range(5, 20):
-    for n in range(5, 1010):
-        ans = solution(n)
-        if ans[3] > 0:
-            print(n, ans)
+if __name__ == '__main__':  # only if run as a script, skip when imported as module
+    print(solution(1000))
+    if False:
+        # for n in range(5, 20):
+        for n in range(5, 1010):
+            ans = solution(n)
+            if ans[3] > 0:
+                print(n, ans)

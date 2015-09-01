@@ -34,6 +34,7 @@ def solution(n):
     else:
         return n
 
-print(solution(5))
-print(solution(13195))
-#print(solution(600851475143))
+if __name__ == '__main__':
+    print(solution(5))
+    print(solution(13195))
+    print(solution(600851475143))

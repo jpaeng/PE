@@ -14,5 +14,6 @@ def solution(maxfactor):
             prime_product *= prime
     return product
 
-print(solution(10))
-print(solution(20))
+if __name__ == '__main__':  # only if run as a script, skip when imported as module
+    print(solution(10))
+    print(solution(20))

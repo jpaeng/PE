@@ -29,17 +29,18 @@ def solution(num, maxfactor):
     for n in range(num, 0, -1):
         if is_num_palindrome(n):
             for f1 in range(maxfactor, 0, -1):
-                if n / f1 > maxfactor:
+                if n/f1 > maxfactor:
                     break
                 elif n % f1 == 0:
-                    f2 = int(n / f1)
+                    f2 = int(n/f1)
                     break
-            if f2 is None:
+            if f2 is not None:
                 break
     return n, f1, f2
 
 
-print(solution(100, 15))
-print(solution(10000, 99))
-# print(solution(1000000, 999))
-# print(solution(100000000, 9999))
+if __name__ == '__main__':
+    print(solution(100, 15))
+    print(solution(10000, 99))
+    print(solution(1000000, 999))
+    print(solution(100000000, 9999))

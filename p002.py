@@ -27,8 +27,9 @@ def solution(max_n):
 
     return total
 
-print(solution(10))
-print(solution(33))
-print(solution(34))
-print(solution(35))
-print(solution(3999999))
+if __name__ == '__main__':
+    print(solution(10))
+    print(solution(33))
+    print(solution(34))
+    print(solution(35))
+    print(solution(3999999))
