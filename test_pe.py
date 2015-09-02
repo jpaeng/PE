@@ -15,6 +15,7 @@ import p011
 import p012
 import p013
 import p014
+import p015
 
 
 def test_common():
@@ -127,3 +128,10 @@ def test_p013():
 def test_p014():
     assert p014.collatz_sequence(13) == [13, 40, 20, 10, 5, 16, 8, 4, 2, 1]
     assert p014.solution(15) == 9
+
+
+def test_p015():
+    assert p015.lattice_paths_recursive((2, 2)) == 6
+    assert p015.lattice_paths_recursive((10, 10)) == 184756
+    for n in range(1, 11):
+        assert p015.lattice_paths_formula(n) == p015.lattice_paths_recursive((n, n))
