@@ -1,6 +1,7 @@
 
 import common
 import pytest
+
 import p001
 import p002
 import p003
@@ -13,6 +14,7 @@ import p010
 import p011
 import p012
 import p013
+import p014
 
 
 def test_common():
@@ -33,8 +35,8 @@ def test_common():
     assert common.is_in_ordered_list( -1, ordered_list)
     assert common.is_in_ordered_list(  0, ordered_list)
     assert common.is_in_ordered_list(  9, ordered_list)
-    assert common.is_in_ordered_list( 10, ordered_list) == False
-    assert common.is_in_ordered_list(-11, ordered_list) == False
+    assert common.is_in_ordered_list( 10, ordered_list) is False
+    assert common.is_in_ordered_list(-11, ordered_list) is False
 
     # sieve_erathosthenes
     assert common.sieve_erathosthenes(30) == prime_list_10
@@ -118,6 +120,10 @@ def test_p012():
 
 def test_p013():
     text_list = [str(x) for x in range(1000, 10000, 100)]
-    print(len(text_list))
     assert p013.sum_digits(text_list, 1) == 450
     assert p013.sum_digits(text_list, 2) == 4905
+
+
+def test_p014():
+    assert p014.collatz_sequence(13) == [13, 40, 20, 10, 5, 16, 8, 4, 2, 1]
+    assert p014.solution(15) == 9
