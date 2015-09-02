@@ -12,6 +12,7 @@ import p007
 import p010
 import p011
 import p012
+import p013
 
 
 def test_common():
@@ -113,3 +114,10 @@ def test_p012():
     assert p012.get_factors(1) == [1]
     assert p012.get_factors(16) == [1, 2, 4, 8, 16]
     assert p012.solution(5) == (28, [1, 2, 4, 7, 14, 28])
+
+
+def test_p013():
+    text_list = [str(x) for x in range(1000, 10000, 100)]
+    print(len(text_list))
+    assert p013.sum_digits(text_list, 1) == 450
+    assert p013.sum_digits(text_list, 2) == 4905
