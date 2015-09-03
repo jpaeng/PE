@@ -7,6 +7,7 @@ What is the sum of the digits of the number 2**1000?
 
 
 def power_digit_sum(num, pwr):
+    """Return the sum of the digits in the answer to num^pwr."""
     str_ans = str(num**pwr)
     sum_dig = sum(int(str_ans[i]) for i in range(len(str_ans)))
     return sum_dig

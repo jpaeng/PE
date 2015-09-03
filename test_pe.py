@@ -17,6 +17,7 @@ import p013
 import p014
 import p015
 import p016
+import p017
 
 
 def test_common():
@@ -140,3 +141,11 @@ def test_p015():
 
 def test_p016():
     assert p016.power_digit_sum(2, 15) == 26
+
+
+def test_p017():
+    assert p017.number_letter_count(5) == 4
+    assert p017.number_letter_count(115) == 20
+    assert p017.number_letter_count(342) == 23
+    assert p017.solution(5) == 19
+    assert p017.solution(342) == 6117
