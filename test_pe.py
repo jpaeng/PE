@@ -16,6 +16,7 @@ import p012
 import p013
 import p014
 import p015
+import p016
 
 
 def test_common():
@@ -135,3 +136,7 @@ def test_p015():
     assert p015.lattice_paths_recursive((10, 10)) == 184756
     for n in range(1, 11):
         assert p015.lattice_paths_formula(n) == p015.lattice_paths_recursive((n, n))
+
+
+def test_p016():
+    assert p016.power_digit_sum(2, 15) == 26
