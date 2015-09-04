@@ -27,7 +27,7 @@ def collatz_sequence(n):
     return col_list
 
 
-def solution(upper_limit):
+def longest_collatz_sequence(upper_limit):
     """Return number (bound by upper_limit) with longest Collatz Sequence. """
     max_start = -1
     max_length = -1
@@ -43,5 +43,5 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
     for i in range(1, 16):
         print(collatz_sequence(i))
     print()
-    max_start = solution(999999)
+    max_start = longest_collatz_sequence(999999)
     print(max_start, len(collatz_sequence(max_start)))

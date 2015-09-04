@@ -24,7 +24,7 @@ teens_count = {n: len(teens[n]) for n in range(10, 20)}
 tens_count = {n: len(tens[n]) for n in range(2, 10)}
 
 
-def number_letter_count(num):
+def number_letter_count_math(num):
     """Return the count of letters when num is spelled out. Math algorithm"""
 
     # Tens, ones
@@ -58,7 +58,7 @@ def number_letter_count(num):
     return count
 
 
-def number_letter_count2(num):
+def number_letter_count_text(num):
     """Return the count of letters when num is spelled out. Text conversion algorithm"""
     if num > 19:
         str_num = str(num)
@@ -90,42 +90,42 @@ def number_letter_count2(num):
     return count
 
 
-def solution(max_n):
+def sum_of_number_letter_counts_math(max_n):
     total = 0
     for i in range(1, max_n+1):
-        total += number_letter_count(i)
+        total += number_letter_count_math(i)
     return total
 
 
-def solution2(max_n):
+def sum_of_number_letter_counts_text(max_n):
     total = 0
     for i in range(1, max_n+1):
-        total += number_letter_count2(i)
+        total += number_letter_count_text(i)
     return total
 
 
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
     for n in range(1, 22):
-        print(n, number_letter_count(n), number_letter_count2(n))
+        print(n, number_letter_count_math(n), number_letter_count_text(n))
     n = 342
-    print(n, number_letter_count(n), number_letter_count2(n))
+    print(n, number_letter_count_math(n), number_letter_count_text(n))
     n = 115
-    print(n, number_letter_count(n), number_letter_count2(n))
+    print(n, number_letter_count_math(n), number_letter_count_text(n))
 
     print()
-    print(solution(5))
-    print(solution(342))
-    print(solution(1000))
+    print(sum_of_number_letter_counts_math(5))
+    print(sum_of_number_letter_counts_math(342))
+    print(sum_of_number_letter_counts_math(1000))
 
     # Time Check
     print()
     count = 1000
     start = timer()
     for n in range(count):
-        solution(count)
+        sum_of_number_letter_counts_math(count)
     time1 = timer()
     for n in range(count):
-        solution2(count)
+        sum_of_number_letter_counts_text(count)
     time2 = timer()
 
     print(time1-start)  # in ms

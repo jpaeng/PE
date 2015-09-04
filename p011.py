@@ -34,7 +34,7 @@ def text_to_grid(text, xsize, ysize):
     return grid
 
 
-def solution(grid, xsize, ysize, product_count):
+def greatest_n_adjacent_product(grid, xsize, ysize, product_count):
     max_product = -1
     for x in range(xsize-product_count+1):
         for y in range(ysize-product_count+1):
@@ -72,4 +72,4 @@ def solution(grid, xsize, ysize, product_count):
 
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
     grid = text_to_grid(grid_text, 20, 20)
-    print(solution(grid, 20, 20, 4))
+    print(greatest_n_adjacent_product(grid, 20, 20, 4))

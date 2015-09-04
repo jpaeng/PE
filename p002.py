@@ -5,7 +5,7 @@
 # find the sum of the even-valued terms.
 
 
-def solution(max_n):
+def sum_even_fibonacci(max_n):
     """
     sum just the even terms
     every third term is even
@@ -28,8 +28,8 @@ def solution(max_n):
     return total
 
 if __name__ == '__main__':
-    print(solution(10))
-    print(solution(33))
-    print(solution(34))
-    print(solution(35))
-    print(solution(3999999))
+    print(sum_even_fibonacci(10))
+    print(sum_even_fibonacci(33))
+    print(sum_even_fibonacci(34))
+    print(sum_even_fibonacci(35))
+    print(sum_even_fibonacci(3999999))

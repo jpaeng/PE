@@ -22,7 +22,7 @@ def is_num_palindrome(num):
         return is_str_palindrome(strnum)
 
 
-def solution(num, maxfactor):
+def largest_palindrome_product(num, maxfactor):
     n = None
     f1 = None
     f2 = None
@@ -40,7 +40,7 @@ def solution(num, maxfactor):
 
 
 if __name__ == '__main__':
-    print(solution(100, 15))
-    print(solution(10000, 99))
-    print(solution(1000000, 999))
-    print(solution(100000000, 9999))
+    print(largest_palindrome_product(100, 15))
+    print(largest_palindrome_product(10000, 99))
+    print(largest_palindrome_product(1000000, 999))
+    print(largest_palindrome_product(100000000, 9999))

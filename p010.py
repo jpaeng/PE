@@ -4,10 +4,10 @@
 import common
 
 
-def solution(n):
+def sum_of_primes(n):
     prime_list = common.sieve_erathosthenes(n)
     return sum(prime_list)
 
 
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    print(solution(2000000))
+    print(sum_of_primes(2000000))

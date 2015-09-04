@@ -8,7 +8,7 @@ import scipy.special
 import common
 
 
-def solution(n):
+def nth_prime(n):
     # valid for n >= 4
     search_range = (-n)*(scipy.special.lambertw(-1.0/n, -1)).real
     prime_list = common.sieve_erathosthenes(int(search_range))
@@ -16,8 +16,8 @@ def solution(n):
 
 
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    print(solution(4))
-    print(solution(6))
-    print(solution(10))
-    print(solution(150))
-    print(solution(10001))
+    print(nth_prime(4))
+    print(nth_prime(6))
+    print(nth_prime(10))
+    print(nth_prime(150))
+    print(nth_prime(10001))

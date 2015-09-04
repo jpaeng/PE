@@ -4,7 +4,7 @@
 import common
 
 
-def solution(maxfactor):
+def least_common_multiple_of_sequence(maxfactor):
     product = 1
     prime_list = common.sieve_erathosthenes(maxfactor)
     for prime in prime_list:
@@ -14,6 +14,7 @@ def solution(maxfactor):
             prime_product *= prime
     return product
 
+
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    print(solution(10))
-    print(solution(20))
+    print(least_common_multiple_of_sequence(10))
+    print(least_common_multiple_of_sequence(20))

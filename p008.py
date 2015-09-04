@@ -40,7 +40,7 @@ def handle_zero(index, prod_count, string_length, window_list, num_string):
     return index, prod
 
 
-def solution1(num_string, prod_count):
+def greatest_product_of_n_digits(num_string, prod_count):
     prod = 1
     max_prod = 0
     string_length = len(num_string)
@@ -69,7 +69,7 @@ def solution1(num_string, prod_count):
     return max_prod
 
 
-def solution2(num_string, prod_count):
+def greatest_product_of_n_digits_brute_force(num_string, prod_count):
     string_length = len(num_string)
     num_list = []
     max_prod = 1
@@ -83,7 +83,7 @@ def solution2(num_string, prod_count):
     return max_prod
 
 
-def solution3(num_string, prod_count):
+def greatest_product_of_n_digits_list_comprehensions(num_string, prod_count):
     string_length = len(num_string)
     max_prod = 0
     if prod_count < string_length:
@@ -99,21 +99,21 @@ def solution3(num_string, prod_count):
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
     print(len(strnum))
 
-    print(solution1(strnum, 5))
-    print(solution2(strnum, 5))
-    print(solution3(strnum, 5))
+    print(greatest_product_of_n_digits(strnum, 5))
+    print(greatest_product_of_n_digits_brute_force(strnum, 5))
+    print(greatest_product_of_n_digits_list_comprehensions(strnum, 5))
 
     # Time Check
     count = 1000
     start = timer()
     for n in range(count):
-        solution1(strnum, 5)
+        greatest_product_of_n_digits(strnum, 5)
     time1 = timer()
     for n in range(count):
-        solution2(strnum, 5)
+        greatest_product_of_n_digits_brute_force(strnum, 5)
     time2 = timer()
     for n in range(count):
-        solution3(strnum, 5)
+        greatest_product_of_n_digits_list_comprehensions(strnum, 5)
     time3 = timer()
 
     print(time1-start)  # in ms

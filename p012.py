@@ -35,7 +35,7 @@ def get_factors(num):        # Valid for num > 1
     return result
 
 
-def solution(target_factor_count):
+def triangle_number_with_n_divisors(target_factor_count):
     triangle_num = 0
     n = 0
     while True:
@@ -48,5 +48,5 @@ def solution(target_factor_count):
 
 
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    num, factor_list = solution(5)
+    num, factor_list = triangle_number_with_n_divisors(5)
     print(num, len(factor_list), factor_list)

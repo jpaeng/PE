@@ -5,7 +5,7 @@
 # Find the product abc.
 
 
-def solution(pyth_sum):
+def pythagorean_triplet_product(pyth_sum):
     a = 0
     b = 0
     c = 0
@@ -22,10 +22,10 @@ def solution(pyth_sum):
 
 
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    print(solution(1000))
+    print(pythagorean_triplet_product(1000))
     if False:
         # for n in range(5, 20):
         for n in range(5, 1010):
-            ans = solution(n)
+            ans = pythagorean_triplet_product(n)
             if ans[3] > 0:
                 print(n, ans)

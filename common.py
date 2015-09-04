@@ -37,21 +37,26 @@ def sieve_erathosthenes(n):
     bool_table[0] = False
     bool_table[1] = False
 
-    prime_list = []
-    sqrtn = int(math.sqrt(n))
-    for i in range(2, sqrtn+1):
-        if bool_table[i]:
-            prime_list.append(i)
-            for j in range(i**2, n+1, i):
-                bool_table[j] = False
-
-    if sqrtn % 2 == 0:
-        sqrtn += 1
+    if n == 2:
+        prime_list = [2]
+    elif n == 3:
+        prime_list = [2, 3]
     else:
-        sqrtn += 2
-    for i in range(sqrtn, n+1, 2):
-        if bool_table[i]:
-            prime_list.append(i)
+        prime_list = []
+        sqrtn = int(math.sqrt(n))
+        for i in range(2, sqrtn+1):
+            if bool_table[i]:
+                prime_list.append(i)
+                for j in range(i**2, n+1, i):
+                    bool_table[j] = False
+
+        if sqrtn % 2 == 0:
+            sqrtn += 1
+        else:
+            sqrtn += 2
+        for i in range(sqrtn, n+1, 2):
+            if bool_table[i]:
+                prime_list.append(i)
 
     return prime_list
 
@@ -72,3 +77,8 @@ def get_prime_factors(num, prime_list):
                     hiresult.insert(0, num/n)
         result.extend(hiresult)
     return result
+
+
+if __name__ == '__main__':  # only if run as a script, skip when imported as module
+    for n in range(2, 11):
+        print(n, sieve_erathosthenes(n))

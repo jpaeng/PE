@@ -4,7 +4,7 @@
 import math
 
 
-def solution(n):
+def largest_prime_factor(n):
     if n < 2:
         return 0
 
@@ -35,6 +35,6 @@ def solution(n):
         return n
 
 if __name__ == '__main__':
-    print(solution(5))
-    print(solution(13195))
-    print(solution(600851475143))
+    print(largest_prime_factor(5))
+    print(largest_prime_factor(13195))
+    print(largest_prime_factor(600851475143))
