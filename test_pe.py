@@ -18,6 +18,7 @@ import p014
 import p015
 import p016
 import p017
+import p019
 
 
 def test_common():
@@ -149,3 +150,15 @@ def test_p017():
     assert p017.number_letter_count(342) == 23
     assert p017.solution(5) == 19
     assert p017.solution(342) == 6117
+
+
+def test_p019():
+    # TODO ERROR CONDITIONS
+    curr_date = {'month': 7, 'day': 1, 'year': 2015, 'weekday': 3}     # 7/1/2015, Wednesday
+    p019.increment_month(curr_date)
+    assert curr_date == {'month': 8, 'day': 1, 'year': 2015, 'weekday': 6}
+    p019.increment_month(curr_date)
+    assert curr_date == {'month': 9, 'day': 1, 'year': 2015, 'weekday': 2}
+
+    stop_date = {'month': 6, 'day': 25, 'year': 2016, 'weekday': 6}     # 6/25/2016, Saturday
+    assert p019.count_weekdays(curr_date, 0, stop_date) == 2
