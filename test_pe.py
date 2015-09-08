@@ -2,14 +2,6 @@
 import common
 import pytest
 
-import p001
-import p002
-import p003
-import p004
-import p005
-import p006
-import p007
-
 import p010
 import p011
 import p012
@@ -19,6 +11,8 @@ import p015
 import p016
 import p017
 import p019
+
+import p00x
 
 
 def test_common():
@@ -58,46 +52,45 @@ def test_common():
 
 def test_p001():
     with pytest.raises(ZeroDivisionError):
-        p001.sum_of_multiples(100, 0)
-    assert p001.sum_of_multiples(9, 1) == 45
-
-    assert p001.sum_of_two_multiples(9) == 23
+        p00x.sum_of_multiples(100, 0)
+    assert p00x.sum_of_multiples(9, 1) == 45
+    assert p00x.sum_of_two_multiples(9, 3, 5) == 23
 
 
 def test_p002():
-    assert p002.sum_even_fibonacci(33) == 10
-    assert p002.sum_even_fibonacci(34) == 44
+    assert p00x.sum_even_fibonacci(33) == 10
+    assert p00x.sum_even_fibonacci(34) == 44
 
 
 def test_p003():
-    assert p003.largest_prime_factor(0) == 0
-    assert p003.largest_prime_factor(5) == 5
-    assert p003.largest_prime_factor(13195) == 29
+    assert p00x.largest_prime_factor(0) == 0
+    assert p00x.largest_prime_factor(5) == 5
+    assert p00x.largest_prime_factor(13195) == 29
 
 
 def test_p004():
-    assert p004.is_num_palindrome(11)
-    assert p004.is_num_palindrome(909)
-    assert p004.is_num_palindrome(422) is False
+    assert p00x.is_num_palindrome(11)
+    assert p00x.is_num_palindrome(909)
+    assert p00x.is_num_palindrome(422) is False
 
-    assert p004.largest_palindrome_product(100, 15) == (99, 11, 9)
-    assert p004.largest_palindrome_product(101, 15) == (99, 11, 9)
-    assert p004.largest_palindrome_product(101, 15) != (99, 11, 10)
+    assert p00x.largest_palindrome_product(100, 15) == (99, 11, 9)
+    assert p00x.largest_palindrome_product(101, 15) == (99, 11, 9)
+    assert p00x.largest_palindrome_product(101, 15) != (99, 11, 10)
 
 
 def test_p005():
-    assert p005.least_common_multiple_of_sequence(10) == 2520
+    assert p00x.least_common_multiple_of_sequence(10) == 2520
 
 
 def test_p006():
-    assert p006.square_of_sum_minus_sum_of_squares(10) == 2640
+    assert p00x.square_of_sum_minus_sum_of_squares(10) == 2640
 
 
 def test_p007():
-    assert p007.nth_prime(6)   == 13
-    assert p007.nth_prime(100) == 541
-    assert p007.nth_prime(121) == 661
-    assert p007.nth_prime(167) == 991
+    assert p00x.nth_prime(6)   == 13
+    assert p00x.nth_prime(100) == 541
+    assert p00x.nth_prime(121) == 661
+    assert p00x.nth_prime(167) == 991
 
 
 def test_p010():
