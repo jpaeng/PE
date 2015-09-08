@@ -13,7 +13,6 @@ from timeit import default_timer as timer
 # If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9.
 # The sum of these multiples is 23.
 # Find the sum of all the multiples of 3 or 5 below 1000.
-problem_num = 1
 
 
 def sum_of_multiples(max_n, k):
@@ -37,7 +36,6 @@ def sum_of_two_multiples(max_n, k1, k2):
 #     1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, ...
 # By considering the terms in the Fibonacci sequence whose values do not exceed four million,
 # find the sum of the even-valued terms.
-problem_num += 1
 
 
 def sum_even_fibonacci(max_n):
@@ -66,7 +64,6 @@ def sum_even_fibonacci(max_n):
 # Problem 3:  Largest Prime Factor
 # The prime factors of 13195 are 5, 7, 13 and 29.
 # What is the largest prime factor of the number 600851475143 ?
-problem_num += 1
 
 
 def largest_prime_factor(n):
@@ -104,7 +101,6 @@ def largest_prime_factor(n):
 # A palindromic number reads the same both ways.
 # The largest palindrome made from the product of two 2-digit numbers is 9009 = 91x99.
 # Find the largest palindrome made from the product of two 3-digit numbers.
-problem_num += 1
 
 
 def is_str_palindrome(string):
@@ -145,7 +141,6 @@ def largest_palindrome_product(num, maxfactor):
 # Problem 5:  Least Common Multiple
 # 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
 # What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
-problem_num += 1
 
 
 def least_common_multiple_of_sequence(maxfactor):
@@ -168,7 +163,6 @@ def least_common_multiple_of_sequence(maxfactor):
 
 # Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is 3025 - 385 = 2640.
 # Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
-problem_num += 1
 
 
 def square_of_sum_minus_sum_of_squares(max_n):
@@ -187,7 +181,6 @@ def square_of_sum_minus_sum_of_squares(max_n):
 
 # There are approximately X/ln(X) primes among the first X numbers.
 # So the nth prime will be close to the number -nW(-1/n) where W() is the Lambert product log function.
-problem_num += 1
 
 
 def nth_prime(n):
@@ -199,7 +192,6 @@ def nth_prime(n):
 
 # Problem 8:  Greatest Product of Digits
 # Find the greatest product of five consecutive digits in the 1000-digit number.
-problem_num += 1
 
 
 def handle_zero(index, prod_count, string_length, window_list, num_string):
@@ -280,7 +272,6 @@ def greatest_product_of_n_digits_list_comprehensions(num_string, prod_count):
 # For example, 3^2 + 4^2 = 9 + 16 = 25 = 5^2.
 # There exists exactly one Pythagorean triplet for which a + b + c = 1000.
 # Find the product abc.
-problem_num += 1
 
 
 def pythagorean_triplet_product(pyth_sum):
@@ -300,7 +291,7 @@ def pythagorean_triplet_product(pyth_sum):
 
 
 # Problem 1-9 Checks
-# problem_num = 1
+problem_num = 1
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
     if problem_num == 1:
         print(sum_of_two_multiples(9, 3, 5))
