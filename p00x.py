@@ -291,8 +291,9 @@ def pythagorean_triplet_product(pyth_sum):
 
 
 # Problem 1-9 Checks
-problem_num = 1
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
+    problem_num = 1
+
     if problem_num == 1:
         print(sum_of_two_multiples(9, 3, 5))
         print(sum_of_two_multiples(999, 3, 5))

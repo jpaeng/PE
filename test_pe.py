@@ -2,17 +2,8 @@
 import common
 import pytest
 
-import p010
-import p011
-import p012
-import p013
-import p014
-import p015
-import p016
-import p017
-import p019
-
 import p00x
+import p01x
 
 
 def test_common():
@@ -94,64 +85,64 @@ def test_p007():
 
 
 def test_p010():
-    assert p010.sum_of_primes(10) == 17
+    assert p01x.sum_of_primes(10) == 17
 
 
 def test_p011():
     text = [str(x) for x in range(16)]
     text = ' '.join(text)
-    grid = p011.text_to_grid(text, 4, 4)
-    assert p011.greatest_n_adjacent_product(grid, 4, 4, 2) == 210
+    grid = p01x.text_to_grid(text, 4, 4)
+    assert p01x.greatest_n_adjacent_product(grid, 4, 4, 2) == 210
 
     text = [str(x) for x in range(15, -1, -1)]
     text = ' '.join(text)
-    grid = p011.text_to_grid(text, 4, 4)
-    assert p011.greatest_n_adjacent_product(grid, 4, 4, 2) == 210
+    grid = p01x.text_to_grid(text, 4, 4)
+    assert p01x.greatest_n_adjacent_product(grid, 4, 4, 2) == 210
 
 
 def test_p012():
-    assert p012.get_factors(1) == [1]
-    assert p012.get_factors(16) == [1, 2, 4, 8, 16]
-    assert p012.triangle_number_with_n_divisors(5) == (28, [1, 2, 4, 7, 14, 28])
+    assert p01x.get_factors(1) == [1]
+    assert p01x.get_factors(16) == [1, 2, 4, 8, 16]
+    assert p01x.triangle_number_with_n_divisors(5) == (28, [1, 2, 4, 7, 14, 28])
 
 
 def test_p013():
     text_list = [str(x) for x in range(1000, 10000, 100)]
-    assert p013.sum_digits(text_list, 1) == 450
-    assert p013.sum_digits(text_list, 2) == 4905
+    assert p01x.sum_digits(text_list, 1) == 450
+    assert p01x.sum_digits(text_list, 2) == 4905
 
 
 def test_p014():
-    assert p014.collatz_sequence(13) == [13, 40, 20, 10, 5, 16, 8, 4, 2, 1]
-    assert p014.longest_collatz_sequence(15) == 9
+    assert p01x.collatz_sequence(13) == [13, 40, 20, 10, 5, 16, 8, 4, 2, 1]
+    assert p01x.longest_collatz_sequence(15) == 9
 
 
 def test_p015():
-    assert p015.lattice_path_count_recursive((2, 2)) == 6
-    assert p015.lattice_path_count_recursive((10, 10)) == 184756
+    assert p01x.lattice_path_count_recursive((2, 2)) == 6
+    assert p01x.lattice_path_count_recursive((10, 10)) == 184756
     for n in range(1, 11):
-        assert p015.lattice_path_count_formula(n) == p015.lattice_path_count_recursive((n, n))
+        assert p01x.lattice_path_count_formula(n) == p01x.lattice_path_count_recursive((n, n))
 
 
 def test_p016():
-    assert p016.power_digit_sum(2, 15) == 26
+    assert p01x.power_digit_sum(2, 15) == 26
 
 
 def test_p017():
-    assert p017.number_letter_count_math(5) == 4
-    assert p017.number_letter_count_math(115) == 20
-    assert p017.number_letter_count_math(342) == 23
-    assert p017.sum_of_number_letter_counts_math(5) == 19
-    assert p017.sum_of_number_letter_counts_math(342) == 6117
+    assert p01x.number_letter_count_math(5) == 4
+    assert p01x.number_letter_count_math(115) == 20
+    assert p01x.number_letter_count_math(342) == 23
+    assert p01x.sum_of_number_letter_counts_math(5) == 19
+    assert p01x.sum_of_number_letter_counts_math(342) == 6117
 
 
 def test_p019():
     # TODO ERROR CONDITIONS
     curr_date = {'month': 7, 'day': 1, 'year': 2015, 'weekday': 3}     # 7/1/2015, Wednesday
-    p019.increment_month(curr_date)
+    p01x.increment_month(curr_date)
     assert curr_date == {'month': 8, 'day': 1, 'year': 2015, 'weekday': 6}
-    p019.increment_month(curr_date)
+    p01x.increment_month(curr_date)
     assert curr_date == {'month': 9, 'day': 1, 'year': 2015, 'weekday': 2}
 
     stop_date = {'month': 6, 'day': 25, 'year': 2016, 'weekday': 6}     # 6/25/2016, Saturday
-    assert p019.count_weekdays(curr_date, 0, stop_date) == 2
+    assert p01x.count_weekdays(curr_date, 0, stop_date) == 2
