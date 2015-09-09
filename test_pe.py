@@ -1,9 +1,11 @@
 
+import math
 import common
 import pytest
 
 import p00x
 import p01x
+import p02x
 
 
 def test_common():
@@ -108,8 +110,8 @@ def test_p012():
 
 def test_p013():
     text_list = [str(x) for x in range(1000, 10000, 100)]
-    assert p01x.sum_digits(text_list, 1) == 450
-    assert p01x.sum_digits(text_list, 2) == 4905
+    assert p01x.sum_msb_digits(text_list, 1) == 450
+    assert p01x.sum_msb_digits(text_list, 2) == 4905
 
 
 def test_p014():
@@ -146,3 +148,7 @@ def test_p019():
 
     stop_date = {'month': 6, 'day': 25, 'year': 2016, 'weekday': 6}     # 6/25/2016, Saturday
     assert p01x.count_weekdays(curr_date, 0, stop_date) == 2
+
+
+def test_p020():
+    assert p02x.sum_digits(math.factorial(10)) == 27

@@ -117,7 +117,7 @@ def triangle_number_with_n_divisors(target_factor_count):
 # Problem 13:  MSB Sum of 50-digit Numbers
 # Work out the first ten digits of the sum of the following one-hundred 50-digit numbers.
 
-def sum_digits(str_list, n):
+def sum_msb_digits(str_list, n):
     """ Return the left n digits of the sum of str_list. """
     total = sum(int(str_num[:n]) for str_num in str_list)
     return total
@@ -562,7 +562,7 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
 53503534226472524250874054075591789781264330331690'
         pr13_nlist_strlist = pr13_nlist_string.split(' ')
         for z in range(1, 14):
-            print(z, sum_digits(pr13_nlist_strlist, z))
+            print(z, sum_msb_digits(pr13_nlist_strlist, z))
         print('00', 12345678901234567890)
     elif problem_num == 14:
         for z in range(1, 16):
