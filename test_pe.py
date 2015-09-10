@@ -158,3 +158,9 @@ def test_p020():
 
 def test_p021():
     assert p02x.amicable_list(10000) == [220, 284, 1184, 1210, 2620, 2924, 5020, 5564, 6232, 6368]
+
+
+def test_p022():
+    assert p02x.alpha_value('Colin') == 53
+    p022_name_list = ['Jock', 'Alex', 'Colin']
+    assert p02x.alpha_list_score(p022_name_list) == 265

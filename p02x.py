@@ -44,9 +44,42 @@ def amicable_list(max_n):
     return am_list
 
 
-# Problem 1-9 Checks
+# Problem 22:  Name Scores
+# Using p022_names.txt (right click and 'Save Link/Target As...'),
+# a 46K text file containing over five-thousand first names,
+# Begin by sorting it into alphabetical order.
+# Then working out the alphabetical value for each name,
+# multiply this value by its alphabetical position in the list to obtain a name score.
+
+# For example, when the list is sorted into alphabetical order,
+# COLIN, which is worth 3 + 15 + 12 + 9 + 14 = 53, is the 938th name in the list.
+# So, COLIN would obtain a score of 938 x 53 = 49714.
+
+# What is the total of all the name scores in the file?
+
+
+def alpha_value(name):
+    """ Return the alphabetical value of name calculated from the value of each character in name."""
+    total = 0
+    for char in name.upper():
+        total += ord(char)-64
+    return total
+
+
+def alpha_list_score(text_list):
+    """Return the score of an list of names which is the sum of (alpha value of each name x its alphabetical position"""
+    text_list.sort()
+    score_total = 0
+    for (index, name) in enumerate(text_list):
+        score_total += (index+1)*alpha_value(name)
+    return score_total
+
+
+
+
+# Problem 20-29 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 21
+    problem_num = 22
 
     if problem_num == 20:
         print()
@@ -58,3 +91,15 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print(sum(pr21_list), pr21_list)
         pr21_list = amicable_list(10000)
         print(sum(pr21_list), pr21_list)
+    elif problem_num == 22:
+        print()
+        p022_name = 'Alex'
+        print(p022_name, alpha_value(p022_name))
+        p022_name = 'Colin'
+        print(p022_name, alpha_value(p022_name))
+        p022_name = 'Jock'
+        print(p022_name, alpha_value(p022_name))
+        file_ptr = open('p022_names.txt')
+        p022_names_list = (file_ptr.read().replace('"', '')).split(',')
+        file_ptr.close()
+        print(alpha_list_score(p022_names_list))
