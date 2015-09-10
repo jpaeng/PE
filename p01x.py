@@ -85,30 +85,13 @@ def greatest_n_adjacent_product(grid, xsize, ysize, product_count):
 # We can see that 28 is the first triangle number to have over five divisors.
 # What is the value of the first triangle number to have over five hundred divisors?
 
-def get_factors(num):        # Valid for num > 1
-    result = [1]
-    if num > 1:
-        hiresult = [num]
-    else:
-        hiresult = []
-    maxcheck = int(math.sqrt(num))+1
-    for n in range(2, maxcheck):
-        if num % n == 0:
-            n2 = int(num/n)
-            result.append(n)
-            if n != n2:
-                hiresult.insert(0, n2)
-    result.extend(hiresult)
-    return result
-
-
 def triangle_number_with_n_divisors(target_factor_count):
     triangle_num = 0
     n = 0
     while True:
         n += 1
         triangle_num += n
-        factors = get_factors(triangle_num)
+        factors = common.get_factors(triangle_num)
         if len(factors) > target_factor_count:
             break
     return triangle_num, factors

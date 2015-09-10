@@ -1,5 +1,6 @@
 
 import math
+from timeit import default_timer as timer
 
 
 # = List Procedures =================================
@@ -29,6 +30,27 @@ def is_in_ordered_list(n, ordered_list):      # binary search
         return False
     else:
         return True
+
+
+# = Factor Procedures ================================
+def get_factors(num):        # Valid for num > 1
+    result = [1]
+    if num > 1:
+        hiresult = [num]
+    else:
+        hiresult = []
+    maxcheck = int(math.sqrt(num))+1
+    for n in range(2, maxcheck):
+        if num % n == 0:
+            n2 = int(num/n)
+            result.append(n)
+            if n != n2:
+                hiresult.insert(0, n2)
+    result.extend(hiresult)
+    return result
+
+
+# def get_prime_factors(num, prime_list): below in Prime Procedures section
 
 
 # = Prime Procedures =================================
@@ -80,5 +102,37 @@ def get_prime_factors(num, prime_list):
 
 
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
+    # Check sieve_erathosthenes()
+    print()
     for n in range(2, 11):
         print(n, sieve_erathosthenes(n))
+
+    # Time Check index_in_ordered_list()
+    ordered_list = [z for z in range(10000)]
+    time_count = 1000
+
+    start = timer()
+    for z in range(time_count):
+        time_ans = index_in_ordered_list(921, ordered_list)
+    time1 = timer()
+    for z in range(time_count):
+        time_ans = ordered_list.index(921)
+    time2 = timer()
+
+    print()
+    print(time1-start)  # in ms
+    print(time2-time1)  # in ms
+
+    # Time Check is_in_ordered_list()
+    start = timer()
+    for z in range(time_count):
+        time_ans = is_in_ordered_list(921, ordered_list)
+    time1 = timer()
+    for z in range(time_count):
+        time_ans = 921 in ordered_list
+    time2 = timer()
+
+    print()
+    print(time1-start)  # in ms
+    print(time2-time1)  # in ms
+

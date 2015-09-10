@@ -13,15 +13,15 @@ def test_common():
     ordered_list = list(range(-10, 10))
     prime_list_10 = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
 
-    # indexInOrderedList
-    assert common.index_in_ordered_list(-10, ordered_list) == 0
-    assert common.index_in_ordered_list( -1, ordered_list) == 9
-    assert common.index_in_ordered_list(  0, ordered_list) == 10
-    assert common.index_in_ordered_list(  9, ordered_list) == 19
+    # index_in_ordered_list
+    assert common.index_in_ordered_list(-10, ordered_list) == ordered_list.index(-10)
+    assert common.index_in_ordered_list( -1, ordered_list) == ordered_list.index(-1)
+    assert common.index_in_ordered_list(  0, ordered_list) == ordered_list.index(0)
+    assert common.index_in_ordered_list(  9, ordered_list) == ordered_list.index(9)
     assert common.index_in_ordered_list( 10, ordered_list) == -1
     assert common.index_in_ordered_list(-11, ordered_list) == -1
 
-    # isInOrderedList
+    # is_in_ordered_list
     assert common.is_in_ordered_list(-10, ordered_list)
     assert common.is_in_ordered_list( -1, ordered_list)
     assert common.is_in_ordered_list(  0, ordered_list)
@@ -29,11 +29,15 @@ def test_common():
     assert common.is_in_ordered_list( 10, ordered_list) is False
     assert common.is_in_ordered_list(-11, ordered_list) is False
 
+    # get_factors
+    assert common.get_factors(1) == [1]
+    assert common.get_factors(16) == [1, 2, 4, 8, 16]
+
     # sieve_erathosthenes
     assert common.sieve_erathosthenes(30) == prime_list_10
     assert common.sieve_erathosthenes(30) != ordered_list
 
-    # getPrimeFactors
+    # get_prime_factors
     assert common.get_prime_factors(0, prime_list_10) == []
     assert common.get_prime_factors(2, prime_list_10) == [2]
     assert common.get_prime_factors(512, prime_list_10) == [2]
@@ -103,8 +107,6 @@ def test_p011():
 
 
 def test_p012():
-    assert p01x.get_factors(1) == [1]
-    assert p01x.get_factors(16) == [1, 2, 4, 8, 16]
     assert p01x.triangle_number_with_n_divisors(5) == (28, [1, 2, 4, 7, 14, 28])
 
 
@@ -152,3 +154,7 @@ def test_p019():
 
 def test_p020():
     assert p02x.sum_digits(math.factorial(10)) == 27
+
+
+def test_p021():
+    assert p02x.amicable_list(10000) == [220, 284, 1184, 1210, 2620, 2924, 5020, 5564, 6232, 6368]
