@@ -186,3 +186,12 @@ def test_p026():
     assert p02x.recurring_cycle(2) == 0
     assert p02x.recurring_cycle(7) == 6
     assert p02x.recurring_cycle(9) == 1
+
+
+def test_p027():
+    pr27_coeff_list = common.sieve_erathosthenes(50)
+    pr27_prime_list = common.sieve_erathosthenes(3000)
+    assert p02x.consecutive_prime_count(1, 41, pr27_prime_list) == 40
+    assert p02x.consecutive_prime_count(-1, 41, pr27_prime_list) == 41
+    assert p02x.max_count_given_b(41, pr27_coeff_list, pr27_prime_list) == (-1, 41, 41)
+    assert p02x.max_count_combination(pr27_coeff_list, pr27_prime_list) == (-5, 47, 43)
