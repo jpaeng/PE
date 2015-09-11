@@ -200,3 +200,10 @@ def test_p027():
 def test_p028():
     assert p02x.number_spiral_diagonal_sum(5, 1, 1) == 101
     assert p02x.number_spiral_diagonal_sum(1001, 1, 1) == 669171001
+
+
+def test_p029():
+    pr29_list = [z for z in range(2, 6)]
+    assert len(p02x.distinct_powers(pr29_list)) == 15
+    pr29_list = [z for z in range(2, 101)]
+    assert len(p02x.distinct_powers(pr29_list)) == 9183
