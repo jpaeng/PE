@@ -195,3 +195,8 @@ def test_p027():
     assert p02x.consecutive_prime_count(-1, 41, pr27_prime_list) == 41
     assert p02x.max_count_given_b(41, pr27_coeff_list, pr27_prime_list) == (-1, 41, 41)
     assert p02x.max_count_combination(pr27_coeff_list, pr27_prime_list) == (-5, 47, 43)
+
+
+def test_p028():
+    assert p02x.number_spiral_diagonal_sum(5, 1, 1) == 101
+    assert p02x.number_spiral_diagonal_sum(1001, 1, 1) == 669171001

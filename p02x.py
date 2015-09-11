@@ -295,10 +295,42 @@ def max_count_combination(coeff_candidates, prime_list):
     return max_max_set
 
 
+# Problem 28:  Number Spiral Diagonals
+# Starting with the number 1 and moving to the right in a clockwise direction a 5 by 5 spiral is formed as follows:
+
+# 21 22 23 24 25
+# 20  7  8  9 10
+# 19  6  1  2 11
+# 18  5  4  3 12
+# 17 16 15 14 13
+
+# It can be verified that the sum of the numbers on the diagonals is 101.
+# What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way?
+
+def number_spiral_diagonal_sum(dim, start, count_incr):
+    """Return the sum of diagonals of a dim x dim grid created by starting with start and spiraling outward by incr."""
+    upper_limit = dim**2
+    term = start
+    corner_incr = 0
+    corner = 4
+    total = start
+
+    while term < upper_limit:
+        if corner < 4:
+            corner += 1
+        else:
+            corner = 1
+            corner_incr += 2*count_incr
+        term += corner_incr
+        total += term
+    return total
+
+
+
 
 # Problem 20-29 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 27
+    problem_num = 28
 
     if problem_num == 20:
         print()
@@ -364,3 +396,8 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print(max_count_given_b(41, pr27_coeff_list, pr27_prime_list))
         print(max_count_given_b(1601, pr27_coeff_list, pr27_prime_list))
         print(max_count_combination(pr27_coeff_list, pr27_prime_list))
+    elif problem_num == 28:
+        pr28_dim = 5
+        print(pr28_dim, number_spiral_diagonal_sum(pr28_dim, 1, 1))
+        pr28_dim = 1001
+        print(pr28_dim, number_spiral_diagonal_sum(pr28_dim, 1, 1))
