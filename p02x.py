@@ -33,12 +33,12 @@ def sum_digits(num):
 # Evaluate the sum of all the amicable numbers under 10000.
 
 def amicable_list(max_n):
-    """Return the list of amicable numbers up to max_n."""
+    """ Return the list of amicable numbers up to max_n."""
     am_list = []
     for n in range(2, max_n+1):
-        divisor_sum = sum(common.get_factors(n)) - n
+        divisor_sum = sum(common.get_proper_divisors(n))
         if divisor_sum > n:
-            if n == sum(common.get_factors(divisor_sum)) - divisor_sum:
+            if n == sum(common.get_proper_divisors(divisor_sum)):
                 am_list.append(n)
                 am_list.append(divisor_sum)
     return am_list
@@ -57,7 +57,6 @@ def amicable_list(max_n):
 
 # What is the total of all the name scores in the file?
 
-
 def alpha_value(name):
     """ Return the alphabetical value of name calculated from the value of each character in name."""
     total = 0
@@ -67,7 +66,7 @@ def alpha_value(name):
 
 
 def alpha_list_score(text_list):
-    """Return the score of an list of names which is the sum of (alpha value of each name x its alphabetical position"""
+    """ Return the score of an list of names which is the sum of (alpha value of each name x its alphabetical position"""
     text_list.sort()
     score_total = 0
     for (index, name) in enumerate(text_list):
@@ -75,11 +74,62 @@ def alpha_list_score(text_list):
     return score_total
 
 
+# Problem 23:  Non-Abundant Sums
+# A perfect number is a number for which the sum of its proper divisors is exactly equal to the number.
+# For example, the sum of the proper divisors of 28 would be 1 + 2 + 4 + 7 + 14 = 28,
+#     which means that 28 is a perfect number.
+# A number n is called deficient if the sum of its proper divisors is less than n
+#     and it is called abundant if this sum exceeds n.
+# As 12 is the smallest abundant number, 1 + 2 + 3 + 4 + 6 = 16,
+#     the smallest number that can be written as the sum of two abundant numbers is 24.
+# By mathematical analysis, it can be shown that all integers greater than 28123
+#     can be written as the sum of two abundant numbers.
+# However, this upper limit cannot be reduced any further by analysis even though
+#     it is known that the greatest number that cannot be expressed as
+#     the sum of two abundant numbers is less than this limit.
+# Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
+
+def abundant_list(max_n):
+    """ Return list of abundant numbers up to max_n."""
+    alist = [n for n in range(2, max_n+1) if n < sum(common.get_proper_divisors(n))]
+    return alist
+
+
+def is_abundant_sum(xsum, abund_list):
+    """ Return True or False whether num is the sum of abundant numbers."""
+    if xsum < 24:
+        return False
+    else:
+        index = 0
+        complement = xsum - abund_list[index]
+        while complement >= abund_list[index]:
+            if complement in abund_list:
+                return True
+            else:
+                index += 1
+                complement = xsum - abund_list[index]
+        return False
+
+
+def abundant_sum_list(max_sum):
+    """ Return list of all numbers up to max_n that can be expressed as the sum of two abundant numbers."""
+    abund_list = abundant_list(max_sum)
+    ab_sum_list = [xsum for xsum in range(24, max_sum+1) if is_abundant_sum(xsum, abund_list)]
+    return ab_sum_list
+
+
+def non_abundant_sum_list(max_sum):
+    """ Return list of all numbers up to max_n that cannot be expressed as the sum of two abundant numbers."""
+    abund_list = abundant_list(max_sum)
+    #ab_sum_list = [xsum for xsum in range(2, max_sum-11) if not is_abundant_sum(xsum, abund_list)]
+    ab_sum_list = [xsum for xsum in range(2, max_sum+1) if not is_abundant_sum(xsum, abund_list)]
+    ab_sum_list.insert(0, 1)
+    return ab_sum_list
 
 
 # Problem 20-29 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 22
+    problem_num = 24
 
     if problem_num == 20:
         print()
@@ -103,3 +153,13 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         p022_names_list = (file_ptr.read().replace('"', '')).split(',')
         file_ptr.close()
         print(alpha_list_score(p022_names_list))
+    elif problem_num == 23:
+        z_abund_list = abundant_list(100)
+        print()
+        print(z_abund_list)
+        print(abundant_sum_list(40))
+        print(non_abundant_sum_list(40))
+        print('Sum of all non-abundant numbers below 40:', sum(non_abundant_sum_list(40)))
+        #print('Sum of all non-abundant numbers below 28123:', sum(non_abundant_sum_list(28123)))
+        z_abund_list = abundant_list(10000)
+        print('Odd abundant numbers below 10000: ', [z for z in z_abund_list if z%2])

@@ -33,12 +33,10 @@ def is_in_ordered_list(n, ordered_list):      # binary search
 
 
 # = Factor Procedures ================================
-def get_factors(num):        # Valid for num > 1
+def get_proper_divisors(num):   # Valid for num > 1
+    """ Return list of all proper divisors of num.  Proper divisors are the same as factors except does not include num itself."""
     result = [1]
-    if num > 1:
-        hiresult = [num]
-    else:
-        hiresult = []
+    hiresult = []
     maxcheck = int(math.sqrt(num))+1
     for n in range(2, maxcheck):
         if num % n == 0:
@@ -47,6 +45,14 @@ def get_factors(num):        # Valid for num > 1
             if n != n2:
                 hiresult.insert(0, n2)
     result.extend(hiresult)
+    return result
+
+
+def get_factors(num):        # Valid for num > 1
+    """Return list of all factors of num, including num itself."""
+    result = get_proper_divisors(num)
+    if num > 1:
+        result.append(num)
     return result
 
 
@@ -102,10 +108,13 @@ def get_prime_factors(num, prime_list):
 
 
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    # Check sieve_erathosthenes()
-    print()
-    for n in range(2, 11):
-        print(n, sieve_erathosthenes(n))
+    # Check get_proper_divisors()
+    print('Check get_proper_divisors()')
+    print(12, get_proper_divisors(12))
+
+    # Check get_factors()
+    print('Check get_factors()')
+    print(12, get_factors(12))
 
     # Time Check index_in_ordered_list()
     ordered_list = [z for z in range(10000)]
@@ -135,4 +144,9 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
     print()
     print(time1-start)  # in ms
     print(time2-time1)  # in ms
+
+    # Check sieve_erathosthenes()
+    print()
+    for n in range(2, 11):
+        print(n, sieve_erathosthenes(n))
 

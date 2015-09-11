@@ -164,3 +164,9 @@ def test_p022():
     assert p02x.alpha_value('Colin') == 53
     p022_name_list = ['Jock', 'Alex', 'Colin']
     assert p02x.alpha_list_score(p022_name_list) == 265
+
+
+def test_p023():
+    assert p02x.abundant_list(40) == [12, 18, 20, 24, 30, 36, 40]
+    assert p02x.abundant_sum_list(40) == [24, 30, 32, 36, 38, 40]
+    assert p02x.non_abundant_sum_list(10) == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
