@@ -180,3 +180,9 @@ def test_p024():
 def test_p025():
     assert p02x.fibonacci_greater_than(10) == (7, 13)
     assert p02x.fibonacci_greater_than(100) == (12, 144)
+
+
+def test_p026():
+    assert p02x.recurring_cycle(2) == 0
+    assert p02x.recurring_cycle(7) == 6
+    assert p02x.recurring_cycle(9) == 1

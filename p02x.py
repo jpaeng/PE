@@ -209,9 +209,41 @@ def fibonacci_greater_than(min_n):
     return n, fn
 
 
+# Problem 26:  Reciprocal Cycles
+# A unit fraction contains 1 in the numerator.
+# The decimal representation of the unit fractions with denominators 2 to 10 are given:
+#     1/2	= 	0.5
+#     1/3	= 	0.(3)
+#     1/4	= 	0.25
+#     1/5	= 	0.2
+#     1/6	= 	0.1(6)
+#     1/7	= 	0.(142857)
+#     1/8	= 	0.125
+#     1/9	= 	0.(1)
+#     1/10= 	0.1
+# Where 0.1(6) means 0.166666..., and has a 1-digit recurring cycle.
+# It can be seen that 1/7 has a 6-digit recurring cycle.
+# Find the value of d < 1000 for which 1/d contains the longest recurring cycle in its decimal fraction part.
+
+def recurring_cycle(n):
+    """ Return the length of the recurring cycle in 1/n.  Return 0 if no recurring cycle."""
+    remainders = []
+    remainder = 10
+    while True:
+        if remainder < n:
+            remainder *= 10
+        remainder = remainder % n
+        if remainder == 0:
+            return 0
+        elif remainder in remainders:
+            return len(remainders[remainders.index(remainder):])
+        else:
+            remainders.append(remainder)
+
+
 # Problem 20-29 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 25
+    problem_num = 26
 
     if problem_num == 20:
         print()
@@ -246,11 +278,25 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         z_abund_list = abundant_list(10000)
         print('Odd abundant numbers below 10000: ', [z for z in z_abund_list if z % 2])
     elif problem_num == 24:
+        print()
         pr24_bit_count = 4
         for z in range(math.factorial(pr24_bit_count)):
             print(z, lexi_perm(z, pr24_bit_count))
         print(999999, lexi_perm(999999, 10))
     elif problem_num == 25:
+        print()
         for z in range(1, 5):
             print(fibonacci_greater_than(10**z))
         print(fibonacci_greater_than(10**999)[0])
+    elif problem_num == 26:
+        print()
+        for z in range(1, 11):
+            print(z, recurring_cycle(z))
+        zlongest = 0
+        zlongest_z = 1
+        for z in range(1, 1000):
+            zcycle_length = recurring_cycle(z)
+            if zlongest < zcycle_length:
+                zlongest = zcycle_length
+                zlongest_z = z
+        print(zlongest_z, zlongest)
