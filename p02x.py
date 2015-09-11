@@ -3,6 +3,7 @@
 
 
 import math
+import string
 import common
 
 from timeit import default_timer as timer
@@ -121,15 +122,96 @@ def abundant_sum_list(max_sum):
 def non_abundant_sum_list(max_sum):
     """ Return list of all numbers up to max_n that cannot be expressed as the sum of two abundant numbers."""
     abund_list = abundant_list(max_sum)
-    #ab_sum_list = [xsum for xsum in range(2, max_sum-11) if not is_abundant_sum(xsum, abund_list)]
+    # ab_sum_list = [xsum for xsum in range(2, max_sum-11) if not is_abundant_sum(xsum, abund_list)]
     ab_sum_list = [xsum for xsum in range(2, max_sum+1) if not is_abundant_sum(xsum, abund_list)]
     ab_sum_list.insert(0, 1)
     return ab_sum_list
 
 
+# Problem 24:  Lexicographic Permutations
+# A permutation is an ordered arrangement of objects.
+# For example, 3124 is one possible permutation of the digits 1, 2, 3 and 4.
+# If all of the permutations are listed numerically or alphabetically, we call it lexicographic order.
+# The lexicographic permutations of 0, 1 and 2 are:
+#         012   021   102   120   201   210
+# The lexicographic permutations of 0, 1, 2 and 3 are:
+    # 0123
+    # 0132
+    # 0213
+    # 0231
+    # 0312
+    # 0321
+
+    # 1023
+    # 1032
+    # 1203
+    # 1230
+    # 1302
+    # 1320
+
+    # 2013
+    # 2031
+    # 2103
+    # 2130
+    # 2301
+    # 2310
+
+    # 3012
+    # 3021
+    # 3102
+    # 3120
+    # 3201
+    # 3210
+# What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
+
+def lexi_perm(n, digit_count):
+    """ Return the nth permutation of digit_count digits."""
+    digits = (string.digits + string.ascii_lowercase)[:digit_count]
+    result = ''
+    remainder = n
+    for position in range(digit_count-1, -1, -1):       # Start with msb and loop to lsb
+        divisor = math.factorial(position)              # Factorials:  1 2 6 24 120 ...
+        dividend = int(remainder/divisor)               # Determine which digit in list is next
+        remainder = remainder % divisor                 # Remainder calculated for next loop
+        result += digits[dividend]                      # Extend string to right
+        digits = digits.replace(digits[dividend], '')   # Remove digit just used from list
+    return result
+
+
+# Problem 25:  1000-digit Fibonacci number
+# The Fibonacci sequence is defined by the recurrence relation:
+#     Fn = F(n-1) + F(n-2), where F1 = 1 and F2 = 1.
+# Hence the first 12 terms will be:
+#     F1 = 1
+#     F2 = 1
+#     F3 = 2
+#     F4 = 3
+#     F5 = 5
+#     F6 = 8
+#     F7 = 13
+#     F8 = 21
+#     F9 = 34
+#     F10 = 55
+#     F11 = 89
+#     F12 = 144
+# The 12th term, F12, is the first term to contain three digits.
+# What is the first term in the Fibonacci sequence to contain 1000 digits?
+
+def fibonacci_greater_than(min_n):
+    fn = 1
+    fn_1 = 1
+    n = 2
+
+    while fn < min_n:
+        fn, fn_1 = fn + fn_1, fn
+        n += 1
+
+    return n, fn
+
+
 # Problem 20-29 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 24
+    problem_num = 25
 
     if problem_num == 20:
         print()
@@ -160,6 +242,15 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print(abundant_sum_list(40))
         print(non_abundant_sum_list(40))
         print('Sum of all non-abundant numbers below 40:', sum(non_abundant_sum_list(40)))
-        #print('Sum of all non-abundant numbers below 28123:', sum(non_abundant_sum_list(28123)))
+        # print('Sum of all non-abundant numbers below 28123:', sum(non_abundant_sum_list(28123)))
         z_abund_list = abundant_list(10000)
-        print('Odd abundant numbers below 10000: ', [z for z in z_abund_list if z%2])
+        print('Odd abundant numbers below 10000: ', [z for z in z_abund_list if z % 2])
+    elif problem_num == 24:
+        pr24_bit_count = 4
+        for z in range(math.factorial(pr24_bit_count)):
+            print(z, lexi_perm(z, pr24_bit_count))
+        print(999999, lexi_perm(999999, 10))
+    elif problem_num == 25:
+        for z in range(1, 5):
+            print(fibonacci_greater_than(10**z))
+        print(fibonacci_greater_than(10**999)[0])
