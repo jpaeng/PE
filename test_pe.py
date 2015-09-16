@@ -6,6 +6,7 @@ import pytest
 import p00x
 import p01x
 import p02x
+import p03x
 
 
 def test_common():
@@ -207,3 +208,20 @@ def test_p029():
     assert len(p02x.distinct_powers(pr29_list)) == 15
     pr29_list = [z for z in range(2, 101)]
     assert len(p02x.distinct_powers(pr29_list)) == 9183
+
+
+def test_p030():
+    assert p03x.sum_of_digit_powers(1634, 4) == 1634
+    assert p03x.sum_of_digit_powers(8208, 4) == 8208
+    assert p03x.sum_of_digit_powers(9474, 4) == 9474
+    assert p03x.sum_of_digit_powers(1635, 4) == 2003
+    assert p03x.sum_of_digit_powers(8218, 4) == 8209
+    assert p03x.sum_of_digit_powers(9574, 4) == 9843
+
+    assert p03x.position_value(9876543210, 3) == 3
+
+    assert p03x.increment_position(9876543210, 4) == 9876553210
+
+    assert p03x.set_next_digit(1000, 2, 4) == [1634]
+
+    assert p03x.perfect_digit_powers(4) == [1, 1634, 8208, 9474]

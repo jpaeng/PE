@@ -6,8 +6,6 @@ import math
 import string
 import common
 
-from timeit import default_timer as timer
-
 
 # Problem 20:  Factorial Digit Sum
 # n! means n x (n - 1) x ... x 3 x 2 x 1
