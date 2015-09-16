@@ -33,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_pe.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="test_pe.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test_pe.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="222" column="59" selection-start-line="222" selection-start-column="59" selection-end-line="222" selection-end-column="59" />
+            <state vertical-scroll-proportion="0.72131145">
+              <caret line="233" column="55" selection-start-line="233" selection-start-column="55" selection-end-line="233" selection-end-column="55" />
               <folding>
                 <element signature="e#1#12#0" expanded="true" />
               </folding>
@@ -45,11 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="p03x.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="p03x.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/p03x.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.090164">
-              <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="136" column="68" selection-start-line="136" selection-start-column="37" selection-end-line="136" selection-end-column="68" />
               <folding>
                 <element signature="e#39#50#0" expanded="true" />
               </folding>
@@ -129,8 +129,8 @@
         <option value="$PROJECT_DIR$/p01x.py" />
         <option value="$PROJECT_DIR$/common.py" />
         <option value="$PROJECT_DIR$/p02x.py" />
-        <option value="$PROJECT_DIR$/test_pe.py" />
         <option value="$PROJECT_DIR$/p03x.py" />
+        <option value="$PROJECT_DIR$/test_pe.py" />
       </list>
     </option>
   </component>
@@ -166,6 +166,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -186,8 +188,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -971,7 +971,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -985,22 +984,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_pe.py">
+    <entry file="file://$PROJECT_DIR$/p03x.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="222" column="59" selection-start-line="222" selection-start-column="59" selection-end-line="222" selection-end-column="59" />
+          <caret line="136" column="68" selection-start-line="136" selection-start-column="37" selection-end-line="136" selection-end-column="68" />
           <folding>
-            <element signature="e#1#12#0" expanded="true" />
+            <element signature="e#39#50#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/p03x.py">
+    <entry file="file://$PROJECT_DIR$/test_pe.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.090164">
-          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.72131145">
+          <caret line="233" column="55" selection-start-line="233" selection-start-column="55" selection-end-line="233" selection-end-column="55" />
           <folding>
-            <element signature="e#39#50#0" expanded="true" />
+            <element signature="e#1#12#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -225,3 +225,13 @@ def test_p030():
     assert p03x.set_next_digit(1000, 2, 4) == [1634]
 
     assert p03x.perfect_digit_powers(4) == [1, 1634, 8208, 9474]
+
+
+def test_p031():
+    coin_list = [200, 100, 50, 20, 10, 5, 2, 1]
+    assert p03x.coin_combinations(0, coin_list, 1) == 1
+    assert p03x.coin_combinations(1, coin_list, 1) == 1
+    assert p03x.coin_combinations(2, coin_list, 1) == 2
+    assert p03x.coin_combinations(3, coin_list, 1) == 2
+    assert p03x.coin_combinations(4, coin_list, 1) == 3
+    assert p03x.coin_combinations(200, coin_list, 1) == 73682

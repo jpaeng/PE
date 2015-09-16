@@ -37,7 +37,7 @@ def increment_position(n, position):
 
 
 def perfect_digit_powers(power):
-    """ Return list of numbers """
+    """ Return list of all perfect digit power numbers for a given power."""
 
     perfect_dig_list = set_next_digit(0, power, power)
 
@@ -45,6 +45,7 @@ def perfect_digit_powers(power):
 
 
 def set_next_digit(current_num, position, power):
+    """ Return a list of perfect digit powers found by recursing position by position from msb to lsb."""
     current_sum = sum_of_digit_powers(current_num, power)
     incr_max = (current_num + (10**(position+1) - 1) - current_sum)
     if incr_max > 0:
@@ -74,10 +75,32 @@ def set_next_digit(current_num, position, power):
     return perfect_dig_list
 
 
+# Problem 31:  Coin Sums
+# In England the currency is made up of pound, L, and pence, p,
+#     and there are eight coins in general circulation:
+#         1p, 2p, 5p, 10p, 20p, 50p, L1 (100p) and L2 (200p).
+# It is possible to make L2 in the following way:
+#     1xL1 + 1x50p + 2x20p + 1x5p + 1x2p + 3x1p
+# How many different ways can L2 be made using any number of coins?
+
+def coin_combinations(value, coin_list, smallest_coin):
+    """ Return the count of different possible combinations of coin_list coins that sum to the given value."""
+    count = 0
+    if len(coin_list) > 1:
+        while value >= 0:
+            count += coin_combinations(value, coin_list[1:], smallest_coin)
+            value -= coin_list[0]
+        return count
+    elif (value >= 0) and (value % smallest_coin == 0):
+        return 1
+    else:
+        return 0
+
+
 
 # Problem 30-39 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 30
+    problem_num = 31
 
     if problem_num == 30:
         print()
@@ -107,3 +130,9 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print()
         print(perfect_digit_powers(4))
         print(perfect_digit_powers(5))
+    elif problem_num == 31:
+        print(coin_combinations(4, [2, 1], 1))
+        print(coin_combinations(6, [3, 2], 2))
+        print(coin_combinations(6, [3, 2, 1], 1))
+        print(coin_combinations(200, [200, 100, 50, 20, 10, 5, 2, 1], 1))
+        print(coin_combinations(1, [200, 100, 50, 20, 10, 5, 2, 1], 1))
