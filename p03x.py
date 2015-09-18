@@ -147,12 +147,37 @@ def pandigital_products():
     return pandigital_c_list
 
 
+# Problem 33:  Digit Canceling Fractions
+# The fraction 49/98 is a curious fraction, as an inexperienced mathematician in
+# attempting to simplify it may incorrectly believe that 49/98 = 4/8, which is correct,
+# is obtained by cancelling the 9s.
+# We shall consider fractions like, 30/50 = 3/5, to be trivial examples.
+# There are exactly four non-trivial examples of this type of fraction,
+# less than one in value, and containing two digits in the numerator and denominator.
+# If the product of these four fractions is given in its lowest common terms, find the value of the denominator.
+
+def digit_canceling_fractions():
+    """ Return list of non-trivial digit canceling fractions."""
+    fraction_list = []
+    for num in range(1, 9):             # All possible single-digit numerators for fractions < 1
+        for den in range(num+1, 10):    # All possible single-digit denominators for a given numerator for fractions < 1
+            for digit in range(1, 10):  # All possible added digit
+                fraction0 = num/den
+                fraction1 = (digit*10 + num)/(den*10 + digit)
+                fraction2 = (num*10 + digit)/(digit*10 + den)
+                if fraction0 == fraction1:
+                    fraction_list.append((num, den, (digit*10 + num), (den*10 + digit), fraction1))
+                if fraction0 == fraction2:
+                    fraction_list.append((num, den, (num*10 + digit), (digit*10 + den), fraction2))
+    return fraction_list
+
+
 
 
 
 # Problem 30-39 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 32
+    problem_num = 33
 
     if problem_num == 30:
         print()
@@ -192,3 +217,13 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print(is_pandigital(39, 186, 39*186))
         print(pandigital_products())
         print(sum(pandigital_products()))
+    elif problem_num == 33:
+        print()
+        fraction_list = digit_canceling_fractions()
+        num_product = 1
+        den_product = 1
+        for fraction in fraction_list:
+            num_product *= fraction[0]
+            den_product *= fraction[1]
+        print(fraction_list)
+        print(common.reduce_fraction(num_product, den_product))

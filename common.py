@@ -61,6 +61,7 @@ def get_factors(num):        # Valid for num > 1
 
 # = Prime Procedures =================================
 def sieve_erathosthenes(n):
+    """ Return ordered list of primes up to n."""
     bool_table = [True]*(n+1)
     bool_table[0] = False
     bool_table[1] = False
@@ -90,6 +91,7 @@ def sieve_erathosthenes(n):
 
 
 def get_prime_factors(num, prime_list):
+    """ Return list of prime factors of num. Prime_list must be ordered."""
     if is_in_ordered_list(num, prime_list):
         result = [num]
     else:
@@ -107,6 +109,25 @@ def get_prime_factors(num, prime_list):
     return result
 
 
+# = Fraction Procedures ==============================
+def reduce_fraction(num, den):
+    """Return tuple of num and den reduced to lowest common terms."""
+    prime_list = sieve_erathosthenes(max(num, den))
+    num_factor_list = get_prime_factors(num, prime_list)
+    den_factor_list = get_prime_factors(den, prime_list)
+
+    for num_factor in num_factor_list:
+        if num_factor in den_factor_list:
+            while True:
+                num /= num_factor
+                den /= num_factor
+                if(num % num_factor) or (den % num_factor):
+                    break
+    return int(num), int(den)
+
+
+
+# = Check Common Functions ===========================
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
     # Check get_proper_divisors()
     print('Check get_proper_divisors()')
@@ -147,6 +168,10 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
 
     # Check sieve_erathosthenes()
     print()
-    for n in range(2, 11):
-        print(n, sieve_erathosthenes(n))
+    for z in range(2, 11):
+        print(z, sieve_erathosthenes(z))
 
+    # Check reduce_fraction()
+    y = 6
+    for z in range(1, 13):
+        print(y, z, reduce_fraction(y, z))
