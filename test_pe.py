@@ -235,3 +235,11 @@ def test_p031():
     assert p03x.coin_combinations(3, coin_list, 1) == 2
     assert p03x.coin_combinations(4, coin_list, 1) == 3
     assert p03x.coin_combinations(200, coin_list, 1) == 73682
+
+
+def test_p032():
+    assert p03x.is_pandigital(0, 0, 0) == False
+    assert p03x.is_pandigital(1, 1111, 1111) == False
+    assert p03x.is_pandigital(1, 2345, 6789)
+    assert p03x.is_pandigital(39, 186, 7254)
+    assert p03x.pandigital_products() == [6952, 7852, 5796, 5346, 4396, 7254, 7632]

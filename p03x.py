@@ -97,10 +97,62 @@ def coin_combinations(value, coin_list, smallest_coin):
         return 0
 
 
+# Problem 32:  Pandigital Products
+# We shall say that an n-digit number is pandigital if it makes use of all the digits 1 to n exactly once;
+#     for example, the 5-digit number, 15234, is 1 through 5 pandigital.
+# The product 7254 is unusual, as the identity, 39 x 186 = 7254, containing multiplicand, multiplier,
+#     and product is 1 through 9 pandigital.
+# Find the sum of all products whose multiplicand/multiplier/product identity can be written as
+#     a 1 through 9 pandigital.
+# HINT: Some products can be obtained in more than one way so be sure to only include it once in your sum.
+
+def is_pandigital(a, b, c):
+    """ Return True if a, b, c combine to be pandigital per str_digits"""
+    str_digits = '123456789'
+    str_num = str(a) + str(b) + str(c)
+    if len(str_num) == len(str_digits):
+        for n in str_digits:
+            if str_num.count(n) != 1:
+                return False
+    else:
+        return False
+    return True
+
+
+def pandigital_products():
+    """ Return list of products(c) of pandigital identities a * b = c."""
+    pandigital_c_list = []
+
+    # For 1-digit a, 4-digit b, and 4-digit c
+    for a in range(2, 10):  # loop through 1-digit a
+        b = 1233            # min b = 1234
+        c = a * b
+        while c < 9876:     # max c = 9876
+            b += 1
+            c = a * b
+            if is_pandigital(a, b, c):
+                if c not in pandigital_c_list:
+                    pandigital_c_list.append(c)
+
+    # For 2-digit a, 3-digit b, and 4-digit c
+    for a in range(12, 99):  # loop through 2-digit a
+        b = 122             # min b = 123
+        c = a * b
+        while c < 9876:     # max c = 9876
+            b += 1
+            c = a * b
+            if is_pandigital(a, b, c):
+                if c not in pandigital_c_list:
+                    pandigital_c_list.append(c)
+    return pandigital_c_list
+
+
+
+
 
 # Problem 30-39 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 31
+    problem_num = 32
 
     if problem_num == 30:
         print()
@@ -136,3 +188,7 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print(coin_combinations(6, [3, 2, 1], 1))
         print(coin_combinations(200, [200, 100, 50, 20, 10, 5, 2, 1], 1))
         print(coin_combinations(1, [200, 100, 50, 20, 10, 5, 2, 1], 1))
+    elif problem_num == 32:
+        print(is_pandigital(39, 186, 39*186))
+        print(pandigital_products())
+        print(sum(pandigital_products()))

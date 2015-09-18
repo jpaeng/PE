@@ -33,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_pe.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="test_pe.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test_pe.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.72131145">
-              <caret line="233" column="55" selection-start-line="233" selection-start-column="55" selection-end-line="233" selection-end-column="55" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="239" column="16" selection-start-line="239" selection-start-column="16" selection-end-line="239" selection-end-column="16" />
               <folding>
                 <element signature="e#1#12#0" expanded="true" />
               </folding>
@@ -45,11 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="p03x.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="p03x.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/p03x.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="136" column="68" selection-start-line="136" selection-start-column="37" selection-end-line="136" selection-end-column="68" />
+            <state vertical-scroll-proportion="0.6655738">
+              <caret line="137" column="29" selection-start-line="137" selection-start-column="29" selection-end-line="137" selection-end-column="29" />
               <folding>
                 <element signature="e#39#50#0" expanded="true" />
               </folding>
@@ -129,8 +129,8 @@
         <option value="$PROJECT_DIR$/p01x.py" />
         <option value="$PROJECT_DIR$/common.py" />
         <option value="$PROJECT_DIR$/p02x.py" />
-        <option value="$PROJECT_DIR$/p03x.py" />
         <option value="$PROJECT_DIR$/test_pe.py" />
+        <option value="$PROJECT_DIR$/p03x.py" />
       </list>
     </option>
   </component>
@@ -231,30 +231,6 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="py.test in test_p011" type="tests" factoryName="py.test" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="PE" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="testToRun" value="$PROJECT_DIR$/test_pe.py" />
-      <option name="keywords" value="test_p011" />
-      <option name="params" value="" />
-      <option name="USE_PARAM" value="false" />
-      <option name="USE_KEYWORD" value="true" />
-      <method />
-    </configuration>
     <configuration default="false" name="p02x" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -304,6 +280,30 @@
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/p03x.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="py.test in test_p030" type="tests" factoryName="py.test" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="PE" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="testToRun" value="$PROJECT_DIR$/test_pe.py" />
+      <option name="keywords" value="test_p030" />
+      <option name="params" value="" />
+      <option name="USE_PARAM" value="false" />
+      <option name="USE_KEYWORD" value="true" />
       <method />
     </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
@@ -455,18 +455,18 @@
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Python tests.pe_pytests" />
       <item index="1" class="java.lang.String" itemvalue="Python tests.py.test in test_pe.py" />
-      <item index="2" class="java.lang.String" itemvalue="Python tests.py.test in test_p011" />
-      <item index="3" class="java.lang.String" itemvalue="Python.p02x" />
-      <item index="4" class="java.lang.String" itemvalue="Python.common" />
-      <item index="5" class="java.lang.String" itemvalue="Python.p03x" />
+      <item index="2" class="java.lang.String" itemvalue="Python.p02x" />
+      <item index="3" class="java.lang.String" itemvalue="Python.common" />
+      <item index="4" class="java.lang.String" itemvalue="Python.p03x" />
+      <item index="5" class="java.lang.String" itemvalue="Python tests.py.test in test_p030" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python tests.py.test in test_pe.py" />
-        <item index="1" class="java.lang.String" itemvalue="Python.p03x" />
-        <item index="2" class="java.lang.String" itemvalue="Python.p02x" />
-        <item index="3" class="java.lang.String" itemvalue="Python.common" />
-        <item index="4" class="java.lang.String" itemvalue="Python tests.py.test in test_p011" />
+        <item index="1" class="java.lang.String" itemvalue="Python tests.py.test in test_p030" />
+        <item index="2" class="java.lang.String" itemvalue="Python.p03x" />
+        <item index="3" class="java.lang.String" itemvalue="Python.p02x" />
+        <item index="4" class="java.lang.String" itemvalue="Python.common" />
       </list>
     </recent_temporary>
   </component>
@@ -984,22 +984,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/p03x.py">
+    <entry file="file://$PROJECT_DIR$/test_pe.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="136" column="68" selection-start-line="136" selection-start-column="37" selection-end-line="136" selection-end-column="68" />
+          <caret line="239" column="16" selection-start-line="239" selection-start-column="16" selection-end-line="239" selection-end-column="16" />
           <folding>
-            <element signature="e#39#50#0" expanded="true" />
+            <element signature="e#1#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_pe.py">
+    <entry file="file://$PROJECT_DIR$/p03x.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.72131145">
-          <caret line="233" column="55" selection-start-line="233" selection-start-column="55" selection-end-line="233" selection-end-column="55" />
+        <state vertical-scroll-proportion="0.6655738">
+          <caret line="137" column="29" selection-start-line="137" selection-start-column="29" selection-end-line="137" selection-end-column="29" />
           <folding>
-            <element signature="e#1#12#0" expanded="true" />
+            <element signature="e#39#50#0" expanded="true" />
           </folding>
         </state>
       </provider>
