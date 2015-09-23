@@ -172,12 +172,317 @@ def digit_canceling_fractions():
     return fraction_list
 
 
+# Problem 34:  Digit Factorials
+# 145 is a curious number, as 1! + 4! + 5! = 1 + 24 + 120 = 145.
+# Find the sum of all numbers which are equal to the sum of the factorial of their digits.
+# Note: as 1! = 1 and 2! = 2 are not sums they are not included.
+
+def digit_factorial_sum(n):
+    """ Return the sum of the factorials of the digits of n."""
+    factorials = (1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880)    # factorials for digits 0-9
+    result = 0
+    for char in str(n):
+        result += factorials[int(char)]
+    return result
+
+
+def factorial_sum_search(in_n, num_length, start_n, max_n):
+    """ Return list of numbers equal to factorial sum - recursive."""
+    result = []
+    print(in_n)
+    for num in range(start_n, min(10**num_length, max_n), 10**(num_length-1)):
+        n = in_n + num
+        fact_sum = digit_factorial_sum(n)
+        if fact_sum > (n+num_length):
+            break
+        elif num_length == 1:
+            if fact_sum == n:
+                result.append(n)
+        else:
+            result.extend(factorial_sum_search(n, num_length-1, 0, max_n))
+
+    return result
+
+
+def factorial_sum_list(max_num=-1):
+    """ Return list of all numbers which are equal to the sum of the factorials of their digits."""
+
+    # Constants
+    factorials = (1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880)    # factorials for digits 0-9
+
+    # Max number to check
+    max_digit_count = int(math.log10(factorials[9]*math.log10(factorials[9]))) + 1
+    if max_num < 0:
+        max_num = min(factorials[9]*max_digit_count, 10**(max_digit_count+1))
+
+    # 1-digit numbers
+    result_list = factorial_sum_search(0, 1, 0, max_num)
+
+    # 2-digit numbers
+    result_list.extend(factorial_sum_search(0, 2, 10**1, max_num))
+
+    # 3-digit numbers
+    result_list.extend(factorial_sum_search(0, 3, 10**2, max_num))
+
+    # 4-digit numbers
+    result_list.extend(factorial_sum_search(0, 4, 10**3, max_num))
+
+    # 5-digit numbers
+    result_list.extend(factorial_sum_search(0, 5, 10**4, max_num))
+
+    # 6-digit numbers
+    result_list.extend(factorial_sum_search(0, 6, 10**5, max_num))
+
+    # 7-digit numbers
+    result_list.extend(factorial_sum_search(0, 7, 10**6, max_num))
+
+    return result_list
+
+
+def factorial_sum_list_old(max_num=-1):
+    """ Return list of all numbers which are equal to the sum of the factorials of their digits."""
+
+    # Constants
+    factorials = (1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880)    # factorials for digits 0-9
+#    max_digits = (0, 3, 4, 6, 7, 8, 9, 9)      # the max digit that can be used at each digit count,
+    #                                           e.g. 2-digit numbers can only use digits 0-4
+
+    # Max number to check
+    max_digit_count = int(math.log10(factorials[9]*math.log10(factorials[9]))) + 1
+    if max_num < 0:
+        max_num = min(factorials[9]*max_digit_count, 10**(max_digit_count+1))
+
+    result_list = []
+
+    # 1-digit numbers
+    num_length = 1
+#    for num0 in range(max_digits[num_length] + 1):
+    for num0 in range(10):
+        n = num0
+        fact_sum = digit_factorial_sum(n)
+        if fact_sum > (n+num_length):
+            break
+        elif fact_sum == n:
+            result_list.append(n)
+
+    # 2-digit numbers
+    num_length = 2
+    # for num1 in range(10, 10*(max_digits[num_length] + 1), 10):
+    for num1 in range(10, 100, 10):
+        n = num1
+        fact_sum = digit_factorial_sum(n)
+        if n > max_num:
+            break
+        elif fact_sum > (n+num_length):
+            break
+        else:
+            # for num0 in range(max_digits[num_length] + 1):
+            for num0 in range(10):
+                n = num1 + num0
+                fact_sum = digit_factorial_sum(n)
+                if fact_sum > (n+num_length):
+                    break
+                elif fact_sum == n:
+                    result_list.append(n)
+
+    # 3-digit numbers
+    num_length = 3
+    for num2 in range(100, 1000, 100):
+        n = num2
+        fact_sum = digit_factorial_sum(n)
+        if n > max_num:
+            break
+        elif fact_sum > (n+num_length):
+            break
+        else:
+            for num1 in range(0, 100, 10):
+                n = num2 + num1
+                fact_sum = digit_factorial_sum(n)
+                if fact_sum > (n+num_length):
+                    break
+                else:
+                    for num0 in range(10):
+                        n = num2 + num1 + num0
+                        fact_sum = digit_factorial_sum(n)
+                        if fact_sum > (n+num_length):
+                            break
+                        elif fact_sum == n:
+                            result_list.append(n)
+
+    # 4-digit numbers
+    num_length = 4
+    for num3 in range(1000, 10000, 1000):
+        n = num3
+        fact_sum = digit_factorial_sum(n)
+        if n > max_num:
+            break
+        elif fact_sum > (n+num_length):
+            break
+        else:
+            for num2 in range(0, 1000, 100):
+                n = num3 + num2
+                fact_sum = digit_factorial_sum(n)
+                if fact_sum > (n+num_length):
+                    break
+                else:
+                    for num1 in range(0, 100, 10):
+                        n = num3 + num2 + num1
+                        fact_sum = digit_factorial_sum(n)
+                        if fact_sum > (n+num_length):
+                            break
+                        else:
+                            for num0 in range(10):
+                                n = num3 + num2 + num1 + num0
+                                fact_sum = digit_factorial_sum(n)
+                                if fact_sum > (n+num_length):
+                                    break
+                                elif fact_sum == n:
+                                    result_list.append(n)
+
+    # 5-digit numbers
+    num_length = 5
+    for num4 in range(10000, 100000, 10000):
+        n = num4
+        fact_sum = digit_factorial_sum(n)
+        if n > max_num:
+            break
+        elif fact_sum > (n+num_length):
+            break
+        else:
+            for num3 in range(0, 10000, 1000):
+                n = num4 + num3
+                fact_sum = digit_factorial_sum(n)
+                if fact_sum > (n+num_length):
+                    break
+                else:
+                    for num2 in range(0, 1000, 100):
+                        n = num4 + num3 + num2
+                        fact_sum = digit_factorial_sum(n)
+                        if fact_sum > (n+num_length):
+                            break
+                        else:
+                            for num1 in range(0, 100, 10):
+                                n = num4 + num3 + num2 + num1
+                                fact_sum = digit_factorial_sum(n)
+                                if fact_sum > (n+num_length):
+                                    break
+                                else:
+                                    for num0 in range(10):
+                                        n = num4 + num3 + num2 + num1 + num0
+                                        fact_sum = digit_factorial_sum(n)
+                                        if fact_sum > (n+num_length):
+                                            break
+                                        elif fact_sum == n:
+                                            result_list.append(n)
+
+    # 6-digit numbers
+    num_length = 6
+    for num5 in range(100000, 1000000, 100000):
+        n = num5
+        fact_sum = digit_factorial_sum(n)
+        if n > max_num:
+            break
+        elif fact_sum > (n+num_length):
+            break
+        else:
+            for num4 in range(0, 100000, 10000):
+                n = num5 + num4
+                fact_sum = digit_factorial_sum(n)
+                if fact_sum > (n+num_length):
+                    break
+                else:
+                    for num3 in range(0, 10000, 1000):
+                        n = num5 + num4 + num3
+                        fact_sum = digit_factorial_sum(n)
+                        if fact_sum > (n+num_length):
+                            break
+                        else:
+                            for num2 in range(0, 1000, 100):
+                                n = num5 + num4 + num3 + num2
+                                fact_sum = digit_factorial_sum(n)
+                                if fact_sum > (n+num_length):
+                                    break
+                                else:
+                                    for num1 in range(0, 100, 10):
+                                        n = num5 + num4 + num3 + num2 + num1
+                                        fact_sum = digit_factorial_sum(n)
+                                        if fact_sum > (n+num_length):
+                                            break
+                                        else:
+                                            for num0 in range(10):
+                                                n = num5 + num4 + num3 + num2 + num1 + num0
+                                                fact_sum = digit_factorial_sum(n)
+                                                if fact_sum > (n+num_length):
+                                                    break
+                                                elif fact_sum == n:
+                                                    result_list.append(n)
+
+    # 7-digit numbers
+    # num_length = 7
+    for num6 in range(1000000, 10000000, 1000000):
+        n = num6
+        fact_sum = digit_factorial_sum(n)
+        # if fact_sum > (n+num_length):
+        if n > max_num:
+            break
+        else:
+            for num5 in range(0, 1000000, 100000):
+                n = num6 + num5
+                fact_sum = digit_factorial_sum(n)
+                # if fact_sum > (n+num_length):
+                if n > max_num:
+                    break
+                else:
+                    for num4 in range(0, 100000, 10000):
+                        n = num6 + num5 + num4
+                        fact_sum = digit_factorial_sum(n)
+                        # if fact_sum > (n+num_length):
+                        if n > max_num:
+                            break
+                        else:
+                            for num3 in range(0, 10000, 1000):
+                                n = num6 + num5 + num4 + num3
+                                fact_sum = digit_factorial_sum(n)
+                                # if fact_sum > (n+num_length):
+                                if n > max_num:
+                                    break
+                                else:
+                                    for num2 in range(0, 1000, 100):
+                                        n = num6 + num5 + num4 + num3 + num2
+                                        fact_sum = digit_factorial_sum(n)
+                                        # if fact_sum > (n+num_length):
+                                        if n > max_num:
+                                            break
+                                        else:
+                                            for num1 in range(0, 100, 10):
+                                                n = num6 + num5 + num4 + num3 + num2 + num1
+                                                fact_sum = digit_factorial_sum(n)
+                                                # if fact_sum > (n+num_length):
+                                                if n > max_num:
+                                                    break
+                                                else:
+                                                    for num0 in range(10):
+                                                        n = num6 + num5 + num4 + num3 + num2 + num1 + num0
+                                                        fact_sum = digit_factorial_sum(n)
+                                                        # if fact_sum > (n+num_length):
+                                                        if n > max_num:
+                                                            break
+                                                        elif fact_sum == n:
+                                                            result_list.append(n)
+
+    return result_list
+
+
+
+
+
+
 
 
 
 # Problem 30-39 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 33
+    problem_num = 34
 
     if problem_num == 30:
         print()
@@ -227,3 +532,7 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
             den_product *= fraction[1]
         print(fraction_list)
         print(common.reduce_fraction(num_product, den_product))
+    elif problem_num == 34:
+        print()
+        print(factorial_sum_list(200))
+        print(factorial_sum_list())

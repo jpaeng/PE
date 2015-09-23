@@ -243,3 +243,7 @@ def test_p032():
     assert p03x.is_pandigital(1, 2345, 6789)
     assert p03x.is_pandigital(39, 186, 7254)
     assert p03x.pandigital_products() == [6952, 7852, 5796, 5346, 4396, 7254, 7632]
+
+
+def test_p034():
+    assert p03x.factorial_sum_list(200) == [1, 2, 145]
