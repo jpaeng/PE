@@ -238,10 +238,10 @@ def test_p031():
 
 
 def test_p032():
-    assert p03x.is_pandigital(0, 0, 0) == False
-    assert p03x.is_pandigital(1, 1111, 1111) == False
-    assert p03x.is_pandigital(1, 2345, 6789)
-    assert p03x.is_pandigital(39, 186, 7254)
+    assert p03x.is_pandigital_3(0, 0, 0) == False
+    assert p03x.is_pandigital_3(1, 1111, 1111) == False
+    assert p03x.is_pandigital_3(1, 2345, 6789)
+    assert p03x.is_pandigital_3(39, 186, 7254)
     assert p03x.pandigital_products() == [6952, 7852, 5796, 5346, 4396, 7254, 7632]
 
 
@@ -259,3 +259,7 @@ def test_p036():
 
 def test_p037():
     assert p03x.truncatable_primes() == [23, 37, 53, 73, 313, 317, 373, 797, 3137, 3797, 739397]
+
+
+def test_p038():
+    assert p03x.pandigital_concatenated_multiples() == [(932718654, 9327, 18654), (327654981, 327, 654, 981), (918273645, 9, 18, 27, 36, 45)]

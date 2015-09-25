@@ -106,7 +106,7 @@ def coin_combinations(value, coin_list, smallest_coin):
 #     a 1 through 9 pandigital.
 # HINT: Some products can be obtained in more than one way so be sure to only include it once in your sum.
 
-def is_pandigital(a, b, c):
+def is_pandigital_3(a, b, c):
     """ Return True if a, b, c combine to be pandigital per str_digits"""
     str_digits = '123456789'
     str_num = str(a) + str(b) + str(c)
@@ -130,7 +130,7 @@ def pandigital_products():
         while c < 9876:     # max c = 9876
             b += 1
             c = a * b
-            if is_pandigital(a, b, c):
+            if is_pandigital_3(a, b, c):
                 if c not in pandigital_c_list:
                     pandigital_c_list.append(c)
 
@@ -141,7 +141,7 @@ def pandigital_products():
         while c < 9876:     # max c = 9876
             b += 1
             c = a * b
-            if is_pandigital(a, b, c):
+            if is_pandigital_3(a, b, c):
                 if c not in pandigital_c_list:
                     pandigital_c_list.append(c)
     return pandigital_c_list
@@ -653,9 +653,55 @@ def truncatable_primes():
     return trunc_primes
 
 
+# Problem 38: Pandigital Multiples
+# Take the number 192 and multiply it by each of 1, 2, and 3:
+#     192 x 1 = 192
+#     192 x 2 = 384
+#     192 x 3 = 576
+# By concatenating each product we get the 1 to 9 pandigital, 192384576.
+# We will call 192384576 the concatenated product of 192 and (1,2,3)
+# The same can be achieved by starting with 9 and multiplying by 1, 2, 3, 4, and 5,
+# giving the pandigital, 918273645, which is the concatenated product of 9 and (1,2,3,4,5).
+# What is the largest 1 to 9 pandigital 9-digit number that can be formed
+# as the concatenated product of an integer with (1,2, ... , n) where n > 1?
+
+def is_pandigital_1(str_n):
+    for c in '123456789':
+        if str_n.count(c) != 1:
+            return False
+    return True
+
+
+def pandigital_concatenated_multiples():
+    result_list = []
+
+    # 4-digit + 5-digit = 9-digit
+    for n in range(9876, 5123, -1):
+        str_sum = str(n) + str(n*2)
+        if is_pandigital_1(str_sum):
+            result_list.append((int(str_sum), int(n), int(n*2)))
+            break       # return just the largest 4-digit set
+
+    # 3-digit + 3-digit + 3-digit = 9-digit
+    for n in range(329, 123, -1):
+        str_sum = str(n) + str(n*2) + str(n*3)
+        if is_pandigital_1(str_sum):
+            result_list.append((int(str_sum), int(n), int(n*2), int(n*3)))
+            break       # return just the largest 3-digit set
+
+    # 1-digit + 2-digit + 2-digit + 2-digit + 2-digit = 9-digit
+    for n in range(9, 5, -1):
+        str_sum = str(n) + str(n*2) + str(n*3) + str(n*4) + str(n*5)
+        if is_pandigital_1(str_sum):
+            result_list.append((int(str_sum), int(n), int(n*2), int(n*3), int(n*4), int(n*5)))
+            break       # return just the largest 1-digit set
+
+    return result_list
+
+
 # Problem 30-39 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 37
+    problem_num = 38
 
     if problem_num == 30:
         print()
@@ -692,7 +738,7 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print(coin_combinations(200, [200, 100, 50, 20, 10, 5, 2, 1], 1))
         print(coin_combinations(1, [200, 100, 50, 20, 10, 5, 2, 1], 1))
     elif problem_num == 32:
-        print(is_pandigital(39, 186, 39*186))
+        print(is_pandigital_3(39, 186, 39*186))
         print(pandigital_products())
         print(sum(pandigital_products()))
     elif problem_num == 33:
@@ -720,3 +766,5 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print(next_right_extend_prime('379', prime_list_10M))
         print(next_left_extend_prime('797', prime_list_10M))
         print(truncatable_primes())
+    elif problem_num == 38:
+        print(pandigital_concatenated_multiples())

@@ -36,8 +36,8 @@
       <file leaf-file-name="test_pe.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test_pe.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.847541">
-              <caret line="261" column="0" selection-start-line="261" selection-start-column="0" selection-end-line="261" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.8606557">
+              <caret line="262" column="0" selection-start-line="262" selection-start-column="0" selection-end-line="262" selection-end-column="0" />
               <folding>
                 <element signature="e#1#12#0" expanded="true" />
               </folding>
@@ -49,14 +49,14 @@
         <entry file="file://$PROJECT_DIR$/p03x.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="694" column="45" selection-start-line="694" selection-start-column="45" selection-end-line="694" selection-end-column="45" />
+              <caret line="673" column="0" selection-start-line="673" selection-start-column="0" selection-end-line="673" selection-end-column="0" />
               <folding>
                 <element signature="e#39#50#0" expanded="true" />
-                <element signature="e#9015#18940#0" expanded="false" />
-                <element signature="e#19331#20002#0" expanded="false" />
-                <element signature="e#20067#20315#0" expanded="false" />
-                <element signature="e#22182#22622#0" expanded="false" />
-                <element signature="e#22668#23137#0" expanded="false" />
+                <element signature="e#9021#18946#0" expanded="false" />
+                <element signature="e#19337#20008#0" expanded="false" />
+                <element signature="e#20073#20321#0" expanded="false" />
+                <element signature="e#22188#22628#0" expanded="false" />
+                <element signature="e#22674#23143#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -134,8 +134,8 @@
         <option value="$PROJECT_DIR$/p02x.py" />
         <option value="$PROJECT_DIR$/p00x.py" />
         <option value="$PROJECT_DIR$/common.py" />
-        <option value="$PROJECT_DIR$/test_pe.py" />
         <option value="$PROJECT_DIR$/p03x.py" />
+        <option value="$PROJECT_DIR$/test_pe.py" />
       </list>
     </option>
   </component>
@@ -171,6 +171,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -191,7 +192,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -212,7 +212,7 @@
       </console-settings>
     </option>
   </component>
-  <component name="RunManager" selected="Python.p03x">
+  <component name="RunManager" selected="Python tests.py.test in test_pe.py">
     <configuration default="false" name="py.test in test_pe.py" type="tests" factoryName="py.test" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -468,8 +468,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.p03x" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.py.test in test_pe.py" />
+        <item index="0" class="java.lang.String" itemvalue="Python tests.py.test in test_pe.py" />
+        <item index="1" class="java.lang.String" itemvalue="Python.p03x" />
         <item index="2" class="java.lang.String" itemvalue="Python.common" />
         <item index="3" class="java.lang.String" itemvalue="Python tests.py.test in test_p030" />
         <item index="4" class="java.lang.String" itemvalue="Python.p02x" />
@@ -494,6 +494,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32372504" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29268292" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -506,7 +507,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -988,22 +988,22 @@
     <entry file="file://$PROJECT_DIR$/p03x.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="694" column="45" selection-start-line="694" selection-start-column="45" selection-end-line="694" selection-end-column="45" />
+          <caret line="673" column="0" selection-start-line="673" selection-start-column="0" selection-end-line="673" selection-end-column="0" />
           <folding>
             <element signature="e#39#50#0" expanded="true" />
-            <element signature="e#9015#18940#0" expanded="false" />
-            <element signature="e#19331#20002#0" expanded="false" />
-            <element signature="e#20067#20315#0" expanded="false" />
-            <element signature="e#22182#22622#0" expanded="false" />
-            <element signature="e#22668#23137#0" expanded="false" />
+            <element signature="e#9021#18946#0" expanded="false" />
+            <element signature="e#19337#20008#0" expanded="false" />
+            <element signature="e#20073#20321#0" expanded="false" />
+            <element signature="e#22188#22628#0" expanded="false" />
+            <element signature="e#22674#23143#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test_pe.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.847541">
-          <caret line="261" column="0" selection-start-line="261" selection-start-column="0" selection-end-line="261" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.8606557">
+          <caret line="262" column="0" selection-start-line="262" selection-start-column="0" selection-end-line="262" selection-end-column="0" />
           <folding>
             <element signature="e#1#12#0" expanded="true" />
           </folding>
