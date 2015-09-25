@@ -247,3 +247,11 @@ def test_p032():
 
 def test_p034():
     assert p03x.factorial_sum_list(200) == [1, 2, 145]
+
+
+def test_p035():
+    assert p03x.circular_primes(100) == [2, 3, 5, 7, 11, 13, 17, 31, 37, 71, 73, 79, 97]
+
+
+def test_p036():
+    assert p03x.double_base_palindromes(1000) == [1, 3, 5, 7, 9, 33, 99, 313, 585, 717]

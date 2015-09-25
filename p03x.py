@@ -189,7 +189,7 @@ def digit_factorial_sum(n):
 def factorial_sum_search(in_n, num_length, start_n, max_n):
     """ Return list of numbers equal to factorial sum - recursive."""
     result = []
-    print(in_n)
+    # print(in_n)
     for num in range(start_n, min(10**num_length, max_n), 10**(num_length-1)):
         n = in_n + num
         fact_sum = digit_factorial_sum(n)
@@ -421,42 +421,42 @@ def factorial_sum_list_old(max_num=-1):
     # num_length = 7
     for num6 in range(1000000, 10000000, 1000000):
         n = num6
-        fact_sum = digit_factorial_sum(n)
+        # fact_sum = digit_factorial_sum(n)
         # if fact_sum > (n+num_length):
         if n > max_num:
             break
         else:
             for num5 in range(0, 1000000, 100000):
                 n = num6 + num5
-                fact_sum = digit_factorial_sum(n)
+                # fact_sum = digit_factorial_sum(n)
                 # if fact_sum > (n+num_length):
                 if n > max_num:
                     break
                 else:
                     for num4 in range(0, 100000, 10000):
                         n = num6 + num5 + num4
-                        fact_sum = digit_factorial_sum(n)
+                        # fact_sum = digit_factorial_sum(n)
                         # if fact_sum > (n+num_length):
                         if n > max_num:
                             break
                         else:
                             for num3 in range(0, 10000, 1000):
                                 n = num6 + num5 + num4 + num3
-                                fact_sum = digit_factorial_sum(n)
+                                # fact_sum = digit_factorial_sum(n)
                                 # if fact_sum > (n+num_length):
                                 if n > max_num:
                                     break
                                 else:
                                     for num2 in range(0, 1000, 100):
                                         n = num6 + num5 + num4 + num3 + num2
-                                        fact_sum = digit_factorial_sum(n)
+                                        # fact_sum = digit_factorial_sum(n)
                                         # if fact_sum > (n+num_length):
                                         if n > max_num:
                                             break
                                         else:
                                             for num1 in range(0, 100, 10):
                                                 n = num6 + num5 + num4 + num3 + num2 + num1
-                                                fact_sum = digit_factorial_sum(n)
+                                                # fact_sum = digit_factorial_sum(n)
                                                 # if fact_sum > (n+num_length):
                                                 if n > max_num:
                                                     break
@@ -473,16 +473,83 @@ def factorial_sum_list_old(max_num=-1):
     return result_list
 
 
+# Problem 35: Circular Primes
+# The number, 197, is called a circular prime because all rotations of the digits:
+#     197, 971, and 719, are themselves prime.
+# There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31, 37, 71, 73, 79, and 97.
+# How many circular primes are there below one million?
+
+def check_circular_prime_not_efficient_for_sparse_list(n, prime_list):
+    """If circular prime, return a list of all rotational combinations of n.  Else if not circular prime, return []."""
+    circ_prime_list = [n]
+    circular_prime_flag = True
+    str_n = str(n)
+    length_n = len(str_n)
+    if length_n > 1:
+        str_n2 = str_n + str_n
+        for j in range(length_n-1):
+            str_n2 = str_n2[1:]
+            x = int(str_n2[:length_n])
+            if x in prime_list:
+                if x != n:
+                    circ_prime_list.append(x)
+                    prime_list.remove(x)
+            else:
+                circular_prime_flag = False
+    if circular_prime_flag:
+        return circ_prime_list
+    else:
+        return []
 
 
+def circular_primes_not_efficient_for_sparse_list(max_n):
+    prime_list = common.sieve_erathosthenes(max_n)
+    circ_prime_list = []
+    for p in prime_list:
+        circ_prime_list.extend(check_circular_prime_not_efficient_for_sparse_list(p, prime_list))
+    circ_prime_list.sort()
+    return circ_prime_list
 
 
+def is_circular_prime(n, prime_list):
+    """ Return True if n is circular prime or False if n is not circular prime."""
+    strn = str(n)
+    if len(strn) > 1:
+        for i in range(1, len(strn)):
+            strni = strn[i:] + strn[:i]
+            # if int(strni) not in prime_list:
+            if not common.is_in_ordered_list(int(strni), prime_list):
+                return False
+    return True
 
+
+def circular_primes(max_n):
+    """Return list of all circular primes up to max_n."""
+    prime_list = common.sieve_erathosthenes(max_n)
+    circ_prime_list = []
+    for p in prime_list:
+        if is_circular_prime(p, prime_list):
+            circ_prime_list.append(p)
+    return circ_prime_list
+
+
+# Problem 36: Double-base Palindromes
+# The decimal number, 585 = 1001001001(binary), is palindromic in both bases.
+# Find the sum of all numbers, less than one million, which are palindromic in base 10 and base 2.
+# (Please note that the palindromic number, in either base, may not include leading zeros.)
+
+def double_base_palindromes(max_n):
+    """ Return a list of all decimal-binary palindromes up to max_n."""
+    palindromes = []
+    for n in range(1, max_n + 1, 2):    # binary palindromes must be odd
+        if common.is_str_palindrome(str(n)) and common.is_str_palindrome(bin(n)[2:]):
+            palindromes.append(n)
+    return palindromes
 
 
 # Problem 30-39 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 34
+    problem_num = 36
 
     if problem_num == 30:
         print()
@@ -536,3 +603,9 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print()
         print(factorial_sum_list(200))
         print(factorial_sum_list())
+    elif problem_num == 35:
+        print(circular_primes(100))
+        print(len(circular_primes(1000000)))
+    elif problem_num == 36:
+        print(double_base_palindromes(1000))
+        print(double_base_palindromes(1000000))

@@ -102,23 +102,11 @@ def largest_prime_factor(n):
 # The largest palindrome made from the product of two 2-digit numbers is 9009 = 91x99.
 # Find the largest palindrome made from the product of two 3-digit numbers.
 
-
-def is_str_palindrome(string):
-    length = len(string)
-    if length < 2:
-        return True
-    else:
-        if string[0] == string[-1]:
-            return is_str_palindrome(string[1:-1])
-        else:
-            return False
-
-
 def is_num_palindrome(n):
     if n < 10:
         return True
     else:
-        return is_str_palindrome(str(n))
+        return common.is_str_palindrome(str(n))
 
 
 def largest_palindrome_product(num, maxfactor):

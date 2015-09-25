@@ -126,6 +126,18 @@ def reduce_fraction(num, den):
     return int(num), int(den)
 
 
+# = Palindrome Procedures ============================
+def is_str_palindrome(string):
+    length = len(string)
+    if length < 2:
+        return True
+    else:
+        if string[0] == string[-1]:
+            return is_str_palindrome(string[1:-1])
+        else:
+            return False
+
+
 
 # = Check Common Functions ===========================
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
