@@ -60,6 +60,22 @@ def get_factors(num):        # Valid for num > 1
 
 
 # = Prime Procedures =================================
+def is_prime(num):
+    """Return True or False depending on whether num is prime."""
+    if num == 1:
+        return False
+    elif num == 2:
+        return True
+    elif num%2 == 0:
+        return False
+    else:
+        maxcheck = int(math.sqrt(num))+1
+        for n in range(3, maxcheck, 2):
+            if num%n == 0:
+                return False
+        return True
+
+
 def sieve_erathosthenes(n):
     """ Return ordered list of primes up to n."""
     bool_table = [True]*(n+1)
@@ -184,6 +200,7 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print(z, sieve_erathosthenes(z))
 
     # Check reduce_fraction()
+    print()
     y = 6
     for z in range(1, 13):
         print(y, z, reduce_fraction(y, z))

@@ -25,7 +25,7 @@
         <entry file="file://$PROJECT_DIR$/common.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="129" column="21" selection-start-line="129" selection-start-column="4" selection-end-line="129" selection-end-column="21" />
+              <caret line="200" column="0" selection-start-line="200" selection-start-column="0" selection-end-line="200" selection-end-column="0" />
               <folding>
                 <element signature="e#1#12#0" expanded="true" />
               </folding>
@@ -33,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_pe.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="test_pe.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test_pe.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="257" column="0" selection-start-line="257" selection-start-column="0" selection-end-line="257" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.847541">
+              <caret line="261" column="0" selection-start-line="261" selection-start-column="0" selection-end-line="261" selection-end-column="0" />
               <folding>
                 <element signature="e#1#12#0" expanded="true" />
               </folding>
@@ -45,16 +45,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="p03x.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="p03x.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/p03x.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8152174">
-              <caret line="611" column="0" selection-start-line="611" selection-start-column="0" selection-end-line="611" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="694" column="45" selection-start-line="694" selection-start-column="45" selection-end-line="694" selection-end-column="45" />
               <folding>
                 <element signature="e#39#50#0" expanded="true" />
                 <element signature="e#9015#18940#0" expanded="false" />
                 <element signature="e#19331#20002#0" expanded="false" />
                 <element signature="e#20067#20315#0" expanded="false" />
+                <element signature="e#22182#22622#0" expanded="false" />
+                <element signature="e#22668#23137#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -130,10 +132,10 @@
         <option value="$PROJECT_DIR$/p017.py" />
         <option value="$PROJECT_DIR$/p01x.py" />
         <option value="$PROJECT_DIR$/p02x.py" />
-        <option value="$PROJECT_DIR$/common.py" />
         <option value="$PROJECT_DIR$/p00x.py" />
-        <option value="$PROJECT_DIR$/p03x.py" />
+        <option value="$PROJECT_DIR$/common.py" />
         <option value="$PROJECT_DIR$/test_pe.py" />
+        <option value="$PROJECT_DIR$/p03x.py" />
       </list>
     </option>
   </component>
@@ -141,7 +143,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-2" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
     <option name="width" value="1696" />
     <option name="height" value="1036" />
   </component>
@@ -168,8 +171,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -190,6 +191,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -467,8 +470,8 @@
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.p03x" />
         <item index="1" class="java.lang.String" itemvalue="Python tests.py.test in test_pe.py" />
-        <item index="2" class="java.lang.String" itemvalue="Python tests.py.test in test_p030" />
-        <item index="3" class="java.lang.String" itemvalue="Python.common" />
+        <item index="2" class="java.lang.String" itemvalue="Python.common" />
+        <item index="3" class="java.lang.String" itemvalue="Python tests.py.test in test_p030" />
         <item index="4" class="java.lang.String" itemvalue="Python.p02x" />
       </list>
     </recent_temporary>
@@ -484,7 +487,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-2" y="0" width="1696" height="1036" extended-state="0" />
+    <frame x="-8" y="-8" width="1696" height="1036" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.10952381" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -520,14 +523,9 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="63" />
+      <option name="time" value="65" />
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="PythonConfigurationType">
-        <watch expression="len(num_string)" language="Python" />
-        <watch expression="num_string[790:820]" language="Python" />
-      </configuration>
-    </watches-manager>
+    <watches-manager />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/test_pe.py">
@@ -980,17 +978,7 @@
     <entry file="file://$PROJECT_DIR$/common.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="129" column="21" selection-start-line="129" selection-start-column="4" selection-end-line="129" selection-end-column="21" />
-          <folding>
-            <element signature="e#1#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_pe.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="257" column="0" selection-start-line="257" selection-start-column="0" selection-end-line="257" selection-end-column="0" />
+          <caret line="200" column="0" selection-start-line="200" selection-start-column="0" selection-end-line="200" selection-end-column="0" />
           <folding>
             <element signature="e#1#12#0" expanded="true" />
           </folding>
@@ -999,13 +987,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/p03x.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8152174">
-          <caret line="611" column="0" selection-start-line="611" selection-start-column="0" selection-end-line="611" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="694" column="45" selection-start-line="694" selection-start-column="45" selection-end-line="694" selection-end-column="45" />
           <folding>
             <element signature="e#39#50#0" expanded="true" />
             <element signature="e#9015#18940#0" expanded="false" />
             <element signature="e#19331#20002#0" expanded="false" />
             <element signature="e#20067#20315#0" expanded="false" />
+            <element signature="e#22182#22622#0" expanded="false" />
+            <element signature="e#22668#23137#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_pe.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.847541">
+          <caret line="261" column="0" selection-start-line="261" selection-start-column="0" selection-end-line="261" selection-end-column="0" />
+          <folding>
+            <element signature="e#1#12#0" expanded="true" />
           </folding>
         </state>
       </provider>

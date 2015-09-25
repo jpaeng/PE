@@ -255,3 +255,7 @@ def test_p035():
 
 def test_p036():
     assert p03x.double_base_palindromes(1000) == [1, 3, 5, 7, 9, 33, 99, 313, 585, 717]
+
+
+def test_p037():
+    assert p03x.truncatable_primes() == [23, 37, 53, 73, 313, 317, 373, 797, 3137, 3797, 739397]

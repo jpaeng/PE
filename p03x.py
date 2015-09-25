@@ -547,9 +547,115 @@ def double_base_palindromes(max_n):
     return palindromes
 
 
+# Problem 37: Truncatable Primes
+# The number 3797 has an interesting property.
+# Being prime itself, it is possible to continuously remove digits from left to right,
+# and remain prime at each stage: 3797, 797, 97, and 7.
+# Similarly we can work from right to left: 3797, 379, 37, and 3.
+# Find the sum of the only eleven primes that are both truncatable from left to right and right to left.
+# NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
+
+def old_next_right_extend_prime(str_n):
+    """Recursive return list of primes created by adding digits to the right. Stop if added digit creates non-prime."""
+    usable_digits = ('1', '3', '7', '9')    # all possible multi-digit primes must end with one of these digits
+    n = int(str_n)
+    if common.is_prime(n):
+        primes = [n]
+        for p in usable_digits:
+            primes.extend(old_next_right_extend_prime(str_n+p))
+        return primes
+    else:
+        return []
+
+
+def old_next_left_extend_prime(str_n):
+    """Recursive return list of primes created by adding digits to the left. Stop if added digit creates non-prime."""
+    usable_digits = ('1', '2', '3', '5', '7', '9')  # will not generate complete list of primes - just those reducible to single digit primes.
+    n = int(str_n)
+    if common.is_prime(n):
+        primes = [n]
+        for p in usable_digits:
+            primes.extend(old_next_left_extend_prime(p+str_n))
+        return primes
+    else:
+        return []
+
+
+def old_truncatable_primes():
+    """Return list of primes that are both left and right truncatable."""
+    left_extend_primes = old_next_left_extend_prime('3')
+    left_extend_primes.extend(old_next_left_extend_prime('7'))
+
+    right_extend_primes = old_next_right_extend_prime('2')
+    right_extend_primes.extend(old_next_right_extend_prime('3'))
+    right_extend_primes.extend(old_next_right_extend_prime('5'))
+    right_extend_primes.extend(old_next_right_extend_prime('7'))
+
+    left_extend_primes.sort()
+    right_extend_primes.sort()
+    trunc_primes = []
+    for p in left_extend_primes[2:]:
+        if p in right_extend_primes:
+            trunc_primes.append(p)
+    # print(left_extend_primes)
+    # print(right_extend_primes)
+    # print(trunc_primes)
+    return trunc_primes
+
+
+def next_right_extend_prime(str_n, prime_list):
+    """Recursive return list of primes created by adding digits to the right. Stop if added digit creates non-prime."""
+    usable_digits = ('1', '3', '7', '9')    # all possible multi-digit primes must end with one of these digits
+    n = int(str_n)
+    if common.is_in_ordered_list(n, prime_list):
+        primes = [n]
+        for p in usable_digits:
+            primes.extend(next_right_extend_prime(str_n+p, prime_list))
+        return primes
+    else:
+        return []
+
+
+def next_left_extend_prime(str_n, prime_list):
+    """Recursive return list of primes created by adding digits to the left. Stop if added digit creates non-prime."""
+    usable_digits = ('1', '2', '3', '5', '7', '9')  # will not generate complete list of primes - just those reducible to single digit primes.
+    n = int(str_n)
+    if common.is_in_ordered_list(n, prime_list):
+        primes = [n]
+        for p in usable_digits:
+            primes.extend(next_left_extend_prime(p+str_n, prime_list))
+        return primes
+    else:
+        return []
+
+
+def truncatable_primes():
+    """Return list of primes that are both left and right truncatable."""
+    prime_list = common.sieve_erathosthenes(1000000)
+
+    left_extend_primes = next_left_extend_prime('3', prime_list)
+    left_extend_primes.extend(next_left_extend_prime('7', prime_list))
+
+    right_extend_primes = next_right_extend_prime('2', prime_list)
+    right_extend_primes.extend(next_right_extend_prime('3', prime_list))
+    right_extend_primes.extend(next_right_extend_prime('5', prime_list))
+    right_extend_primes.extend(next_right_extend_prime('7', prime_list))
+
+    left_extend_primes.sort()
+    right_extend_primes.sort()
+    trunc_primes = []
+    for p in left_extend_primes[2:]:
+        if p in right_extend_primes:
+            trunc_primes.append(p)
+    # print(left_extend_primes)
+    # print(right_extend_primes)
+    # print(trunc_primes)
+    return trunc_primes
+
+
 # Problem 30-39 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 36
+    problem_num = 37
 
     if problem_num == 30:
         print()
@@ -609,3 +715,8 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
     elif problem_num == 36:
         print(double_base_palindromes(1000))
         print(double_base_palindromes(1000000))
+    elif problem_num == 37:
+        prime_list_10M = common.sieve_erathosthenes(10000000)
+        print(next_right_extend_prime('379', prime_list_10M))
+        print(next_left_extend_prime('797', prime_list_10M))
+        print(truncatable_primes())
