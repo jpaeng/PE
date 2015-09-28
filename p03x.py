@@ -699,9 +699,31 @@ def pandigital_concatenated_multiples():
     return result_list
 
 
+# Problem 39: Integer Right Triangles
+# If p is the perimeter of a right angle triangle with integral length sides, {a,b,c},
+# there are exactly three solutions for p = 120.
+# {20,48,52}, {24,45,51}, {30,40,50}
+# For which value of p <= 1000, is the number of solutions maximised?
+
+def integral_right_triangle_perimeters(max_p):
+    max_n = int(max_p/2)
+    squares = [n*n for n in range(max_n+1)]
+    perimeters_list = []
+    for a in range(1, max_n+1):
+        for b in range(a, max_n+1):
+            c = common.index_in_ordered_list(squares[a]+squares[b], squares)
+            if c > 0:
+                p = a + b + c
+                if p > max_p:
+                    break
+                else:
+                    perimeters_list.append(p)
+    return perimeters_list
+
+
 # Problem 30-39 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 38
+    problem_num = 39
 
     if problem_num == 30:
         print()
@@ -743,13 +765,13 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print(sum(pandigital_products()))
     elif problem_num == 33:
         print()
-        fraction_list = digit_canceling_fractions()
+        zfraction_list = digit_canceling_fractions()
         num_product = 1
         den_product = 1
-        for fraction in fraction_list:
+        for fraction in zfraction_list:
             num_product *= fraction[0]
             den_product *= fraction[1]
-        print(fraction_list)
+        print(zfraction_list)
         print(common.reduce_fraction(num_product, den_product))
     elif problem_num == 34:
         print()
@@ -768,3 +790,17 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print(truncatable_primes())
     elif problem_num == 38:
         print(pandigital_concatenated_multiples())
+    elif problem_num == 39:
+        print()
+        p_list = integral_right_triangle_perimeters(100)
+        p_list.sort()
+        print(p_list)
+        p_list = integral_right_triangle_perimeters(1000)
+        max_count = 0
+        max_count_p = 0
+        for zprime in p_list:
+            zcount = p_list.count(zprime)
+            if max_count < zcount:
+                max_count = zcount
+                max_count_p = zprime
+        print(max_count_p, max_count)
