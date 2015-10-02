@@ -7,6 +7,7 @@ import p00x
 import p01x
 import p02x
 import p03x
+import p04x
 
 
 def test_common():
@@ -263,3 +264,17 @@ def test_p037():
 
 def test_p038():
     assert p03x.pandigital_concatenated_multiples() == [(932718654, 9327, 18654), (327654981, 327, 654, 981), (918273645, 9, 18, 27, 36, 45)]
+
+
+def test_p040():
+    assert p04x.nth_digit(188) == 9
+    assert p04x.nth_digit(189) == 9
+    assert p04x.nth_digit(190) == 1
+    assert p04x.nth_digit(191) == 0
+    assert p04x.nth_digit(192) == 0
+    assert p04x.nth_digit(193) == 1
+    assert p04x.nth_digit(194) == 0
+    assert p04x.nth_digit(195) == 1
+    assert p04x.nth_digit(196) == 1
+    assert p04x.nth_digit(197) == 0
+    assert p04x.nth_digit(198) == 2
