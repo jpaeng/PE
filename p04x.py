@@ -3,6 +3,7 @@
 
 
 import math
+import string
 import common
 
 from timeit import default_timer as timer
@@ -99,15 +100,44 @@ def pandigital_primes(n, digits):
     for j in range(perm_count):
         k = int(common.lexi_perm(j, digits))
         if common.is_in_ordered_list(k, prime_list):
-        #if k in prime_list:
             pan_prime_list.append(k)
     return pan_prime_list
+
+
+# Problem 42: Coded Triangle Numbers
+# The nth term of the sequence of triangle numbers is given by, tn = (1/2)n(n+1);
+# so the first ten triangle numbers are:
+#     1, 3, 6, 10, 15, 21, 28, 36, 45, 55, ...
+# By converting each letter in a word to a number corresponding to its
+# alphabetical position and adding these values we form a word value.
+# For example, the word value for SKY is 19 + 11 + 25 = 55 = t10.
+# If the word value is a triangle number then we shall call the word a triangle word.
+# Using words.txt (right click and 'Save Link/Target As...'),
+# a 16K text file containing nearly two-thousand common English words,
+# how many are triangle words?
+
+def triangle_words(word_list, max_word_length):
+    """Return list of triangle words in word_list."""
+    alpha_values = dict(zip([char for char in string.ascii_uppercase], range(1, 27)))   # Dictionary of values for each
+    alpha_values.update(dict(zip([char for char in string.ascii_lowercase], range(1, 27))))     # letter
+    max_tn = max_word_length*26
+    max_n = int(-0.5 + math.sqrt(0.25 + 2*max_tn)) + 1
+    tn_list = tuple(int(n*(n+1)/2) for n in range(max_n+1))     # list of triangle numbers
+    tr_word_list = []
+
+    for word in word_list:
+        word_value = 0
+        for char in word:
+            word_value += alpha_values.get(char)
+        if word_value in tn_list:
+            tr_word_list.append((word, word_value))
+    return tr_word_list
 
 
 
 # Problem 40-49 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 41
+    problem_num = 42
 
     if problem_num == 40:
         print()
@@ -130,15 +160,21 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print(time2-time1)  # in ms
     elif problem_num == 41:
         zdigits = '123456789'
-        zdigcount =4
+        zdigcount = 4
         print(zdigcount, pandigital_primes(zdigcount, zdigits[:zdigcount]))
-        zdigcount =5
+        zdigcount = 5
         print(zdigcount, pandigital_primes(zdigcount, zdigits[:zdigcount]))
-        zdigcount =6
+        zdigcount = 6
         print(zdigcount, pandigital_primes(zdigcount, zdigits[:zdigcount]))
-        zdigcount =7
+        zdigcount = 7
         print(zdigcount, pandigital_primes(zdigcount, zdigits[:zdigcount]))
-        zdigcount =8
-        #print(zdigcount, pandigital_primes(zdigcount, zdigits[:zdigcount]))
-        zdigcount =9
-        #print(zdigcount, pandigital_primes(zdigcount, zdigits[:zdigcount]))
+        zdigcount = 8
+        # print(zdigcount, pandigital_primes(zdigcount, zdigits[:zdigcount]))
+        zdigcount = 9
+        # print(zdigcount, pandigital_primes(zdigcount, zdigits[:zdigcount]))
+    elif problem_num == 42:
+        z_file = open('p042_words.txt')
+        z_word_list = (z_file.read().replace('"', '')).split(',')
+        z_file.close()
+        print(triangle_words(['sky', 'SKY', 'ski'], 25))
+        print(triangle_words(z_word_list, 25))

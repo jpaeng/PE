@@ -282,3 +282,7 @@ def test_p040():
 
 def test_p041():
     assert p04x.pandigital_primes(4, '1234') == [1423, 2143, 2341, 4231]
+
+
+def test_p042():
+    assert p04x.triangle_words(['sky', 'SKY', 'ski'], 25) == [('sky', 55), ('SKY', 55)]
