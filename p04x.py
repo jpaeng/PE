@@ -82,9 +82,32 @@ def nth_digit(n):
     return dn
 
 
+# Problem 41:  Pandigital Prime
+# We shall say that an n-digit number is pandigital if
+# it makes use of all the digits 1 to n exactly once.
+# For example, 2143 is a 4-digit pandigital and is also prime.
+# What is the largest n-digit pandigital prime that exists?
+# Notes:
+#   Number of permutations of '123456789' is 9! = 362880
+#   Number of primes below 987654321 is n/ln(n) = 476987788
+
+def pandigital_primes(n, digits):
+    """ Return list of all n-digit pandigital primes."""
+    prime_list = common.sieve_erathosthenes(10**n)
+    pan_prime_list = []
+    perm_count = math.factorial(n)
+    for j in range(perm_count):
+        k = int(common.lexi_perm(j, digits))
+        if common.is_in_ordered_list(k, prime_list):
+        #if k in prime_list:
+            pan_prime_list.append(k)
+    return pan_prime_list
+
+
+
 # Problem 40-49 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 40
+    problem_num = 41
 
     if problem_num == 40:
         print()
@@ -105,3 +128,17 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
 
         print(time1-start)  # in ms
         print(time2-time1)  # in ms
+    elif problem_num == 41:
+        zdigits = '123456789'
+        zdigcount =4
+        print(zdigcount, pandigital_primes(zdigcount, zdigits[:zdigcount]))
+        zdigcount =5
+        print(zdigcount, pandigital_primes(zdigcount, zdigits[:zdigcount]))
+        zdigcount =6
+        print(zdigcount, pandigital_primes(zdigcount, zdigits[:zdigcount]))
+        zdigcount =7
+        print(zdigcount, pandigital_primes(zdigcount, zdigits[:zdigcount]))
+        zdigcount =8
+        #print(zdigcount, pandigital_primes(zdigcount, zdigits[:zdigcount]))
+        zdigcount =9
+        #print(zdigcount, pandigital_primes(zdigcount, zdigits[:zdigcount]))

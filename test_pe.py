@@ -175,8 +175,8 @@ def test_p023():
 
 
 def test_p024():
-    assert p02x.lexi_perm(11, 4) == '1320'
-    assert p02x.lexi_perm(999999, 10) == '2783915460'
+    assert p02x.common.lexi_perm(11, '0123') == '1320'
+    assert p02x.common.lexi_perm(999999, '0123456789') == '2783915460'
 
 
 def test_p025():
@@ -278,3 +278,7 @@ def test_p040():
     assert p04x.nth_digit(196) == 1
     assert p04x.nth_digit(197) == 0
     assert p04x.nth_digit(198) == 2
+
+
+def test_p041():
+    assert p04x.pandigital_primes(4, '1234') == [1423, 2143, 2341, 4231]

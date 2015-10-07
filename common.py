@@ -154,6 +154,27 @@ def is_str_palindrome(string):
             return False
 
 
+# = Pandigital Procedures ============================
+def is_pandigital(str_n, str_digits):
+    for c in str_digits:
+        if str_n.count(c) != 1:
+            return False
+    return True
+
+
+# = Combinations/Permutation Procedures ==============
+def lexi_perm(n, digits):
+    """ Return the nth permutation of digit_count digits."""
+    digit_count = len(digits)
+    result = ''
+    remainder = n
+    for position in range(digit_count-1, -1, -1):       # Start with msb and loop to lsb
+        divisor = math.factorial(position)              # Factorials:  1 2 6 24 120 ...
+        dividend = int(remainder/divisor)               # Determine which digit in list is next
+        remainder = remainder % divisor                 # Remainder calculated for next loop
+        result += digits[dividend]                      # Extend string to right
+        digits = digits.replace(digits[dividend], '')   # Remove digit just used from list
+    return result
 
 # = Check Common Functions ===========================
 if __name__ == '__main__':  # only if run as a script, skip when imported as module

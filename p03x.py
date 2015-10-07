@@ -665,34 +665,27 @@ def truncatable_primes():
 # What is the largest 1 to 9 pandigital 9-digit number that can be formed
 # as the concatenated product of an integer with (1,2, ... , n) where n > 1?
 
-def is_pandigital_1(str_n):
-    for c in '123456789':
-        if str_n.count(c) != 1:
-            return False
-    return True
-
-
 def pandigital_concatenated_multiples():
     result_list = []
 
     # 4-digit + 5-digit = 9-digit
     for n in range(9876, 5123, -1):
         str_sum = str(n) + str(n*2)
-        if is_pandigital_1(str_sum):
+        if common.is_pandigital(str_sum, '123456789'):
             result_list.append((int(str_sum), int(n), int(n*2)))
             break       # return just the largest 4-digit set
 
     # 3-digit + 3-digit + 3-digit = 9-digit
     for n in range(329, 123, -1):
         str_sum = str(n) + str(n*2) + str(n*3)
-        if is_pandigital_1(str_sum):
+        if common.is_pandigital(str_sum, '123456789'):
             result_list.append((int(str_sum), int(n), int(n*2), int(n*3)))
             break       # return just the largest 3-digit set
 
     # 1-digit + 2-digit + 2-digit + 2-digit + 2-digit = 9-digit
     for n in range(9, 5, -1):
         str_sum = str(n) + str(n*2) + str(n*3) + str(n*4) + str(n*5)
-        if is_pandigital_1(str_sum):
+        if common.is_pandigital(str_sum, '123456789'):
             result_list.append((int(str_sum), int(n), int(n*2), int(n*3), int(n*4), int(n*5)))
             break       # return just the largest 1-digit set
 

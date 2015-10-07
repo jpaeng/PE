@@ -3,7 +3,6 @@
 
 
 import math
-import string
 import common
 
 
@@ -162,19 +161,7 @@ def non_abundant_sum_list(max_sum):
     # 3210
 # What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
 
-def lexi_perm(n, digit_count):
-    """ Return the nth permutation of digit_count digits."""
-    digits = (string.digits + string.ascii_lowercase)[:digit_count]
-    result = ''
-    remainder = n
-    for position in range(digit_count-1, -1, -1):       # Start with msb and loop to lsb
-        divisor = math.factorial(position)              # Factorials:  1 2 6 24 120 ...
-        dividend = int(remainder/divisor)               # Determine which digit in list is next
-        remainder = remainder % divisor                 # Remainder calculated for next loop
-        result += digits[dividend]                      # Extend string to right
-        digits = digits.replace(digits[dividend], '')   # Remove digit just used from list
-    return result
-
+# See common.lexi_perm()
 
 # Problem 25:  1000-digit Fibonacci number
 # The Fibonacci sequence is defined by the recurrence relation:
@@ -386,8 +373,8 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print()
         pr24_bit_count = 4
         for z in range(math.factorial(pr24_bit_count)):
-            print(z, lexi_perm(z, pr24_bit_count))
-        print(999999, lexi_perm(999999, 10))
+            print(z, common.lexi_perm(z, '1234'))
+        print(999999, common.lexi_perm(999999, '0123456789'))
     elif problem_num == 25:
         print()
         for z in range(1, 5):
