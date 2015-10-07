@@ -134,10 +134,50 @@ def triangle_words(word_list, max_word_length):
     return tr_word_list
 
 
+# Problem 43: Sub-string Divisibility
+# The number, 1406357289, is a 0 to 9 pandigital number because it is made up of each of the digits
+# 0 to 9 in some order, but it also has a rather interesting sub-string divisibility property.
+# Let d1 be the 1st digit, d2 be the 2nd digit, and so on. In this way, we note the following:
+#     d2d3d4=406 is divisible by 2
+#     d3d4d5=063 is divisible by 3
+#     d4d5d6=635 is divisible by 5
+#     d5d6d7=357 is divisible by 7
+#     d6d7d8=572 is divisible by 11
+#     d7d8d9=728 is divisible by 13
+#     d8d9d10=289 is divisible by 17
+# Find the sum of all 0 to 9 pandigital numbers with this property.
+# Notes:
+#     Since d2d3d4 is divisible by 2, d4 must be divisible by 2
+#     Since d4d5d6 is divisible by 5, d6 must be either 0 or 5
+
+def pandigital_sub_divisible(str_d4, str_d6, digits):
+    """Return list 0-to-9 pandigital numbers that are divisible as described above."""
+    digits = digits.replace(str_d4, "")
+    digits = digits.replace(str_d6, "")
+    divisible_pan_list = []
+
+    # Loop through all permutations of digits
+    for i in range(math.factorial(len(digits))):
+        str_n = common.lexi_perm(i, digits)
+        str_n = str_n[:3] + str_d4 + str_n[3:]    # Create d2d3d4 divisible by 2
+        str_n = str_n[:5] + str_d6 + str_n[5:]    # Create d4d5d6 divisible by 5
+        d3d4d5 = int(str_n[2:5])
+        if d3d4d5 % 3 == 0:
+            d5d6d7 = int(str_n[4:7])
+            if d5d6d7 % 7 == 0:
+                d6d7d8 = int(str_n[5:8])
+                if d6d7d8 % 11 == 0:
+                    d7d8d9 = int(str_n[6:9])
+                    if d7d8d9 % 13 == 0:
+                        d8d9d10 = int(str_n[7:10])
+                        if d8d9d10 % 17 == 0:
+                            divisible_pan_list.append(int(str_n))
+    return divisible_pan_list
+
 
 # Problem 40-49 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 42
+    problem_num = 43
 
     if problem_num == 40:
         print()
@@ -169,12 +209,19 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         zdigcount = 7
         print(zdigcount, pandigital_primes(zdigcount, zdigits[:zdigcount]))
         zdigcount = 8
-        # print(zdigcount, pandigital_primes(zdigcount, zdigits[:zdigcount]))
+        print(zdigcount, pandigital_primes(zdigcount, zdigits[:zdigcount]))
         zdigcount = 9
-        # print(zdigcount, pandigital_primes(zdigcount, zdigits[:zdigcount]))
+        print(zdigcount, pandigital_primes(zdigcount, zdigits[:zdigcount]))
     elif problem_num == 42:
         z_file = open('p042_words.txt')
         z_word_list = (z_file.read().replace('"', '')).split(',')
         z_file.close()
         print(triangle_words(['sky', 'SKY', 'ski'], 25))
         print(triangle_words(z_word_list, 25))
+    elif problem_num == 43:
+        z_digits = '0123456789'
+        z_pan_div_list = pandigital_sub_divisible('0', '5', z_digits)
+        for even in ['2', '4', '6', '8']:
+            for five in ['0', '5']:
+                z_pan_div_list.extend(pandigital_sub_divisible(even, five, z_digits))
+        print(z_pan_div_list, sum(z_pan_div_list))

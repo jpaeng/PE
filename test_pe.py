@@ -286,3 +286,7 @@ def test_p041():
 
 def test_p042():
     assert p04x.triangle_words(['sky', 'SKY', 'ski'], 25) == [('sky', 55), ('SKY', 55)]
+
+
+def test_p043():
+    assert p04x.pandigital_sub_divisible('6', '5', '0123456789') == [1406357289, 4106357289]
