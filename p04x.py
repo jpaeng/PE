@@ -322,6 +322,11 @@ def consecutive_prime_factors(prime_factor_count, consecutive_count, max_n):
 # Problem 48: Self Powers
 # The series, 1**1 + 2**2 + 3**3 + ... + 10**10 = 10405071317.
 # Find the last ten digits of the series, 1**1 + 2**2 + 3**3 + ... + 1000**1000.
+def sum_self_powers(max_n):
+    result = 0
+    for n in range(1, max_n+1):
+        result += n**n
+    return result
 
 
 # Problem 49: Prime Permutations
@@ -336,7 +341,7 @@ def consecutive_prime_factors(prime_factor_count, consecutive_count, max_n):
 
 # Problem 40-49 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 47
+    problem_num = 48
 
     if problem_num == 40:
         print()
@@ -394,3 +399,7 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print(consecutive_prime_factors(2, 2, 100))
         print(consecutive_prime_factors(3, 3, 1000))
         print(consecutive_prime_factors(4, 4, 10**6))
+    elif problem_num == 48:
+        print(sum_self_powers(10))
+        print(sum_self_powers(100))
+        print(str(sum_self_powers(1000))[-10:])
