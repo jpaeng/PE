@@ -48,8 +48,8 @@
       <file leaf-file-name="p04x.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/p04x.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33224222">
-              <caret line="161" column="58" selection-start-line="161" selection-start-column="52" selection-end-line="161" selection-end-column="58" />
+            <state vertical-scroll-proportion="0.109656304">
+              <caret line="193" column="23" selection-start-line="193" selection-start-column="23" selection-end-line="193" selection-end-column="23" />
               <folding>
                 <element signature="e#39#50#0" expanded="true" />
               </folding>
@@ -184,6 +184,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -204,8 +206,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -536,7 +536,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="71" />
+      <option name="time" value="76" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1015,8 +1015,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/p04x.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33224222">
-          <caret line="161" column="58" selection-start-line="161" selection-start-column="52" selection-end-line="161" selection-end-column="58" />
+        <state vertical-scroll-proportion="0.109656304">
+          <caret line="193" column="23" selection-start-line="193" selection-start-column="23" selection-end-line="193" selection-end-column="23" />
           <folding>
             <element signature="e#39#50#0" expanded="true" />
           </folding>
