@@ -290,3 +290,7 @@ def test_p042():
 
 def test_p043():
     assert p04x.pandigital_sub_divisible('6', '5', '0123456789') == [1406357289, 4106357289]
+
+
+def test_p045():
+    assert p04x.tri_pent_hex(3) == [1, 40755, 1533776805]
