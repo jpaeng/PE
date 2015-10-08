@@ -266,6 +266,29 @@ def tri_pent_hex(count):
 # What is the smallest odd composite that cannot be written as the sum of a prime
 # and twice a square?
 
+def not_goldbach(max_n, count):
+    """ Return list of numbers that do not fit Goldbach's conjecture."""
+    prime_list = common.sieve_erathosthenes(max_n)
+    square_list = [n*n for n in range(1, int(math.sqrt(max_n))+1)]
+    results = []
+
+    for n in range(9, max_n, 2):    # Loop through odd numbers
+        if not common.is_in_ordered_list(n, prime_list):    # composite is the opposite of prime
+            found = False
+            for p in prime_list:
+                if p > (n-2):
+                    break
+                else:
+                    n_p_2 = int((n - p)/2)
+                    if common.is_in_ordered_list(n_p_2, square_list):
+                        found = True
+                        break
+            if not found:
+                results.append(n)
+                if len(results) >= count:
+                    break
+    return results
+
 
 # Problem 47: Distinct Primes Factors
 # The first two consecutive numbers to have two distinct prime factors are:
@@ -296,7 +319,7 @@ def tri_pent_hex(count):
 
 # Problem 40-49 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 45
+    problem_num = 46
 
     if problem_num == 40:
         print()
@@ -348,3 +371,5 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print(pentagonal_min_diff())
     elif problem_num == 45:
         print(tri_pent_hex(3))
+    elif problem_num == 46:
+        print(not_goldbach(10**6, 2))
