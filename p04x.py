@@ -301,6 +301,23 @@ def not_goldbach(max_n, count):
 # Find the first four consecutive integers to have four distinct prime factors.
 # What is the first of these numbers?
 
+def consecutive_prime_factors(prime_factor_count, consecutive_count, max_n):
+    """Return first sequence of numbers that have at least prime_factor_count."""
+    prime_list = common.sieve_erathosthenes(max_n)
+    n = 1
+    count = 0
+    while count < consecutive_count and n < max_n:
+        n += 1
+        if len(common.get_prime_factors(n, prime_list)) >= prime_factor_count:
+            count += 1
+        else:
+            count = 0
+    if n < max_n:
+        results = [n-i for i in reversed(range(consecutive_count))]
+    else:
+        results = []
+    return results
+
 
 # Problem 48: Self Powers
 # The series, 1**1 + 2**2 + 3**3 + ... + 10**10 = 10405071317.
@@ -319,7 +336,7 @@ def not_goldbach(max_n, count):
 
 # Problem 40-49 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 46
+    problem_num = 47
 
     if problem_num == 40:
         print()
@@ -373,3 +390,7 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print(tri_pent_hex(3))
     elif problem_num == 46:
         print(not_goldbach(10**6, 2))
+    elif problem_num == 47:
+        print(consecutive_prime_factors(2, 2, 100))
+        print(consecutive_prime_factors(3, 3, 1000))
+        print(consecutive_prime_factors(4, 4, 10**6))

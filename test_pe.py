@@ -294,3 +294,7 @@ def test_p043():
 
 def test_p045():
     assert p04x.tri_pent_hex(3) == [1, 40755, 1533776805]
+
+
+def test_p047():
+    assert p04x.consecutive_prime_factors(3, 3, 1000) == [644, 645, 646]

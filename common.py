@@ -220,6 +220,12 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
     for z in range(2, 11):
         print(z, sieve_erathosthenes(z))
 
+    # Check get_factors()
+    print('Check get_prime_factors()')
+    zprime_list = sieve_erathosthenes(100)
+    print(24, get_prime_factors(24, zprime_list))
+
+
     # Check reduce_fraction()
     print()
     y = 6
