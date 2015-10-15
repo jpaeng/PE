@@ -31,6 +31,9 @@ def test_common():
     assert common.is_in_ordered_list( 10, ordered_list) is False
     assert common.is_in_ordered_list(-11, ordered_list) is False
 
+    assert common.str_permutation(11, '0123') == '1320'
+    assert common.str_permutation(999999, '0123456789') == '2783915460'
+
     # get_factors
     assert common.get_factors(1) == [1]
     assert common.get_factors(16) == [1, 2, 4, 8, 16]
@@ -174,11 +177,6 @@ def test_p023():
     assert p02x.non_abundant_sum_list(10) == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 
-def test_p024():
-    assert p02x.common.lexi_perm(11, '0123') == '1320'
-    assert p02x.common.lexi_perm(999999, '0123456789') == '2783915460'
-
-
 def test_p025():
     assert p02x.fibonacci_greater_than(10) == (7, 13)
     assert p02x.fibonacci_greater_than(100) == (12, 144)
@@ -298,3 +296,7 @@ def test_p045():
 
 def test_p047():
     assert p04x.consecutive_prime_factors(3, 3, 1000) == [644, 645, 646]
+
+
+def test_p049():
+    assert p04x.prime_permutation_arithmetic_sequence(4, 3) == [[1487, 4817, 8147], [2969, 6299, 9629]]

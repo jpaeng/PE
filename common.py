@@ -32,9 +32,76 @@ def is_in_ordered_list(n, ordered_list):      # binary search
         return True
 
 
+# = List Array Procedures ============================
+def count_in_array(element, array):
+    """Return count of elements in array. List can be any dimension > 1"""
+    dim_count = 0           # dim_count = number of dimensions of the array
+    dim_size = []           # dim_size = array size in each dimension
+    temp_array = array
+    while isinstance(temp_array, (list, tuple)):
+        dim_count += 1
+        dim_size.append(len(temp_array))
+        temp_array = temp_array[0]
+
+    count = 0
+    coord = [0]*(dim_count-1)
+    coord[0] = -1
+    while True:
+        increment_next_level = True
+        for dim in range(dim_count-1):
+            if increment_next_level:
+                if coord[dim] == dim_size[dim]-1:
+                    coord[dim] = 0
+                else:
+                    coord[dim] += 1
+                    increment_next_level = False
+        if increment_next_level:
+            break
+        temp_array = array
+        for dim in range(dim_count-1):
+            temp_array = temp_array[coord[dim]]
+        count += temp_array.count(element)
+
+    return count
+
+
+def coords_in_array(element, array):
+    """Return list of array coordinates containing element. List can be any dimension > 1"""
+    dim_count = 0           # dim_count = number of dimensions of the array
+    dim_size = []           # dim_size = array size in each dimension
+    temp_array = array
+    while isinstance(temp_array, (list, tuple)):
+        dim_count += 1
+        dim_size.append(len(temp_array))
+        temp_array = temp_array[0]
+
+    results = []
+    coord = [0]*dim_count
+    coord[0] = -1
+    while True:
+        increment_next_level = True
+        for dim in range(dim_count):
+            if increment_next_level:
+                if coord[dim] == dim_size[dim]-1:
+                    coord[dim] = 0
+                else:
+                    coord[dim] += 1
+                    increment_next_level = False
+        if increment_next_level:
+            break
+        temp_array = array
+        for dim in range(dim_count):
+            temp_array = temp_array[coord[dim]]
+        if temp_array == element:
+            results.append(list(coord))
+
+    return results
+
+
 # = Factor Procedures ================================
 def get_proper_divisors(num):   # Valid for num > 1
-    """ Return list of all proper divisors of num.  Proper divisors are the same as factors except does not include num itself."""
+    """ Return list of all proper divisors of num.
+        Proper divisors are the same as factors except does not include num itself."""
     result = [1]
     hiresult = []
     maxcheck = int(math.sqrt(num))+1
@@ -66,12 +133,12 @@ def is_prime(num):
         return False
     elif num == 2:
         return True
-    elif num%2 == 0:
+    elif num % 2 == 0:
         return False
     else:
         maxcheck = int(math.sqrt(num))+1
         for n in range(3, maxcheck, 2):
-            if num%n == 0:
+            if num % n == 0:
                 return False
         return True
 
@@ -163,7 +230,7 @@ def is_pandigital(str_n, str_digits):
 
 
 # = Combinations/Permutation Procedures ==============
-def lexi_perm(n, digits):
+def str_permutation(n, digits):
     """ Return the nth permutation of digit_count digits."""
     digit_count = len(digits)
     result = ''
@@ -173,29 +240,37 @@ def lexi_perm(n, digits):
         dividend = int(remainder/divisor)               # Determine which digit in list is next
         remainder = remainder % divisor                 # Remainder calculated for next loop
         result += digits[dividend]                      # Extend string to right
-        digits = digits.replace(digits[dividend], '')   # Remove digit just used from list
+        if dividend < len(digits) - 1:                  # Remove digit just used from list
+            digits = digits[:dividend] + digits[dividend+1:]
+        else:
+            digits = digits[:dividend]
     return result
+
 
 # = Check Common Functions ===========================
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
     # Check get_proper_divisors()
+    print()
     print('Check get_proper_divisors()')
     print(12, get_proper_divisors(12))
 
     # Check get_factors()
+    print()
     print('Check get_factors()')
     print(12, get_factors(12))
 
     # Time Check index_in_ordered_list()
-    ordered_list = [z for z in range(10000)]
+    print()
+    print('Time Check index_in_ordered_list()')
+    z_ordered_list = [z for z in range(10000)]
     time_count = 1000
 
     start = timer()
     for z in range(time_count):
-        time_ans = index_in_ordered_list(921, ordered_list)
+        time_ans = index_in_ordered_list(921, z_ordered_list)
     time1 = timer()
     for z in range(time_count):
-        time_ans = ordered_list.index(921)
+        time_ans = z_ordered_list.index(921)
     time2 = timer()
 
     print()
@@ -203,31 +278,83 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
     print(time2-time1)  # in ms
 
     # Time Check is_in_ordered_list()
+    print()
+    print('Time Check is_in_ordered_list()')
     start = timer()
     for z in range(time_count):
-        time_ans = is_in_ordered_list(921, ordered_list)
+        time_ans = is_in_ordered_list(921, z_ordered_list)
     time1 = timer()
     for z in range(time_count):
-        time_ans = 921 in ordered_list
+        time_ans = 921 in z_ordered_list
     time2 = timer()
 
     print()
     print(time1-start)  # in ms
     print(time2-time1)  # in ms
 
+    # Check array procedures
+    print()
+    print('Check coords_in_array(), count_in_array()')
+    zlist = [z for z in range(12)]
+    zlist = [zlist[z:z+3] for z in range(4)]
+    print(zlist)
+    print(sum(zlist1.count(2) for zlist1 in zlist))
+    for z in range(6):
+        print(z, coords_in_array(z, zlist))
+    zlist = [zlist]*5
+    print(zlist)
+    for z in range(7):
+        print(z, coords_in_array(z, zlist))
+    for z in range(7):
+        print(z, count_in_array(z, zlist))
+
+    # Time Check array procedures
+    print()
+    print('Time Check count_in_array(), coords_in_array()')
+    zlist = [z for z in range(60)]
+    zlist = [zlist[z:z+10] for z in range(10)]
+    zlist = [zlist]*5
+    time_count = 1000
+
+    start = timer()
+    for z in range(time_count):
+        time_ans = count_in_array(150, zlist)
+    time1 = timer()
+    for z in range(time_count):
+        time_ans = coords_in_array(150, zlist)
+    time2 = timer()
+
+    print()
+    print(time1-start)  # in ms
+    print(time2-time1)  # in ms
+
+    # Check str_permutation()
+    z_bit_count = 4
+    print()
+    print('Check str_permutation()')
+    for z in range(math.factorial(z_bit_count)):
+        print(z, str_permutation(z, '1234'))
+
+    print()
+    print('Check lexi_perm_duplicate_digits()')
+    for z in range(math.factorial(z_bit_count)):
+        print(z, str_permutation(z, '1040'))
+
     # Check sieve_erathosthenes()
     print()
+    print('Check sieve_erathosthenes()')
     for z in range(2, 11):
         print(z, sieve_erathosthenes(z))
 
     # Check get_factors()
+    print()
     print('Check get_prime_factors()')
     zprime_list = sieve_erathosthenes(100)
     print(24, get_prime_factors(24, zprime_list))
 
-
     # Check reduce_fraction()
     print()
+    print('Check reduce_fraction()')
     y = 6
     for z in range(1, 13):
         print(y, z, reduce_fraction(y, z))

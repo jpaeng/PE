@@ -62,6 +62,7 @@ def nth_digit(n):
         number_length = 1
     else:
         sub_tot = 0
+        number_length = 0
         for k in range(2, 12):
             sub_tot += 10**(k-1)
             if n < (k * 10**k - sub_tot):   # Calculate n for each base number = 10**k
@@ -98,7 +99,7 @@ def pandigital_primes(n, digits):
     pan_prime_list = []
     perm_count = math.factorial(n)
     for j in range(perm_count):
-        k = int(common.lexi_perm(j, digits))
+        k = int(common.str_permutation(j, digits))
         if common.is_in_ordered_list(k, prime_list):
             pan_prime_list.append(k)
     return pan_prime_list
@@ -158,7 +159,7 @@ def pandigital_sub_divisible(str_d4, str_d6, digits):
 
     # Loop through all permutations of digits
     for i in range(math.factorial(len(digits))):
-        str_n = common.lexi_perm(i, digits)
+        str_n = common.str_permutation(i, digits)
         str_n = str_n[:3] + str_d4 + str_n[3:]    # Create d2d3d4 divisible by 2
         str_n = str_n[:5] + str_d6 + str_n[5:]    # Create d4d5d6 divisible by 5
         d3d4d5 = int(str_n[2:5])
@@ -322,7 +323,9 @@ def consecutive_prime_factors(prime_factor_count, consecutive_count, max_n):
 # Problem 48: Self Powers
 # The series, 1**1 + 2**2 + 3**3 + ... + 10**10 = 10405071317.
 # Find the last ten digits of the series, 1**1 + 2**2 + 3**3 + ... + 1000**1000.
+
 def sum_self_powers(max_n):
+    """Return sum of self powers up to max_n."""
     result = 0
     for n in range(1, max_n+1):
         result += n**n
@@ -338,10 +341,83 @@ def sum_self_powers(max_n):
 # exhibiting this property, but there is one other 4-digit increasing sequence.
 # What 12-digit number do you form by concatenating the three terms in this sequence?
 
+def prime_permutation_arithmetic_sequence(digit_count, term_count):
+    """Return lists of arithmetic sequences that are both prime and permutations of digits."""
+
+    # Make list of prime numbers of the correct digit_count.
+    prime_list = common.sieve_erathosthenes(10**digit_count)
+    n = 10**(digit_count-1)
+    index = -1
+    while index < 0:    # find index of first prime number with correct digit_count
+        n += 1
+        index = common.index_in_ordered_list(n, prime_list)     # returns -1 if n not found
+    prime_list = prime_list[index:]   # prime_list now contains only primes of digit_count
+
+    results = []        # results = the return variable to contain the sequence lists.
+
+    # Loop thru each prime
+    perm_count = math.factorial(digit_count)    # perm_count = the number of possible permutation of digit_count
+    for prime in prime_list:        # loop thru primes
+        str_digits = str(prime)
+        perm_list = [prime]
+        for index in range(1, perm_count):  # loop thru all permutations
+            perm = int(common.str_permutation(index, str_digits))
+            if common.is_in_ordered_list(perm, prime_list) and perm not in perm_list:
+                perm_list.append(perm)      # perm_list contains only permutations that are prime
+        len_perm_list = len(perm_list)
+        if len_perm_list == 1:
+            pass
+        elif len_perm_list < term_count:
+            for perm in reversed(perm_list[1:]):    # delete from prime_list all primes that are in perm_list so we
+                prime_list.remove(perm)             # we don't recheck those primes.
+        else:
+            perm_list.sort()
+
+            # Create diff_array containing the differences between each element of perm_list
+            diff_array = [[0]*len_perm_list for x in range(len_perm_list)]
+            for x in range(len_perm_list-1):
+                for y in range(x+1, len_perm_list):
+                    diff_array[x][y] = perm_list[y] - perm_list[x]
+
+            # Count the number of equal differences between perm_list elements to find arithmetic sequences.
+            for x in range(len_perm_list-1):
+                for y in range(x+1, len_perm_list):
+                    if diff_array[x][y]:        # diff_array[x][y] != 0
+                        diff_count = common.count_in_array(diff_array[x][y], diff_array)    # count the number of diffs
+                        if diff_count > 1:
+                            # seq_coords gets the indices of the perm_list elements that have common differences.
+                            # if any index occurs twice, this indicates the index of an element that is half-way
+                            # between two others.
+                            seq_coords = common.coords_in_array(diff_array[x][y], diff_array)
+                            common_nodes = 0
+                            for x1, y1 in seq_coords:
+                                if common.count_in_array(x1, seq_coords) == 2:
+                                    common_nodes += 1
+                            if common_nodes >= term_count-2:
+                                seq_list = []
+                                for x1, y1 in seq_coords:
+                                    if perm_list[x1] not in seq_list:
+                                        seq_list.append(perm_list[x1])
+                                    if perm_list[y1] not in seq_list:
+                                        seq_list.append(perm_list[y1])
+                                seq_list.sort()
+                                results.append(seq_list)
+                            for x1, y1 in seq_coords:
+                                diff_array[x1][y1] = 0
+                        else:
+                            diff_array[x][y] = 0
+            for perm in reversed(perm_list[1:]):    # delete from prime_list all primes that are in perm_list so we
+                prime_list.remove(perm)             # we don't recheck those primes.
+    return results
+
+
+
+
+
 
 # Problem 40-49 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 48
+    problem_num = 49
 
     if problem_num == 40:
         print()
@@ -403,3 +479,13 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print(sum_self_powers(10))
         print(sum_self_powers(100))
         print(str(sum_self_powers(1000))[-10:])
+    elif problem_num == 49:
+        zlist = [z for z in range(10)]
+        for z in zlist:
+            print(z)
+            zlist.remove(zlist[len(zlist)-1])
+        zlist = [z for z in range(10)]
+        for z in zlist:
+            print(z)
+            zlist.remove(z)
+        print(prime_permutation_arithmetic_sequence(4, 3))

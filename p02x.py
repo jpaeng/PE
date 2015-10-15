@@ -371,10 +371,7 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print('Odd abundant numbers below 10000: ', [z for z in z_abund_list if z % 2])
     elif problem_num == 24:
         print()
-        pr24_bit_count = 4
-        for z in range(math.factorial(pr24_bit_count)):
-            print(z, common.lexi_perm(z, '1234'))
-        print(999999, common.lexi_perm(999999, '0123456789'))
+        print(999999, common.str_permutation(999999, '0123456789'))
     elif problem_num == 25:
         print()
         for z in range(1, 5):
