@@ -16,6 +16,36 @@ from timeit import default_timer as timer
 # The longest sum of consecutive primes below one-thousand that adds to a prime, contains 21 terms, and is equal to 953.
 # Which prime, below one-million, can be written as the sum of the most consecutive primes?
 
+def consecutive_prime_sum(max_sum):
+    """Return longest list of consecutive primes that sum to a prime under max_sum."""
+    prime_list = common.sieve_erathosthenes(max_sum)
+    max_sum = prime_list[-1]        # redefine max_sum to be largest prime number < original max_sum
+    max_length = 1
+    max_length_sum = 2
+    max_list = []
+    len_prime_list = len(prime_list)
+
+    for start_index in range(len_prime_list):
+        # for each start_index, start checking with sequence of current max_length
+        current_index = start_index + max_length
+        if current_index > len_prime_list:
+            break
+        else:
+            current_sum = sum(prime_list[start_index:current_index])
+            if current_sum > max_sum:
+                break
+            else:
+                # for each added prime, check that sum does not exceed max_sum
+                for current_index in range(current_index, len_prime_list):
+                    current_sum += prime_list[current_index]
+                    if current_sum > max_sum:
+                        break
+                    elif common.is_in_ordered_list(current_sum, prime_list):
+                        max_length_sum = current_sum
+                        max_length = current_index - start_index + 1
+                        max_list = prime_list[start_index:current_index+1]
+    return max_length, max_length_sum, max_list
+
 
 # Problem 51: Prime Digit Replacements
 # By replacing the 1st digit of the 2-digit number *3, it turns out that six of the nine possible values:
@@ -39,7 +69,7 @@ from timeit import default_timer as timer
 # There are exactly ten ways of selecting three from five, 12345:
 #     123, 124, 125, 134, 135, 145, 234, 235, 245, and 345
 # In combinatorics, we use the notation, 5C3 = 10.
-# In general, nCr = n!/(r!(n-r)!), where r != n, n! = n×(n-1)×...×3×2×1, and 0! = 1.
+# In general, nCr = n!/(r!(n-r)!), where r != n, n! = nx(n-1)x...x3x2x1, and 0! = 1.
 # It is not until n = 23, that a value exceeds one-million: 23C10 = 1144066.
 # How many, not necessarily distinct, values of  nCr, for 1 = n = 100, are greater than one-million?
 
@@ -136,7 +166,7 @@ from timeit import default_timer as timer
 #     43 44 45 46 47 48 49
 # It is interesting to note that the odd squares lie along the bottom right diagonal,
 # but what is more interesting is that 8 out of the 13 numbers lying along both diagonals are prime;
-# that is, a ratio of 8/13 ˜ 62%.
+# that is, a ratio of 8/13 ~ 62%.
 # If one complete new layer is wrapped around the spiral above, a square spiral with side length 9 will be formed.
 # If this process is continued, what is the side length of the square spiral for which the ratio of primes
 # along both diagonals first falls below 10%?
@@ -167,6 +197,9 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
 
     if problem_num == 50:
         print()
+        print(consecutive_prime_sum(100))
+        print(consecutive_prime_sum(1000))
+        print(consecutive_prime_sum(1000000))
     elif problem_num == 51:
         print()
     elif problem_num == 52:

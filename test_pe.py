@@ -8,6 +8,7 @@ import p01x
 import p02x
 import p03x
 import p04x
+import p05x
 
 
 def test_common():
@@ -300,3 +301,7 @@ def test_p047():
 
 def test_p049():
     assert p04x.prime_permutation_arithmetic_sequence(4, 3) == [[1487, 4817, 8147], [2969, 6299, 9629]]
+
+
+def test_p050():
+    assert p05x.consecutive_prime_sum(100) == (6, 41, [2, 3, 5, 7, 11, 13])
