@@ -305,3 +305,7 @@ def test_p049():
 
 def test_p050():
     assert p05x.consecutive_prime_sum(100) == (6, 41, [2, 3, 5, 7, 11, 13])
+
+
+def test_p051():
+    assert p05x.prime_digit_replacement_families(2, 6) == [[13, 23, 43, 53, 73, 83]]
