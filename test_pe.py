@@ -309,3 +309,7 @@ def test_p050():
 
 def test_p051():
     assert p05x.prime_digit_replacement_families(2, 6) == [[13, 23, 43, 53, 73, 83]]
+
+
+def test_p052():
+    assert p05x.smallest_permuted_multiples(10, [2, 3, 4, 5, 6]) == 142857

@@ -105,6 +105,28 @@ def prime_digit_replacement_families(digit_count, family_count):
 # but in a different order.
 # Find the smallest positive integer, x, such that 2x, 3x, 4x, 5x, and 6x, contain the same digits.
 
+def smallest_permuted_multiples(start_n, multipliers):
+    """ Return the smallest number greater than start_n for which multiples contains the same digits."""
+    n = start_n
+    perm_status = False
+    while True:         # loop until number found
+        max_n = int(10**int(math.log10(start_n+1)+1)/max(multipliers))  # find max n which will keep the same digit count
+        for n in range(start_n, max_n + 1):     # loop through n of the same digit count
+            str_n = str(n)
+            for mult in multipliers:
+                perm_status = common.is_permutation(str_n, str(mult*n))
+                if not perm_status:
+                    break
+            if perm_status:
+                break
+        if perm_status:
+            break
+        start_n = 10**int(math.log10(n)+1)      # calculate start n for increasing digit count by 1
+    if perm_status:
+        return n
+    else:
+        return 0    # return 0 if not found (will never execute because function will run infinite loop instead
+
 
 # Problem 53: Combinatoric Selections
 # There are exactly ten ways of selecting three from five, 12345:
@@ -234,7 +256,7 @@ def prime_digit_replacement_families(digit_count, family_count):
 
 # Problem 50-59 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 51
+    problem_num = 52
 
     if problem_num == 50:
         print()
@@ -249,6 +271,15 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print(prime_digit_replacement_families(6, 8))
     elif problem_num == 52:
         print()
+        print(smallest_permuted_multiples(10, [2]))
+        print(smallest_permuted_multiples(10, [3]))
+        print(smallest_permuted_multiples(10, [4]))
+        print(smallest_permuted_multiples(10, [5]))
+        print(smallest_permuted_multiples(10, [6]))
+        print(smallest_permuted_multiples(10, [2, 3]))
+        print(smallest_permuted_multiples(10, [2, 3, 4]))
+        print(smallest_permuted_multiples(10, [2, 3, 4, 5]))
+        print(smallest_permuted_multiples(10, [2, 3, 4, 5, 6]))
     elif problem_num == 53:
         print()
     elif problem_num == 54:
