@@ -313,3 +313,9 @@ def test_p051():
 
 def test_p052():
     assert p05x.smallest_permuted_multiples(10, [2, 3, 4, 5, 6]) == 142857
+
+
+def test_p053():
+    assert p05x.combination_counts(10, 100) == 5
+    assert p05x.combination_counts(23, 1000000) == 4
+    assert p05x.combination_counts_max_n(11, 100) == 13

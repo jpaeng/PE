@@ -135,6 +135,43 @@ def smallest_permuted_multiples(start_n, multipliers):
 # In general, nCr = n!/(r!(n-r)!), where r != n, n! = nx(n-1)x...x3x2x1, and 0! = 1.
 # It is not until n = 23, that a value exceeds one-million: 23C10 = 1144066.
 # How many, not necessarily distinct, values of  nCr, for 1 = n = 100, are greater than one-million?
+# NOTE:  nCr = nC(n-r)
+
+def combination_counts(n, threshold):
+    """For a given n, return the count of r's that generate nCr >= threshold."""
+    hi = int(n/2)
+    lo = 1
+
+    # make sure at least one nCr > threshold
+    combs = common.combinations(n, hi)
+    if combs < threshold:
+        count = 0
+    else:
+        # binary search to find r when nCr falls below threshold
+        while True:
+            mid = int((hi + lo)/2)
+            combs = common.combinations(n, mid)
+            if combs < threshold:
+                lo = mid
+            else:
+                hi = mid
+            if hi - lo < 2:
+                break
+        # calculate the number of r values for which nCr >= threshold
+        if n % 2:
+            count = 2*int(n/2 - hi + 1)
+        else:
+            count = 2*int(n/2 - hi) + 1
+
+    return count
+
+
+def combination_counts_max_n(max_n, threshold):
+    """Return the count of all (n, r) combinations up to max_n that generate nCr > threshold."""
+    count = 0
+    for n in range(1, max_n+1):
+        count += combination_counts(n, threshold)
+    return count
 
 
 # Problem 54: Poker Hands
@@ -256,7 +293,7 @@ def smallest_permuted_multiples(start_n, multipliers):
 
 # Problem 50-59 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 52
+    problem_num = 53
 
     if problem_num == 50:
         print()
@@ -282,6 +319,18 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print(smallest_permuted_multiples(10, [2, 3, 4, 5, 6]))
     elif problem_num == 53:
         print()
+        zn = 10
+        zcount = 100
+        print(zn, zcount, combination_counts(zn, zcount))
+        zn = 11
+        zcount = 100
+        print(zn, zcount, combination_counts(zn, zcount))
+        zn = 23
+        zcount = 1000000
+        print(zn, zcount, combination_counts(zn, zcount))
+        zn = 100
+        zcount = 1000000
+        print(zn, zcount, combination_counts_max_n(zn, zcount))
     elif problem_num == 54:
         print()
     elif problem_num == 55:

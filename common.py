@@ -230,6 +230,11 @@ def is_pandigital(str_n, str_digits):
 
 
 # = Combinations/Permutation Procedures ==============
+def combinations(n, r):
+    """Return nCr."""
+    return math.factorial(n)/math.factorial(r)/math.factorial(n-r)
+
+
 def str_permutation(n, digits):
     """ Return the nth permutation of digit_count digits."""
     digit_count = len(digits)
