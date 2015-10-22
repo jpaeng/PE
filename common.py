@@ -3,6 +3,23 @@ import math
 from timeit import default_timer as timer
 
 
+# = File Procedures =================================
+def read_single_line_text_file(file_name, remove_chr='"', split_delimiter=','):
+    in_file = open(file_name)
+    str_list = (in_file.read().replace(remove_chr,'')).split(split_delimiter)
+    in_file.close()
+    return str_list
+
+
+def read_multi_line_text_file(file_name):
+    rows = []
+    in_file = open(file_name)
+    for line in in_file:
+        rows.append(line.rstrip())
+    in_file.close()
+    return rows
+
+
 # = List Procedures =================================
 def index_in_ordered_list(n, ordered_list):      # binary search
     lo = 0
@@ -33,6 +50,18 @@ def is_in_ordered_list(n, ordered_list):      # binary search
 
 
 # = List Array Procedures ============================
+def sort_2d_array(array, index=0):
+    len_array = len(array)
+    switched = True
+    while(switched):
+        switched = False
+        for i in range(len_array-1):
+            if array[i][index] > array[i+1][index]:
+                array[i], array[i+1] = array[i+1], array[i]
+                switched = True
+    return array
+
+
 def count_in_array(element, array):
     """Return count of elements in array. List can be any dimension > 1"""
     dim_count = 0           # dim_count = number of dimensions of the array

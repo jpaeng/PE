@@ -212,6 +212,145 @@ def combination_counts_max_n(max_n, threshold):
 # each player's hand is in no specific order, and in each hand there is a clear winner.
 # How many hands does Player 1 win?
 
+def card_parse(str_card):
+    """Return list [suit, value] for given str_card."""
+    len_card = len(str_card)
+    if len_card < 2:
+        card = ['error', -100]
+    elif len_card > 3:
+        card = ['error', -100]
+    else:
+        card = [str_card[-1]]   # first element is the suit: C D H or S
+        if str_card[0] == 'T':  # 10-cards are represented by T
+            card.append(10)
+        elif str_card[0] == 'J':
+            card.append(11)
+        elif str_card[0] == 'Q':
+            card.append(12)
+        elif str_card[0] == 'K':
+            card.append(13)
+        elif str_card[0] == 'A':
+            card.append(14)
+        else:
+            card.append(int(str_card[:-1]))     # numerical cards
+    return card
+
+
+def card_counts(cards):
+    """Return a list of tuples (value, count) for given cards. Input assumed to be sorted by value."""
+    value_index = 1
+    counts = []
+    while len(cards) > 0:
+        count = 1
+        value = cards[-1][value_index]
+        cards.pop()     # remove cards that have been counted
+        for i in reversed(range(len(cards))):   # loop until card value changes
+            if cards[-1][value_index] == value:
+                count += 1
+                cards.pop()     # remove cards that have been counted
+            else:
+                break
+        counts.append((value, count))
+        counts = common.sort_2d_array(counts, 0)    # sort by value
+        counts = common.sort_2d_array(counts, 1)    # sort by count
+        # return list sorted by count, then by value.
+    return counts
+
+
+def score_hand(cards):
+    """Return score given a hand of cards."""
+    suit_index = 0
+    value_index = 1
+    len_card = len(cards)
+    cards = common.sort_2d_array(cards, value_index)
+    value = []
+
+    is_straight = True
+    for i in range(len_card-1):
+        if cards[i+1][value_index] != cards[i][value_index]+1:
+            is_straight = False
+            break
+    
+    is_flush = True
+    for i in range(len_card-1):
+        if cards[i][suit_index] != cards[i+1][suit_index]:
+            is_flush = False
+            break
+
+    if is_straight and is_flush:
+        value.append(cards[-1][value_index] * 10**8)
+    elif is_flush:
+        value.append(cards[-1][value_index] * 10**5)
+    elif is_straight:
+        value.append(cards[-1][value_index] * 10**4)
+    else:
+        counts = card_counts(cards)
+        if counts[-1][1] == 4:      # four of a kind
+            value.append(counts[1][0] * 10**7)
+            value.append(counts[0][0])
+        elif counts[-1][1] == 3:
+            if counts[-2][1] == 2:  # full house
+                value.append(counts[1][0] * 10**6)
+                value.append(counts[0][0])
+            else:                   # three of a kind
+                value.append(counts[2][0] * 10**3)
+                value.append(counts[1][0])
+                value.append(counts[0][0])
+        elif counts[-1][1] == 2:
+            if counts[-2][1] == 2:  # two pair
+                value.append(counts[2][0] * 10**2)
+                value.append(counts[1][0])
+                value.append(counts[0][0])
+            else:                   # one pair
+                value.append(counts[3][0] * 10**1)
+                value.append(counts[2][0])
+                value.append(counts[1][0])
+                value.append(counts[0][0])
+        else:
+            for i in reversed(range(len(counts))):
+                value.append(counts[i][0])
+
+    return value
+
+
+def play_hand(str_line):
+    """Return winner of a hand of poker coded in str_line. str_line contains 10 cards delimited by spaces."""
+    winner = 0
+    str_cards = str_line.split(' ')
+    if len(str_cards) == 10:
+        cards1 = []
+        for i in range(5):
+            cards1.append(card_parse(str_cards[i]))
+        cards2 = []
+        for i in range(5, 10):
+            cards2.append(card_parse(str_cards[i]))
+        score1 = score_hand(cards1)
+        score2 = score_hand(cards2)
+        for i in range(len(score1)):
+            if score1[i] > score2[i]:
+                winner = 1
+                break
+            elif score1[i] < score2[i]:
+                winner = 2
+                break
+    return winner
+
+
+def play_poker_file(file_name):
+    """Return win numbers for player 1 and player 2 for games recorded in file."""
+    str_lines = common.read_multi_line_text_file(file_name)
+
+    wins1 = 0
+    wins2 = 0
+
+    for line in str_lines:
+        if play_hand(line) == 1:
+            wins1 += 1
+        else:
+            wins2 += 1
+
+    return wins1, wins2
+
 
 # Problem 55: Lychrel Numbers
 # If we take 47, reverse and add, 47 + 74 = 121, which is palindromic.
@@ -293,7 +432,7 @@ def combination_counts_max_n(max_n, threshold):
 
 # Problem 50-59 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 53
+    problem_num = 54
 
     if problem_num == 50:
         print()
@@ -333,6 +472,23 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print(zn, zcount, combination_counts_max_n(zn, zcount))
     elif problem_num == 54:
         print()
+        print(card_parse('2H'))
+        print(card_parse('QC'))
+        print(card_parse('TD'))
+        zcards1 = [card_parse(z) for z in '2H 2D 4C 4D 4S'.split(' ')]
+        zcards2 = [card_parse(z) for z in '3C 3D 3S 9S 9D'.split(' ')]
+        print(card_counts(zcards1))
+        print(card_counts(zcards2))
+        zcards1 = [card_parse(z) for z in '2H 2D 4C 4D 4S'.split(' ')]
+        zcards2 = [card_parse(z) for z in '3C 3D 3S 9S 9D'.split(' ')]
+        print(score_hand(zcards1))
+        print(score_hand(zcards2))
+        print(1, play_hand('5H 5C 6S 7S KD 2C 3S 8S 8D TD'))
+        print(2, play_hand('5D 8C 9S JS AC 2C 5C 7D 8S QH'))
+        print(3, play_hand('2D 9C AS AH AC 3D 6D 7D TD QD'))
+        print(4, play_hand('4D 6S 9H QH QC 3D 6D 7H QD QS'))
+        print(5, play_hand('2H 2D 4C 4D 4S 3C 3D 3S 9S 9D'))
+        print(play_poker_file('p054_poker.txt'))
     elif problem_num == 55:
         print()
     elif problem_num == 56:
