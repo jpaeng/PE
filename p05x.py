@@ -67,9 +67,7 @@ def digit_replacement_families(num):
     results = []
 
     for digit in digits:
-        family = []
-        for replacement in "0123456789":
-            family.append(int(str_num.replace(digit, replacement)))
+        family = [int(str_num.replace(digit, c)) for c in "0123456789"]
         results.append(family)
 
     return results
@@ -253,12 +251,25 @@ def card_counts(cards):
         counts.append((value, count))
         counts = common.sort_2d_array(counts, 0)    # sort by value
         counts = common.sort_2d_array(counts, 1)    # sort by count
-        # return list sorted by count, then by value.
+        # return list sorted by count, then by value, both ascending
     return counts
 
 
 def score_hand(cards):
-    """Return score given a hand of cards."""
+    """Return score given a hand of cards.
+    Scores:
+        Royal Flush:    14e8
+        Straight Flush: 2e8 - 14e8
+        Four of a Kind: 2e7 - 14e7
+        Full House:     2e6 - 14e6
+        Flush:          7e5 - 14e5
+        Straight:       6e4 - 14e4
+        Three of a Kind:2e3 - 14e3
+        Two Pairs:      200 - 1400
+        One Pair:       20 - 140
+        High Card:      2 - 14 (Face value)
+    """
+
     suit_index = 0
     value_index = 1
     len_card = len(cards)
@@ -318,12 +329,8 @@ def play_hand(str_line):
     winner = 0
     str_cards = str_line.split(' ')
     if len(str_cards) == 10:
-        cards1 = []
-        for i in range(5):
-            cards1.append(card_parse(str_cards[i]))
-        cards2 = []
-        for i in range(5, 10):
-            cards2.append(card_parse(str_cards[i]))
+        cards1 = [card_parse(str_cards[i]) for i in range(5)]
+        cards2 = [card_parse(str_cards[i]) for i in range(5, 10)]
         score1 = score_hand(cards1)
         score2 = score_hand(cards2)
         for i in range(len(score1)):

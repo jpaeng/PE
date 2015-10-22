@@ -45,9 +45,7 @@ def get_nth_digits_loop(n_list):
 
 def get_nth_digits_formula(n_list):
     """ Return list of nth digits of Champernovne's Constant given a list of n's. Longer execution vs formula."""
-    dn_list = []
-    for n in n_list:
-        dn_list.append(nth_digit(n))
+    dn_list = [nth_digit(n) for n in n_list]
     return dn_list
 
 
@@ -417,7 +415,7 @@ def prime_permutation_arithmetic_sequence(digit_count, term_count):
 
 # Problem 40-49 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 49
+    problem_num = 40
 
     if problem_num == 40:
         print()
