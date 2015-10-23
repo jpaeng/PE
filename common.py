@@ -12,10 +12,8 @@ def read_single_line_text_file(file_name, remove_chr='"', split_delimiter=','):
 
 
 def read_multi_line_text_file(file_name):
-    rows = []
     in_file = open(file_name)
-    for line in in_file:
-        rows.append(line.rstrip())
+    rows = [line.rstrip() for line in in_file]
     in_file.close()
     return rows
 

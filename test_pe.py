@@ -319,3 +319,7 @@ def test_p053():
     assert p05x.combination_counts(10, 100) == 5
     assert p05x.combination_counts(23, 1000000) == 4
     assert p05x.combination_counts_max_n(11, 100) == 13
+
+
+def test_p055():
+    assert p05x.lychrel_numbers(1000) == [196, 295, 394, 493, 592, 689, 691, 788, 790, 879, 887, 978, 986]

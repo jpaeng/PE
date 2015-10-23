@@ -379,6 +379,53 @@ def play_poker_file(file_name):
 # How many Lychrel numbers are there below ten-thousand?
 # NOTE: Wording was modified slightly on 24 April 2007 to emphasise the theoretical nature of Lychrel numbers.
 
+def reverse_digits(n):
+    """Return n with digits reversed."""
+    result = "".join(reversed(list(str(n))))
+    return int(result)
+
+
+def reverse_sum_iterations_to_palindrome(n, max_check):
+    """Return count of iterations to palindrome and the list of numbers checked up to max_check."""
+    num_list = []
+    for i in range(50):
+        reverse_n = reverse_digits(n)
+        sum_n = n + reverse_n
+        if n < max_check:
+            num_list.append(n)
+            num_list.append(reverse_n)
+        if common.is_str_palindrome(str(sum_n)):    # stop if palindrome
+            break
+        n = sum_n
+    return i, num_list
+
+
+def lychrel_numbers(max_n):
+    """Return list of Lychrel numbers up to max_n."""
+    checked = {}
+    for n in range(max_n + 2):
+        checked[n] = False
+    lychrel = []
+    index = 0
+    while index < max_n:
+        index += 1
+        if checked[index]:
+            pass
+        else:
+            iterations, checked_list = reverse_sum_iterations_to_palindrome(index, max_n)
+            if iterations > 48:
+                lychrel.extend(checked_list)
+            for n in checked_list:
+                checked[n] = True
+    lychrel = list(set(lychrel))
+    for n in lychrel:
+        iterations, checked_list = reverse_sum_iterations_to_palindrome(n, max_n)
+        if iterations < 49:
+            lychrel.remove(n)
+    lychrel.sort()
+
+    return lychrel
+
 
 # Problem 56: Powerful Digit Sum
 # A googol (10**100) is a massive number: one followed by one-hundred zeros;
@@ -439,7 +486,7 @@ def play_poker_file(file_name):
 
 # Problem 50-59 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 54
+    problem_num = 55
 
     if problem_num == 50:
         print()
@@ -498,6 +545,19 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print(play_poker_file('p054_poker.txt'))
     elif problem_num == 55:
         print()
+        for z in range(321, 330):
+            print(z, reverse_digits(z))
+        for z in range(40, 50):
+            print(reverse_sum_iterations_to_palindrome(z, 10**4))
+        for z in range(190, 200):
+            print(reverse_sum_iterations_to_palindrome(z, 10**4))
+        for z in range(340, 350):
+            print(reverse_sum_iterations_to_palindrome(z, 10**4))
+        print(reverse_sum_iterations_to_palindrome(4994, 10**4))
+        zlychrel = lychrel_numbers(1000)
+        print(zlychrel)
+        zlychrel = lychrel_numbers(10**4)
+        print(len(zlychrel))
     elif problem_num == 56:
         print()
     elif problem_num == 57:
