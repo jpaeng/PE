@@ -475,6 +475,11 @@ def max_power_digit_sum(n):
 # the number of digits in the denominator.
 # In the first one-thousand expansions, how many fractions contain a numerator with more digits than denominator?
 
+def next_sqrt_fraction(num, den):
+    num += den
+    num, den = den, num     # reciprocal
+    num += den
+    return num, den
 
 # Problem 58: Spiral Primes
 # Starting with 1 and spiralling anticlockwise in the following way, a square spiral with side length 7 is formed.
@@ -514,7 +519,7 @@ def max_power_digit_sum(n):
 
 # Problem 50-59 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 56
+    problem_num = 57
 
     if problem_num == 50:
         print()
@@ -591,7 +596,20 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print(max_power_digit_sum(10))
         print(max_power_digit_sum(100))
     elif problem_num == 57:
+        znum = 3
+        zden = 2
+        for z in range(2, 10):
+            znum, zden = next_sqrt_fraction(znum, zden)
+            print(z, znum, zden)
         print()
+        znum = 3
+        zden = 2
+        zcount = 0
+        for z in range(2, 1001):
+            znum, zden = next_sqrt_fraction(znum, zden)
+            if len(str(znum)) > len(str(zden)):
+                zcount += 1
+        print('sqrt_fraction count =', zcount)
     elif problem_num == 58:
         print()
     elif problem_num == 59:

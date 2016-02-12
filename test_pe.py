@@ -322,3 +322,7 @@ def test_p053():
 
 def test_p055():
     assert p05x.lychrel_numbers(1000) == [196, 295, 394, 493, 592, 689, 691, 788, 790, 879, 887, 978, 986]
+
+
+def test_p057():
+    assert p05x.next_sqrt_fraction(577, 408) == (1393, 985)
