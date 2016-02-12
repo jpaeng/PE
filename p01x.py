@@ -175,11 +175,7 @@ def lattice_path_count_formula(grid_size):
 # 2**15 = 32768 and the sum of its digits is 3 + 2 + 7 + 6 + 8 = 26.
 # What is the sum of the digits of the number 2**1000?
 
-def power_digit_sum(num, pwr):
-    """Return the sum of the digits in the answer to num^pwr."""
-    str_ans = str(num**pwr)
-    sum_dig = sum(int(str_ans[i]) for i in range(len(str_ans)))
-    return sum_dig
+# See power_digit_sum(num, pwr) in common.py
 
 
 # Problem 17:  Number Letter Counts
@@ -560,9 +556,9 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print("20x20:", lattice_path_count_formula(20))
     elif problem_num == 16:
         for z in range(16):
-            print(z, 2**z, power_digit_sum(2, z))
+            print(z, 2**z, common.power_digit_sum(2, z))
         print()
-        print(1000, power_digit_sum(2, 1000))
+        print(1000, common.power_digit_sum(2, 1000))
     elif problem_num == 17:
         for z in range(1, 22):
             print(z, number_letter_count_math(z), number_letter_count_text(z))

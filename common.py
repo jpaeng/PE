@@ -18,6 +18,14 @@ def read_multi_line_text_file(file_name):
     return rows
 
 
+# = String Procedures ===============================
+def power_digit_sum(num, pwr):
+    """Return the sum of the digits in the answer to num^pwr."""
+    str_ans = str(num**pwr)
+    sum_dig = sum(int(str_ans[i]) for i in range(len(str_ans)))
+    return sum_dig
+
+
 # = List Procedures =================================
 def index_in_ordered_list(n, ordered_list):      # binary search
     lo = 0

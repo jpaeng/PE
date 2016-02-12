@@ -3,7 +3,7 @@
 
 
 import math
-import scipy.special
+#import scipy.special
 import common
 
 from timeit import default_timer as timer
@@ -171,11 +171,11 @@ def square_of_sum_minus_sum_of_squares(max_n):
 # So the nth prime will be close to the number -nW(-1/n) where W() is the Lambert product log function.
 
 
-def nth_prime(n):
-    # valid for n >= 4
-    search_range = (-n)*(scipy.special.lambertw(-1.0/n, -1)).real
-    prime_list = common.sieve_erathosthenes(int(search_range))
-    return prime_list[n-1]
+# def nth_prime(n):
+#     # valid for n >= 4
+#     search_range = (-n)*(scipy.special.lambertw(-1.0/n, -1)).real
+#     prime_list = common.sieve_erathosthenes(int(search_range))
+#     return prime_list[n-1]
 
 
 # Problem 8:  Greatest Product of Digits
@@ -307,11 +307,12 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print(square_of_sum_minus_sum_of_squares(10))
         print(square_of_sum_minus_sum_of_squares(100))
     elif problem_num == 7:
-        print(nth_prime(4))
-        print(nth_prime(6))
-        print(nth_prime(10))
-        print(nth_prime(150))
-        print(nth_prime(10001))
+        problem_num = 7
+        # print(nth_prime(4))
+        # print(nth_prime(6))
+        # print(nth_prime(10))
+        # print(nth_prime(150))
+        # print(nth_prime(10001))
     elif problem_num == 8:
         pr8_string = '73167176531330624919225119674426574742355349194934\
 96983520312774506326239578318016984801869478851843\

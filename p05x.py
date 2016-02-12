@@ -417,7 +417,8 @@ def lychrel_numbers(max_n):
                 lychrel.extend(checked_list)
             for n in checked_list:
                 checked[n] = True
-    lychrel = list(set(lychrel))
+    lychrel = list(set(lychrel))    # remove duplicates
+    # check if all numbers in list are actually lychrel. some reversed lychrel might not be lychrel e.g. 790 & 97
     for n in lychrel:
         iterations, checked_list = reverse_sum_iterations_to_palindrome(n, max_n)
         if iterations < 49:
@@ -432,6 +433,33 @@ def lychrel_numbers(max_n):
 # 100**100 is almost unimaginably large: one followed by two-hundred zeros.
 # Despite their size, the sum of the digits in each number is only 1.
 # Considering natural numbers of the form, a**b, where a, b < 100, what is the maximum digital sum?
+
+def max_power_digit_sum(n):
+    max_sum = 1
+    max_sum_a = 1
+    max_sum_b = 1
+    min_a = 1
+    min_b = 1
+
+    if common.power_digit_sum(n, n) == 1:
+        a = n - 1
+    else:
+        a = n
+    while(a >= min_a):
+        b = n
+        min_b = max_sum/(9*math.log10(a))
+        while(b >= min_b):
+            dig_sum = common.power_digit_sum(a, b)
+            if dig_sum > max_sum:
+                max_sum = dig_sum
+                max_sum_a = a
+                max_sum_b = b
+                min_b = max_sum/(9*math.log10(a))
+                min_a = 10**(max_sum/(9*min_b))
+            b -= 1
+        a -= 1
+
+    return max_sum, max_sum_a, max_sum_b
 
 
 # Problem 57: Square Root Convergents
@@ -486,7 +514,7 @@ def lychrel_numbers(max_n):
 
 # Problem 50-59 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 55
+    problem_num = 56
 
     if problem_num == 50:
         print()
@@ -560,6 +588,8 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print(len(zlychrel))
     elif problem_num == 56:
         print()
+        print(max_power_digit_sum(10))
+        print(max_power_digit_sum(100))
     elif problem_num == 57:
         print()
     elif problem_num == 58:

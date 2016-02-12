@@ -16,6 +16,9 @@ def test_common():
     ordered_list = list(range(-10, 10))
     prime_list_10 = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
 
+    # power_digit_sum
+    common.power_digit_sum(2, 15) == 26
+
     # index_in_ordered_list
     assert common.index_in_ordered_list(-10, ordered_list) == ordered_list.index(-10)
     assert common.index_in_ordered_list( -1, ordered_list) == ordered_list.index(-1)
@@ -89,11 +92,11 @@ def test_p006():
     assert p00x.square_of_sum_minus_sum_of_squares(10) == 2640
 
 
-def test_p007():
-    assert p00x.nth_prime(6)   == 13
-    assert p00x.nth_prime(100) == 541
-    assert p00x.nth_prime(121) == 661
-    assert p00x.nth_prime(167) == 991
+# def test_p007():
+#     assert p00x.nth_prime(6)   == 13
+#     assert p00x.nth_prime(100) == 541
+#     assert p00x.nth_prime(121) == 661
+#     assert p00x.nth_prime(167) == 991
 
 
 def test_p010():
@@ -132,10 +135,6 @@ def test_p015():
     assert p01x.lattice_path_count_recursive((10, 10)) == 184756
     for n in range(1, 11):
         assert p01x.lattice_path_count_formula(n) == p01x.lattice_path_count_recursive((n, n))
-
-
-def test_p016():
-    assert p01x.power_digit_sum(2, 15) == 26
 
 
 def test_p017():
