@@ -476,10 +476,9 @@ def max_power_digit_sum(n):
 # In the first one-thousand expansions, how many fractions contain a numerator with more digits than denominator?
 
 def next_sqrt_fraction(num, den):
-    num += den
-    num, den = den, num     # reciprocal
-    num += den
+    num, den = num+den+den, num+den
     return num, den
+
 
 # Problem 58: Spiral Primes
 # Starting with 1 and spiralling anticlockwise in the following way, a square spiral with side length 7 is formed.
@@ -496,6 +495,63 @@ def next_sqrt_fraction(num, den):
 # If one complete new layer is wrapped around the spiral above, a square spiral with side length 9 will be formed.
 # If this process is continued, what is the side length of the square spiral for which the ratio of primes
 # along both diagonals first falls below 10%?
+
+def next_spiral_corner(corner, side_length, prev_term):
+    if corner >= 4:
+        corner = 0
+        side_length += 2
+    return corner+1, side_length, prev_term + side_length
+
+def spiral_corner_prime_ratio(min_ratio, max_term):
+    prime_list = common.sieve_erathosthenes2(max_term, 10**7)
+    count = 1
+    prime_count = 0
+
+    corner = 0
+    side_length = 2
+    term = 1
+
+    while corner < 4:
+        corner, side_length, term = next_spiral_corner(corner, side_length, term)
+        count += 1
+        if common.is_in_ordered_list(term, prime_list):
+            prime_count += 1
+
+    prime_ratio = float(prime_count)/count
+    while((prime_ratio > min_ratio) and (term < max_term)):
+        for index in range(4):
+            corner, side_length, term = next_spiral_corner(corner, side_length, term)
+            count += 1
+            if common.is_in_ordered_list(term, prime_list):
+                prime_count += 1
+        prime_ratio = float(prime_count)/count
+#        print(side_length, prime_ratio)
+    return term, side_length, count, prime_ratio
+
+def spiral_corner_prime_ratio_mr(min_ratio, max_term):  # Much faster than above.
+    count = 1
+    prime_count = 0
+
+    corner = 0
+    side_length = 2
+    term = 1
+
+    while corner < 4:
+        corner, side_length, term = next_spiral_corner(corner, side_length, term)
+        count += 1
+        if common.is_prime_mr(term):
+            prime_count += 1
+
+    prime_ratio = float(prime_count)/count
+    while((prime_ratio > min_ratio) and (term < max_term)):
+        for index in range(4):
+            corner, side_length, term = next_spiral_corner(corner, side_length, term)
+            count += 1
+            if common.is_prime_mr(term):
+                prime_count += 1
+        prime_ratio = float(prime_count)/count
+#        print(side_length, prime_ratio)
+    return term, side_length, count, prime_ratio
 
 
 # Problem 59: XOR Decryption
@@ -519,7 +575,7 @@ def next_sqrt_fraction(num, den):
 
 # Problem 50-59 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 57
+    problem_num = 58
 
     if problem_num == 50:
         print()
@@ -612,5 +668,14 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print('sqrt_fraction count =', zcount)
     elif problem_num == 58:
         print()
+        zcorner = 0
+        zside_length = 2
+        zterm = 1
+        for z in range(13):
+            zcorner, zside_length, zterm = next_spiral_corner(zcorner, zside_length, zterm)
+            print(zcorner, zside_length, zterm)
+        print()
+        print('spiral_corner_prime_ratio(0.2, 10**6) = ', spiral_corner_prime_ratio(0.2, 10**6))
+        print('spiral_corner_prime_ratio_mr(0.1, 10**9) = ', spiral_corner_prime_ratio_mr(0.1, 10**9))
     elif problem_num == 59:
         print()

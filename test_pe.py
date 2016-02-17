@@ -45,6 +45,8 @@ def test_common():
     # sieve_erathosthenes
     assert common.sieve_erathosthenes(30) == prime_list_10
     assert common.sieve_erathosthenes(30) != ordered_list
+    assert common.sieve_erathosthenes2(30) == prime_list_10
+    assert common.prime_list_mr(30) == prime_list_10
 
     # get_prime_factors
     assert common.get_prime_factors(0, prime_list_10) == []
@@ -326,3 +328,8 @@ def test_p055():
 
 def test_p057():
     assert p05x.next_sqrt_fraction(577, 408) == (1393, 985)
+
+
+def test_p058():
+    assert p05x.next_spiral_corner(4, 4, 25) == (1, 6, 31)
+    assert p05x.spiral_corner_prime_ratio_mr(0.1, 10**9) == (688590081, 26240, 52481, 0.09999809454850327)

@@ -178,8 +178,67 @@ def is_prime(num):
         return True
 
 
+def is_prime_mr(n):
+    """Return True or False depending on whether num is prime. Uses Miller-Rabin primality test."""
+    if (n < 2) or (n%2 == 0):
+        flag = False
+    elif n == 2:
+        flag = True
+    else:
+        flag = True
+        r = 0
+        d = n-1
+        if n < 2047:
+            a_list = [2]
+        elif n < 1373653:
+            a_list = [2, 3]
+        elif n < 9080191:
+            a_list = [31, 73]
+        elif n < 25326001:
+            a_list = [2, 3, 5]
+        elif n < 3215031751:
+            a_list = [2, 3, 5, 7]
+        elif n < 4759123141:
+            a_list = [2, 7, 61]
+        elif n < 1122004669633:
+            a_list = [2, 13, 23, 1662803]
+        elif n < 2152302898747:
+            a_list = [2, 3, 5, 7, 11]
+        elif n < 3474749660383:
+            a_list = [2, 3, 5, 7, 11, 13]
+        else:       # if n < 341550071728321:
+            a_list = [2, 3, 5, 7, 11, 13, 17]
+
+        while(d%2 == 0):
+            r += 1
+            d = d // 2
+
+        for a in a_list:
+            x = pow(a, d, n)
+            if (x == 1) or (x == n-1):
+                continue
+            for i in range(r-1):
+                x = pow(x, 2, n)
+                if x == 1:
+                    flag = False
+                    break
+                if x == n-1:
+                    break
+            else:
+                flag = False
+                break
+    return flag
+
+def prime_list_mr(n):
+    """ Return ordered list of primes up to n. Uses Miller-Rabin primality test."""
+    prime_list = [2]
+    for i in range(n+1):
+        if is_prime_mr(i):
+            prime_list.append(i)
+    return prime_list
+
 def sieve_erathosthenes(n):
-    """ Return ordered list of primes up to n."""
+    """ Return ordered list of primes up to n. Maximum n is around 2*10**8"""
     bool_table = [True]*(n+1)
     bool_table[0] = False
     bool_table[1] = False
@@ -204,6 +263,66 @@ def sieve_erathosthenes(n):
         for i in range(sqrtn, n+1, 2):
             if bool_table[i]:
                 prime_list.append(i)
+
+    return prime_list
+
+
+def sieve_erathosthenes2(n, block_size = None):
+    """ Return ordered list of primes up to n. Test up to 10**9. Takes a long time."""
+    if block_size is None:
+        block_size = 10**8
+    if n < 2:
+        prime_list = []
+    elif n == 2:
+        prime_list = [2]
+    else:
+        prime_list = [2, 3]
+
+        if n <= block_size:
+            sieve_e_by_section(prime_list, n)
+        else:
+            for i in range(block_size, n, block_size):
+                sieve_e_by_section(prime_list, i)
+            sieve_e_by_section(prime_list, n)
+
+    return prime_list
+
+
+def sieve_e_by_section(prime_list, n):
+    """ Return ordered list of primes up to n."""
+    last_prime = prime_list[-1]
+    table_count = n-last_prime+1
+    bool_table = [True]*table_count
+    sqrtn = int(math.sqrt(n))
+    if sqrtn % 2 == 0:
+        sqrtn += 1
+    else:
+        sqrtn += 2
+    
+    for p in prime_list:
+        start_i = p * ( 1 + int(last_prime/p)) - last_prime
+        for i in range(start_i, table_count, p):
+            bool_table[i] = False
+
+    if sqrtn > last_prime:
+        for i in range(1, sqrtn - last_prime + 1):
+            if bool_table[i]:
+                p = last_prime + i
+                prime_list.append(p)
+                start_j = p**2 - last_prime
+                for j in range(start_j, table_count, p):
+                    bool_table[j] = False
+            
+        start_i = sqrtn - last_prime + 2
+        for i in range(start_i, table_count, 2):
+            if bool_table[i]:
+                p = last_prime + i
+                prime_list.append(p)
+    else:
+        for i in range(2, table_count, 2):
+            if bool_table[i]:
+                p = last_prime + i
+                prime_list.append(p)
 
     return prime_list
 
@@ -398,6 +517,10 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
     print('Check sieve_erathosthenes()')
     for z in range(2, 11):
         print(z, sieve_erathosthenes(z))
+    z = 1000
+    print(z, sieve_erathosthenes(z))
+    print(z, sieve_erathosthenes2(z, 100))
+    print(z, prime_list_mr(z))
 
     # Check get_factors()
     print()
