@@ -24,8 +24,8 @@
       <file leaf-file-name="common.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/common.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="184" column="16" selection-start-line="184" selection-start-column="16" selection-end-line="184" selection-end-column="16" />
+            <state vertical-scroll-proportion="-4.368421">
+              <caret line="396" column="69" selection-start-line="396" selection-start-column="69" selection-end-line="396" selection-end-column="69" />
               <folding>
                 <element signature="e#1#12#0" expanded="true" />
               </folding>
@@ -37,7 +37,7 @@
         <entry file="file://$PROJECT_DIR$/test_pe.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="313" column="0" selection-start-line="313" selection-start-column="0" selection-end-line="313" selection-end-column="0" />
+              <caret line="257" column="0" selection-start-line="257" selection-start-column="0" selection-end-line="257" selection-end-column="0" />
               <folding>
                 <element signature="e#1#12#0" expanded="true" />
               </folding>
@@ -48,8 +48,8 @@
       <file leaf-file-name="p05x.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/p05x.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.7067962">
-              <caret line="646" column="23" selection-start-line="646" selection-start-column="23" selection-end-line="646" selection-end-column="23" />
+            <state vertical-scroll-proportion="27.170305">
+              <caret line="732" column="0" selection-start-line="732" selection-start-column="0" selection-end-line="733" selection-end-column="0" />
               <folding>
                 <element signature="e#39#50#0" expanded="true" />
               </folding>
@@ -88,7 +88,7 @@
         <entry file="file://$PROJECT_DIR$/p02x.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="330" column="29" selection-start-line="330" selection-start-column="23" selection-end-line="330" selection-end-column="29" />
+              <caret line="360" column="0" selection-start-line="357" selection-start-column="0" selection-end-line="360" selection-end-column="0" />
               <folding>
                 <element signature="e#39#50#0" expanded="true" />
               </folding>
@@ -195,8 +195,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -492,8 +492,8 @@
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python tests.py.test in test_pe.py" />
-        <item index="1" class="java.lang.String" itemvalue="Python.p05x" />
-        <item index="2" class="java.lang.String" itemvalue="Python tests.py.test in test_common" />
+        <item index="1" class="java.lang.String" itemvalue="Python tests.py.test in test_common" />
+        <item index="2" class="java.lang.String" itemvalue="Python.p05x" />
         <item index="3" class="java.lang.String" itemvalue="Python.common" />
         <item index="4" class="java.lang.String" itemvalue="Python.p04x" />
       </list>
@@ -510,17 +510,11 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="py_test_in_test_common - 2016.02.17 at 07h 56m 54s.xml">
+    <history-entry file="py_test_in_test_common - 2016.02.17 at 13h 11m 01s.xml">
       <configuration name="py.test in test_common" configurationId="tests" />
     </history-entry>
-    <history-entry file="py_test_in_test_pe_py - 2016.02.12 at 09h 52m 01s.xml">
-      <configuration name="py.test in test_pe.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="py_test_in_test_pe_py - 2016.02.12 at 09h 54m 22s.xml">
-      <configuration name="py.test in test_pe.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="py_test_in_test_pe_py - 2016.02.12 at 09h 55m 19s.xml">
-      <configuration name="py.test in test_pe.py" configurationId="tests" />
+    <history-entry file="py_test_in_test_common - 2016.02.17 at 13h 11m 14s.xml">
+      <configuration name="py.test in test_common" configurationId="tests" />
     </history-entry>
     <history-entry file="py_test_in_test_pe_py - 2016.02.12 at 09h 57m 52s.xml">
       <configuration name="py.test in test_pe.py" configurationId="tests" />
@@ -538,6 +532,12 @@
       <configuration name="py.test in test_pe.py" configurationId="tests" />
     </history-entry>
     <history-entry file="py_test_in_test_pe_py - 2016.02.17 at 08h 03m 22s.xml">
+      <configuration name="py.test in test_pe.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="py_test_in_test_pe_py - 2016.02.17 at 11h 08m 20s.xml">
+      <configuration name="py.test in test_pe.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="py_test_in_test_pe_py - 2016.02.17 at 13h 11m 22s.xml">
       <configuration name="py.test in test_pe.py" configurationId="tests" />
     </history-entry>
   </component>
@@ -585,7 +585,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="179" />
+      <option name="time" value="181" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -964,13 +964,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5622568">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/p03x.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -980,16 +973,6 @@
             <element signature="e#20073#20321#0" expanded="false" />
             <element signature="e#22188#22628#0" expanded="false" />
             <element signature="e#22674#23143#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/p02x.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="330" column="29" selection-start-line="330" selection-start-column="23" selection-end-line="330" selection-end-column="29" />
-          <folding>
-            <element signature="e#39#50#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1022,20 +1005,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common.py">
+    <entry file="file://$PROJECT_DIR$/p02x.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="184" column="16" selection-start-line="184" selection-start-column="16" selection-end-line="184" selection-end-column="16" />
+          <caret line="360" column="0" selection-start-line="357" selection-start-column="0" selection-end-line="360" selection-end-column="0" />
+          <folding>
+            <element signature="e#39#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.368421">
+          <caret line="396" column="69" selection-start-line="396" selection-start-column="69" selection-end-line="396" selection-end-column="69" />
           <folding>
             <element signature="e#1#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5622568">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test_pe.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="313" column="0" selection-start-line="313" selection-start-column="0" selection-end-line="313" selection-end-column="0" />
+          <caret line="257" column="0" selection-start-line="257" selection-start-column="0" selection-end-line="257" selection-end-column="0" />
           <folding>
             <element signature="e#1#12#0" expanded="true" />
           </folding>
@@ -1044,8 +1045,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/p05x.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.7067962">
-          <caret line="646" column="23" selection-start-line="646" selection-start-column="23" selection-end-line="646" selection-end-column="23" />
+        <state vertical-scroll-proportion="27.170305">
+          <caret line="732" column="0" selection-start-line="732" selection-start-column="0" selection-end-line="733" selection-end-column="0" />
           <folding>
             <element signature="e#39#50#0" expanded="true" />
           </folding>

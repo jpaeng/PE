@@ -389,20 +389,20 @@ def combinations(n, r):
     return math.factorial(n)/math.factorial(r)/math.factorial(n-r)
 
 
-def str_permutation(n, digits):
-    """ Return the nth permutation of digit_count digits."""
-    digit_count = len(digits)
+def str_permutation(n, str_chars):
+    """ Return the nth permutation of char_count str_chars."""
+    char_count = len(str_chars)
     result = ''
     remainder = n
-    for position in range(digit_count-1, -1, -1):       # Start with msb and loop to lsb
+    for position in range(char_count-1, -1, -1):        # Start with msb and loop to lsb
         divisor = math.factorial(position)              # Factorials:  1 2 6 24 120 ...
         dividend = int(remainder/divisor)               # Determine which digit in list is next
         remainder = remainder % divisor                 # Remainder calculated for next loop
-        result += digits[dividend]                      # Extend string to right
-        if dividend < len(digits) - 1:                  # Remove digit just used from list
-            digits = digits[:dividend] + digits[dividend+1:]
+        result += str_chars[dividend]                   # Extend string to right
+        if dividend < len(str_chars) - 1:               # Remove char just used from list
+            str_chars = str_chars[:dividend] + str_chars[dividend+1:]
         else:
-            digits = digits[:dividend]
+            str_chars = str_chars[:dividend]
     return result
 
 

@@ -572,10 +572,61 @@ def spiral_corner_prime_ratio_mr(min_ratio, max_term):  # Much faster than above
 # and the knowledge that the plain text must contain common English words, decrypt the message and find the sum
 # of the ASCII values in the original text.
 
+def decrypt_xor(coded_list, key):
+    key_length = len(key)
+    spaces_count = 0
+    uppercase_count = 0
+    lowercase_count = 0
+    key_index = 0
+    decoded_sum = 0
+    decoded_list = []
+
+    for c in coded_list:
+        d = c ^ key[key_index]
+        decoded_sum += d
+        decoded_list.append(d)
+        if d == 32:
+            spaces_count += 1
+        elif 64 < d < 91:
+            uppercase_count += 1
+        elif 96 < d < 123:
+            lowercase_count += 1
+        key_index += 1
+        if key_index == key_length:
+            key_index = 0
+
+    decoded_ratio = (spaces_count+uppercase_count+lowercase_count)/len(coded_list)
+
+    return decoded_list, decoded_sum, decoded_ratio
+
+def crack_file_3(file_name, key_chars):     # 3 character keys only
+
+    file_ptr = open(file_name)
+    coded_list = [int(i) for i in file_ptr.read().split(',')]
+    file_ptr.close()
+
+    keys_ascii = [ord(char) for char in key_chars]
+
+    max_key = [0, 0, 0]
+    max_decoded_ratio=0
+    for a in keys_ascii:
+        for b in keys_ascii:
+            for c in keys_ascii:
+                decoded_list, decoded_sum, decoded_ratio = decrypt_xor(coded_list, [a, b, c])
+                if max_decoded_ratio < decoded_ratio:
+                    max_decoded_ratio = decoded_ratio
+                    max_key = [int(a), int(b), int(c)]
+
+    decoded_list, decoded_sum, decoded_ratio = decrypt_xor(coded_list, max_key)
+    decoded_str = ''.join(chr(i) for i in decoded_list)
+
+    max_key_string = ''.join(chr(i) for i in max_key)
+
+    return max_key_string, decoded_sum, decoded_ratio, decoded_str
 
 # Problem 50-59 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 58
+    problem_num = 59
 
     if problem_num == 50:
         print()
@@ -679,3 +730,5 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print('spiral_corner_prime_ratio_mr(0.1, 10**9) = ', spiral_corner_prime_ratio_mr(0.1, 10**9))
     elif problem_num == 59:
         print()
+        print(decrypt_xor([65, 42, 107], [42, 65, 42]))    #== [107, 107, 65]
+        print(crack_file_3('p059_cipher.txt', 'abcdefghijklmnopqrstuvwxyz'))
