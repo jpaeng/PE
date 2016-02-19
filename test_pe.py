@@ -9,6 +9,7 @@ import p02x
 import p03x
 import p04x
 import p05x
+import p06x
 
 
 def test_common():
@@ -288,3 +289,10 @@ def test_p058():
 
 def test_p59():
     assert p05x.decrypt_xor([65, 42, 107], [42, 65, 42]) == ([107, 107, 65], 279, 1.0)
+
+def test_p60():
+    assert p06x.check_prime_concatenations_mr(7, 109) ==  True
+    assert p06x.check_prime_concatenations_mr(7, 11) ==  False
+    assert p06x.check_prime_pairs_mr(1, [7, 109]) ==  True
+    assert p06x.check_prime_pairs_mr(4, [7, 109]) ==  False
+    assert p06x.min_prime_pair_set_mr(4) ==  ([3, 7, 109, 673], 792)

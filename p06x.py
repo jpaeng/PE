@@ -15,6 +15,121 @@ from timeit import default_timer as timer
 # The sum of these four primes, 792, represents the lowest sum for a set of four primes with this property.
 # Find the lowest sum for a set of five primes for which any two primes concatenate to produce another prime.
 
+def check_prime_concatenations(prime1, prime2, prime_list):
+    str_prime1 = str(prime1)
+    str_prime2 = str(prime2)
+
+    status = True
+    prime_cat = int(str_prime1 + str_prime2)
+    if not common.is_in_ordered_list(prime_cat, prime_list):
+        status = False
+
+    prime_cat = int(str_prime2 + str_prime1)
+    if not common.is_in_ordered_list(prime_cat, prime_list):
+        status = False
+
+    return status
+
+def check_prime_pairs(index, prime_set, prime_list):
+    status = True
+    for prime in prime_set:
+        if not check_prime_concatenations(prime, prime_list[index], prime_list):
+            status = False
+    return status
+
+def min_prime_pair_set(prime_count):
+    if prime_count < 5:
+        prime_list = common.sieve_erathosthenes2(10**(2*prime_count))
+        min_prime_sum = 10**prime_count
+    else:
+        prime_list = common.sieve_erathosthenes2(10**8)
+        min_prime_sum = 10**8
+
+    min_prime_set = []
+
+    prime_index = 1     # No pair with 2 will work
+    while prime_list[prime_index] < min_prime_sum//prime_count:
+        prime_set = [prime_list[prime_index]]
+        prime_sum = prime_set[0]
+        next_prime_index = prime_index + 1
+        while prime_list[next_prime_index]+prime_sum < min_prime_sum:
+            if check_prime_pairs(next_prime_index, prime_set, prime_list):
+                prime_set.append(prime_list[next_prime_index])
+                prime_sum = sum(prime_set)
+                if len(prime_set) >= 4:
+                    print('    ', len(prime_set), prime_set)
+                if prime_sum > min_prime_sum:
+                    break
+                if len(prime_set) == prime_count:
+                    if prime_sum < min_prime_sum:
+                        min_prime_set = prime_set[:]
+                        min_prime_sum = prime_sum
+                    break
+            next_prime_index += 1
+        prime_index += 1
+
+    return min_prime_set, min_prime_sum
+
+def check_prime_concatenations_mr(prime1, prime2):
+    str_prime1 = str(prime1)
+    str_prime2 = str(prime2)
+
+    status = True
+    prime_cat = int(str_prime1 + str_prime2)
+    if not common.is_prime_mr(prime_cat):
+        status = False
+
+    prime_cat = int(str_prime2 + str_prime1)
+    if not common.is_prime_mr(prime_cat):
+        status = False
+
+    return status
+
+def check_prime_pairs_mr(prime1, prime_set):
+    status = True
+    for prime2 in prime_set:
+        if not check_prime_concatenations_mr(prime1, prime2):
+            status = False
+    return status
+
+def min_prime_pair_set_mr(prime_count):
+    if prime_count < 5:
+        prime_list = common.sieve_erathosthenes2(10**prime_count)
+        min_prime_sum = 10**prime_count
+    else:
+        prime_list = common.sieve_erathosthenes2(10**6)
+        min_prime_sum = 10**9
+    prime_list_count = len(prime_list)
+
+    min_prime_set = []
+
+    prime_index = 1     # No pair with 2 will work
+    while prime_list[prime_index] < min_prime_sum//prime_count:
+        prime_set = [prime_list[prime_index]]
+        prime_sum = prime_set[0]
+        next_prime_index = prime_index + 1
+        while prime_list[next_prime_index]+prime_sum < min_prime_sum:
+            if check_prime_pairs_mr(prime_list[next_prime_index], prime_set):
+                prime_set.append(prime_list[next_prime_index])
+                prime_sum = sum(prime_set)
+                if len(prime_set) >= 4:
+                    print('    ', len(prime_set), prime_set)
+                if prime_sum > min_prime_sum:
+                    break
+                if len(prime_set) == prime_count:
+                    if prime_sum < min_prime_sum:
+                        min_prime_set = prime_set[:]
+                        min_prime_sum = prime_sum
+                    break
+            next_prime_index += 1
+            if(next_prime_index == prime_list_count):
+                break
+        prime_index += 1
+        if(prime_index == prime_list_count):
+            break
+
+    return min_prime_set, min_prime_sum
+
 
 # 61 Cyclical figurate numbers
 # Triangle, square, pentagonal, hexagonal, heptagonal, and octagonal numbers are all figurate (polygonal) numbers
@@ -150,3 +265,39 @@ from timeit import default_timer as timer
 #     10	1,3,7,9	4	2.5
 # It can be seen that n=6 produces a maximum n/f(n) for n <= 10.
 # Find the value of n <= 1,000,000 for which n/f(n) is a maximum.
+
+
+# Problem 50-59 Checks
+if __name__ == '__main__':  # only if run as a script, skip when imported as module
+    problem_num = 60
+
+    if problem_num == 60:
+        print()
+        zprime_list = common.sieve_erathosthenes(10**5)
+        print('check_prime_concatenations(7, 109, zprime_list) = ', check_prime_concatenations(7, 109, zprime_list))
+        print('check_prime_concatenations(7, 11, zprime_list) = ', check_prime_concatenations(7, 11, zprime_list))
+        print('check_prime_pairs(1, [7, 109], zprime_list) = ', check_prime_pairs(1, [7, 109], zprime_list))
+        print('check_prime_pairs(4, [7, 109], zprime_list) = ', check_prime_pairs(4, [7, 109], zprime_list))
+        print('min_prime_pair_set(2) = ', min_prime_pair_set(2))
+        print('min_prime_pair_set(3) = ', min_prime_pair_set(3))
+#        print('min_prime_pair_set(4) = ', min_prime_pair_set(4))
+        print('min_prime_pair_set_mr(4) = ', min_prime_pair_set_mr(4))
+        print('min_prime_pair_set_mr(5) = ', min_prime_pair_set_mr(5))
+    elif problem_num == 61:
+        print()
+    elif problem_num == 62:
+        print()
+    elif problem_num == 63:
+        print()
+    elif problem_num == 64:
+        print()
+    elif problem_num == 65:
+        print()
+    elif problem_num == 66:
+        print()
+    elif problem_num == 67:
+        print()
+    elif problem_num == 68:
+        print()
+    elif problem_num == 69:
+        print()
