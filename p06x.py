@@ -239,13 +239,15 @@ def cyclic_4digit_set(set_count):
     cyclic_set = []
     for num, prefix, suffix in polygonal_numbers[-1]:
         side_list = polygonal_numbers[:-1]
-        set_list = [(8, num)]
-        prefix_suffix_list = add_node_prefix_suffix(4, side_list, suffix, set_list)
-        suffix_prefix_list = add_node_suffix_prefix(4, side_list, prefix, set_list)
-
+        set_list = [(8, num)]   # start with octagonal number because there are the fewest octagonal 4-digit numbers
+                                # then find chains going forward and backward from that number.
+        prefix_suffix_list = add_node_prefix_suffix(4, side_list, suffix, set_list) # find 4-number prefix-suffix chains
+        suffix_prefix_list = add_node_suffix_prefix(4, side_list, prefix, set_list) # find 4-number suffix-prefix chains
+        # look for matches between last number of forward list and last number of backward list in order to make cyclic
         for chain_prefix_suffix in prefix_suffix_list:
             for chain_suffix_prefix in suffix_prefix_list:
                 if chain_prefix_suffix[-1] == chain_suffix_prefix[-1]:
+                    # check that each number represents a different polygonal type
                     sides = []
                     for node in chain_prefix_suffix:
                         sides.append(node[0])
@@ -260,13 +262,14 @@ def cyclic_4digit_set(set_count):
 
 def add_node_prefix_suffix(remaining_count, remaining_side_list, pref, set_list):
     """
-
-    :param remaining_count:
-    :param remaining_side_list:
-    :param pref:
-    :param set_list:
-    :return:
+    Recursive function to find prefix-suffix chains of set length with each number of a different polygonal type.
+    :param remaining_count:     count of numbers remaining to be found
+    :param remaining_side_list: list of polygonal types not yet used and still available
+    :param pref:                prefix to be found
+    :param set_list:            list of numbers already in chain
+    :return:                    list of chains from initial number in set_list
     """
+
     remaining_count -= 1
     return_list = []
     if remaining_count > 0:
@@ -285,6 +288,15 @@ def add_node_prefix_suffix(remaining_count, remaining_side_list, pref, set_list)
 
 
 def add_node_suffix_prefix(remaining_count, remaining_side_list, suff, set_list):
+    """
+    Recursive function to find suffix-prefix chains of set length with each number of a different polygonal type.
+    :param remaining_count:     count of numbers remaining to be found
+    :param remaining_side_list: list of polygonal types not yet used and still available
+    :param suff:                suffix to be found
+    :param set_list:            list of numbers already in chain
+    :return:                    list of chains from initial number in set_list
+    """
+
     remaining_count -= 1
     return_list = []
     if remaining_count > 0:
@@ -292,7 +304,8 @@ def add_node_suffix_prefix(remaining_count, remaining_side_list, suff, set_list)
             side_list = remaining_side_list[:index] + remaining_side_list[index+1:]
             for num, prefix, suffix in remaining_side_list[index]:
                 if suffix == suff:     # number[2] == suffix
-                    return_list.extend(add_node_suffix_prefix(remaining_count, side_list, prefix, set_list+[(remaining_side_list[index].get_side_count(), num)]))
+                    return_list.extend(add_node_suffix_prefix(remaining_count, side_list, prefix,
+                                                      set_list+[(remaining_side_list[index].get_side_count(), num)]))
     else:
         if len(set_list) < 2:
             return_list = []
@@ -303,8 +316,9 @@ def add_node_suffix_prefix(remaining_count, remaining_side_list, suff, set_list)
 
 
 class PrefixSuffixNumbersClass:
-    """
+    """Packages 4-digit numbers with their 2-digit prefixes and suffixes to simplify parameters
 
+    Keeps track of the polygonal side count, and length of list.
     """
 
     def __init__(self, side_count, numberlist):
@@ -489,7 +503,9 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         for z in range(1, 4):
             print('polygonal_number_list(', zside_count, ',', z, ') = ', generate_polygonal_number_list(zside_count, z))
         print()
-        print('cyclic_4digit_set( 6 ) = ', cyclic_4digit_set(6))
+        zresult = cyclic_4digit_set(6)
+        print('cyclic_4digit_set( 6 ) = ', zresult)
+        print('sum(cyclic_4digit_set( 6 )) = ', sum([z[1] for z in zresult[0]]))
     elif problem_num == 62:
         print()
     elif problem_num == 63:
