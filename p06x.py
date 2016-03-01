@@ -288,8 +288,8 @@ def add_node_prefix_suffix(remaining_count, remaining_side_list, pref, set_list)
 
 
 def add_node_suffix_prefix(remaining_count, remaining_side_list, suff, set_list):
-    """
-    Recursive function to find suffix-prefix chains of set length with each number of a different polygonal type.
+    """Recursive function to find suffix-prefix chains of set length with each number of a different polygonal type.
+
     :param remaining_count:     count of numbers remaining to be found
     :param remaining_side_list: list of polygonal types not yet used and still available
     :param suff:                suffix to be found
@@ -369,6 +369,42 @@ class PrefixSuffixNumbersClass:
 # In fact, 41063625 is the smallest cube which has exactly three permutations of its digits which are also cube.
 # Find the smallest cube for which exactly five permutations of its digits are cube.
 
+def cube_permutations(perm_count):
+    """Return the smallest set of perm_count cubes that are permutations of each other.
+
+    :param perm_count:  the number of cube permutations to look for
+    :return:            list of cube permutations of the first cube that has at least perm_count permutations
+    """
+
+    found = False
+    perm_list = []
+    max_digit_count = 14
+    stop_base = 3
+    for digit_count in range(2, max_digit_count+1):
+        # first create list of cubes of the same length
+        start_base = stop_base
+        stop_base = int(math.pow(10**digit_count, 0.3333333333)) + 1
+        cube_list = [base**3 for base in range(start_base, stop_base)]
+        for cube in cube_list:
+            count = 0
+            perm_list = []
+            # count the number of permutations of cube
+            for cube2 in cube_list:
+                if common.is_permutation(str(cube), str(cube2)):
+                    perm_list.append(cube2)
+                    count += 1
+                    if count >= perm_count:
+                        found = True
+                        break
+            if found:
+                break
+        if found:
+            break
+
+    if len(perm_list) >= perm_count:
+        return perm_list
+    else:
+        return []
 
 # 63 Powerful digit counts
 # The 5-digit number, 16807=7**5, is also a fifth power. Similarly, the 9-digit number, 134217728=8**9, is a ninth power.
@@ -481,9 +517,9 @@ class PrefixSuffixNumbersClass:
 # Find the value of n <= 1,000,000 for which n/f(n) is a maximum.
 
 
-# Problem 50-59 Checks
+# Problem 60-69 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 61
+    problem_num = 62
 
     if problem_num == 60:
         print()
@@ -508,6 +544,9 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print('sum(cyclic_4digit_set( 6 )) = ', sum([z[1] for z in zresult[0]]))
     elif problem_num == 62:
         print()
+        print(cube_permutations(3))
+        print(cube_permutations(4))
+        print(cube_permutations(5))
     elif problem_num == 63:
         print()
     elif problem_num == 64:

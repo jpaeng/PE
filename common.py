@@ -419,6 +419,19 @@ def is_permutation(str1, str2):
     return result
 
 
+def is_sub_permutation(str1, str2):
+    """Return whether the characters of str1 is a substring permutation of str2."""
+    result = True
+    if len(str1) > len(str2):
+        result = False
+    else:
+        for c in str1:
+            if str1.count(c) > str2.count(c):
+                result = False
+                break
+    return result
+
+
 # = Check Common Functions ===========================
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
     # Check get_proper_divisors()

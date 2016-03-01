@@ -347,3 +347,7 @@ def test_p060():
 def test_p061():
     assert p06x.generate_polygonal_number_list(3, 2) == [10, 15, 21, 28, 36, 45, 55, 66, 78, 91]
     assert p06x.cyclic_4digit_set(6) == [[(8, 1281), (6, 8128), (5, 2882), (3, 8256), (4, 5625), (7, 2512)]]
+
+
+def test_p062():
+    assert p06x.cube_permutations(3) == [41063625, 56623104, 66430125]
