@@ -351,3 +351,8 @@ def test_p061():
 
 def test_p062():
     assert p06x.cube_permutations(3) == [41063625, 56623104, 66430125]
+
+
+def test_p064():
+    assert p06x.sqrt_continuing_fraction_coeffs(23) == [4, (1, 3, 1, 8)]
+    assert p06x.continuing_fractions_term_stats(p06x.sqrt_continuing_fraction_coeffs, 2, 13) == (2, 2, 0, 4, 6)

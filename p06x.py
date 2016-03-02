@@ -411,6 +411,17 @@ def cube_permutations(perm_count):
 # How many n-digit positive integers exist which are also an nth power?
 
 
+def power_digit_counts():
+    count = 0
+    power = 1
+    while math.log10(9**power)+1 >= power:      # log10(n)+1 gives the number of digits in n in base 10.
+        for base in range(1, 10):
+            if int(math.log10(base**power))+1 == power:
+                count += 1
+        power += 1
+    return count
+
+
 # 64 Odd period square roots
 # All square roots are periodic when written as continued fractions and can be written in the form:
 #     (see page)
@@ -427,9 +438,143 @@ def cube_permutations(perm_count):
 #     v11=[3;(3,6)], period=2
 #     v12= [3;(2,6)], period=2
 #     v13=[3;(1,1,1,1,6)], period=5
-# Exactly four continued fractions, for N = 13, have an odd period.
-# How many continued fractions for N = 10000 have an odd period?
+# Exactly four continued fractions, for N <= 13, have an odd period.
+# How many continued fractions for N <= 10000 have an odd period?
 
+def continuing_fraction_coeffs(number):
+    """Return list of continuing fraction coefficients.  ROUNDING ERRORS BEYOND SOME UNKNOWN NUMBER OF TERMS
+
+    :param number: Starting number for
+    :return:
+    """
+    max_loop = 100
+    resolution = 10**6
+
+    repeating_sequence = []
+    non_repeating_sequence = [int(number)]
+    if int(number*resolution) != non_repeating_sequence[0]*resolution:
+        remainder_list = [1.0/(number - non_repeating_sequence[0])]
+        index = 0
+        while len(repeating_sequence)==0 and (index < max_loop):
+            index += 1
+            non_repeating_sequence.append(int(remainder_list[-1]))
+            remainder = (remainder_list[-1] - non_repeating_sequence[-1])
+            remainder_list.append(1.0/remainder)
+            remainder_int = int(remainder_list[-1]*resolution)
+            for index2 in range(index):
+                if int(remainder_list[index2]*resolution) == remainder_int:
+                    repeating_sequence = non_repeating_sequence[index2+1:]
+                    non_repeating_sequence = non_repeating_sequence[:index2+1]
+                    break
+        non_repeating_sequence.append(tuple(repeating_sequence))
+    return non_repeating_sequence
+
+
+def sqrt_continuing_fraction_coeffs(number, max_term = 1000):
+    """Return list of continuing fraction coefficients for sqrt of number.  NO ROUNDING ERRORS.
+
+    For each term the following variables are calculated:
+            a(n) = int(1/a(n-1)_remainder)
+            a(n)_remainder      = fractional part of a(n)
+            1/(a(n)_remainder   = (sqrt(number)+b)/d
+                                = a(n+1) + (sqrt(number)+c)/d
+    :param number:      number for which sqrt(number) to be analyzed
+    :param max_term:    maximum count of terms to be returned
+    :return:            list of coefficients to be returned in the form
+                                [a0, (a1, a2, a3)]
+                        where a0 is non-repeating
+                        and (a1, a2, a3) are repeating
+    """
+    resolution = 10**6
+    sqrt_num = math.sqrt(number)
+
+    repeating_sequence = []
+    non_repeating_sequence = [int(sqrt_num)]
+    if int(sqrt_num*resolution) != int(sqrt_num)*resolution:    # check for perfect squares
+        loop_input = sqrt_num
+        a = int(loop_input)
+        remainder = loop_input-a
+        remainder_p1 = 1/remainder          # remainder of a(n+1)
+        remainder_p1 -= int(remainder_p1)   # just take fractional portion
+        b = a
+        d = number-(a*a)
+        c = int(sqrt_num - d*(remainder_p1) + 0.1)  # round this number, not just int
+        c_d_list = [(c, d)]
+        index = 0
+        while len(repeating_sequence)==0 and (index < max_term):
+            index += 1
+            loop_input = (sqrt_num + b) / d
+            a = int(loop_input)
+            non_repeating_sequence.append(a)
+            remainder = loop_input-a
+            remainder_p1 = 1/remainder          # remainder of a(n+1)
+            remainder_p1 -= int(remainder_p1)   # just take fractional portion
+            b = c
+            d = (number-(c*c))//d
+            c = int(sqrt_num - d*(remainder_p1) + 0.1)  # round this number, not just int
+            c_d_list.append((c, d))
+            for index2 in range(index):
+                if c_d_list[index2] == c_d_list[index]:
+                    repeating_sequence = non_repeating_sequence[index2+1:]
+                    non_repeating_sequence = non_repeating_sequence[:index2+1]
+                    break
+        non_repeating_sequence.append(tuple(repeating_sequence))
+    return non_repeating_sequence
+
+
+def continuing_fractions_term_counts(coeff_list):
+    """
+
+    :param coeff_list:
+    :return:
+    """
+
+    if isinstance(coeff_list[-1], tuple):
+        nonrepeating_count = len(coeff_list) - 1
+        repeating_count = len(coeff_list[-1])
+        if (repeating_count % 2) == 0:
+            odd_periodic = False
+        else:
+            odd_periodic = True
+    else:
+        nonrepeating_count = len(coeff_list)
+        repeating_count = 0
+        odd_periodic = False
+
+    return odd_periodic, nonrepeating_count, repeating_count
+
+
+def continuing_fractions_term_stats(function, start_n, max_n):
+    """
+
+    :param function:
+    :param start_n:
+    :param max_n:
+    :return:
+    """
+    one_nonrepeating_count = 0
+    zero_repeating_count = 0
+    zero_nonrepeating_count = 0
+    odd_periodic_count = 0
+    even_periodic_count = 0
+
+    for n in range(start_n, max_n+1):
+        coeff_list = function(n)
+        odd_periodic, nonrepeating_count, repeating_count = continuing_fractions_term_counts(coeff_list)
+
+        if nonrepeating_count == 1 and repeating_count == 0:
+            one_nonrepeating_count += 1
+        if repeating_count == 0:
+            zero_repeating_count += 1
+        else:
+            if odd_periodic:
+                odd_periodic_count += 1
+            else:
+                even_periodic_count += 1
+        if nonrepeating_count == 0:
+            zero_nonrepeating_count += 1
+
+    return one_nonrepeating_count, zero_repeating_count, zero_nonrepeating_count, odd_periodic_count, even_periodic_count
 
 # 65 Convergents of e
 # The square root of 2 can be written as an infinite continued fraction.
@@ -519,7 +664,7 @@ def cube_permutations(perm_count):
 
 # Problem 60-69 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 62
+    problem_num = 64
 
     if problem_num == 60:
         print()
@@ -548,9 +693,23 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print(cube_permutations(4))
         print(cube_permutations(5))
     elif problem_num == 63:
-        print()
+        print(power_digit_counts())
     elif problem_num == 64:
         print()
+        z = 23
+        zcoeff_list = sqrt_continuing_fraction_coeffs(z)
+        print('sqrt_continuing_fraction_coeffs(', z, ') :', zcoeff_list, '  counts: ',
+              continuing_fractions_term_counts(zcoeff_list))
+        print()
+        for z in range(2, 14):
+            zcoeff_list = sqrt_continuing_fraction_coeffs(z)
+            print('sqrt_continuing_fraction_coeffs(', z, ') :', zcoeff_list, '  counts: ',
+                  continuing_fractions_term_counts(zcoeff_list))
+        print()
+        print('continuing_fractions_term_stats(sqrt_continuing_fraction_coeffs, 2, 13) = ',
+              continuing_fractions_term_stats(sqrt_continuing_fraction_coeffs, 2, 13))
+        print('continuing_fractions_term_stats(sqrt_continuing_fraction_coeffs, 2, 10000) = ',
+              continuing_fractions_term_stats(sqrt_continuing_fraction_coeffs, 2, 10000))
     elif problem_num == 65:
         print()
     elif problem_num == 66:
