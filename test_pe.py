@@ -260,7 +260,8 @@ def test_p037():
 
 
 def test_p038():
-    assert p03x.pandigital_concatenated_multiples() == [(932718654, 9327, 18654), (327654981, 327, 654, 981), (918273645, 9, 18, 27, 36, 45)]
+    assert p03x.pandigital_concatenated_multiples() \
+           == [(932718654, 9327, 18654), (327654981, 327, 654, 981), (918273645, 9, 18, 27, 36, 45)]
 
 
 def test_p040():
@@ -354,5 +355,11 @@ def test_p062():
 
 
 def test_p064():
-    assert p06x.sqrt_continuing_fraction_coeffs(23) == [4, (1, 3, 1, 8)]
-    assert p06x.continuing_fractions_term_stats(p06x.sqrt_continuing_fraction_coeffs, 2, 13) == (2, 2, 0, 4, 6)
+    assert p06x.sqrt_continued_fraction_coeffs(23) == [4, (1, 3, 1, 8)]
+    assert p06x.continued_fractions_term_stats(p06x.sqrt_continued_fraction_coeffs, 2, 13) == (2, 2, 0, 4, 6)
+
+
+def test_p065():
+    assert p06x.continued_fraction_approximation([1, (2,)], 10) == (3363, 2378, 1.4142136248948696)
+    assert p06x.continued_fraction_approximation(p06x.generate_continued_fraction_coeffs_e(10), 10) \
+           == (1457, 536, 2.718283582089552)

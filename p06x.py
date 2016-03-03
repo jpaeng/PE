@@ -441,12 +441,13 @@ def power_digit_counts():
 # Exactly four continued fractions, for N <= 13, have an odd period.
 # How many continued fractions for N <= 10000 have an odd period?
 
-def continuing_fraction_coeffs(number):
+def continued_fraction_coeffs(number):
     """Return list of continuing fraction coefficients.  ROUNDING ERRORS BEYOND SOME UNKNOWN NUMBER OF TERMS
 
     :param number: Starting number for
     :return:
     """
+
     max_loop = 100
     resolution = 10**6
 
@@ -470,7 +471,7 @@ def continuing_fraction_coeffs(number):
     return non_repeating_sequence
 
 
-def sqrt_continuing_fraction_coeffs(number, max_term = 1000):
+def sqrt_continued_fraction_coeffs(number, max_term = 1000):
     """Return list of continuing fraction coefficients for sqrt of number.  NO ROUNDING ERRORS.
 
     For each term the following variables are calculated:
@@ -485,6 +486,7 @@ def sqrt_continuing_fraction_coeffs(number, max_term = 1000):
                         where a0 is non-repeating
                         and (a1, a2, a3) are repeating
     """
+
     resolution = 10**6
     sqrt_num = math.sqrt(number)
 
@@ -522,7 +524,7 @@ def sqrt_continuing_fraction_coeffs(number, max_term = 1000):
     return non_repeating_sequence
 
 
-def continuing_fractions_term_counts(coeff_list):
+def continued_fractions_term_counts(coeff_list):
     """
 
     :param coeff_list:
@@ -544,7 +546,7 @@ def continuing_fractions_term_counts(coeff_list):
     return odd_periodic, nonrepeating_count, repeating_count
 
 
-def continuing_fractions_term_stats(function, start_n, max_n):
+def continued_fractions_term_stats(function, start_n, max_n):
     """
 
     :param function:
@@ -552,6 +554,7 @@ def continuing_fractions_term_stats(function, start_n, max_n):
     :param max_n:
     :return:
     """
+
     one_nonrepeating_count = 0
     zero_repeating_count = 0
     zero_nonrepeating_count = 0
@@ -560,7 +563,7 @@ def continuing_fractions_term_stats(function, start_n, max_n):
 
     for n in range(start_n, max_n+1):
         coeff_list = function(n)
-        odd_periodic, nonrepeating_count, repeating_count = continuing_fractions_term_counts(coeff_list)
+        odd_periodic, nonrepeating_count, repeating_count = continued_fractions_term_counts(coeff_list)
 
         if nonrepeating_count == 1 and repeating_count == 0:
             one_nonrepeating_count += 1
@@ -576,6 +579,7 @@ def continuing_fractions_term_stats(function, start_n, max_n):
 
     return one_nonrepeating_count, zero_repeating_count, zero_nonrepeating_count, odd_periodic_count, even_periodic_count
 
+
 # 65 Convergents of e
 # The square root of 2 can be written as an infinite continued fraction.
 # The infinite continued fraction can be written, v2 = [1;(2)], (2) indicates that 2 repeats ad infinitum.
@@ -589,6 +593,66 @@ def continuing_fractions_term_stats(function, start_n, max_n):
 #     2, 3, 8/3, 11/4, 19/7, 87/32, 106/39, 193/71, 1264/465, 1457/536, ...
 # The sum of digits in the numerator of the 10th convergent is 1+4+5+7=17.
 # Find the sum of digits in the numerator of the 100th convergent of the continued fraction for e.
+
+
+def continued_fraction_approximation(coeff_list, n):
+    """Return fractional approximations of continued fractions given a list of coefficients.
+
+    :param coeff_list:  of the form [a1, a2, (b1, b2, b3, ...)] where there is at least one non-repeating coeff a1.
+    :param n:           number of coefficients to use in the approximation
+    :return:            numerator, denominator, fractional approximation
+    """
+
+    if isinstance(coeff_list[-1], tuple):
+        nonrepeating_len = len(coeff_list) - 1
+        repeating_len = len(coeff_list[-1])
+    else:
+        nonrepeating_len = len(coeff_list)
+        repeating_len = 0
+        if nonrepeating_len < n:
+            # error !!!
+            pass
+
+    num = 0
+    den = 1
+    if n > 1:
+        if n <= nonrepeating_len:
+            for index in reversed(range(1, n)):
+                num, den = den, coeff_list[index]*den + num
+        else:
+            repeat_list = coeff_list[-1]
+            repeat_n = n - nonrepeating_len
+
+            # initial loop
+            start_index = repeat_n % repeating_len
+            if start_index > 0:
+                for index in reversed(range(start_index)):
+                    num, den = den, repeat_list[index]*den + num
+
+            # repeated loops
+            for repeat_index in range(repeat_n // repeating_len):
+                for index in reversed(range(repeating_len)):
+                    num, den = den, repeat_list[index]*den + num
+
+            # non-repeating coeffs
+            if nonrepeating_len > 1:
+                nonrepeat_list = coeff_list[:-1]
+                for index in reversed(range(1, nonrepeating_len)):
+                    num, den = den, nonrepeat_list[index]*den + num
+
+    den, num = den, coeff_list[0]*den + num
+
+    return num, den, num/den
+
+
+def generate_continued_fraction_coeffs_e(n):
+    """Return the first n coefficients for continued fraction expansion of e."""
+
+    coeff_list = [2]
+    for index in range(1, 2+(n-1)//3):
+        coeff_list.extend([1, 2*index, 1])
+
+    return coeff_list[:n]
 
 
 # 66 Diophantine equation
@@ -664,7 +728,7 @@ def continuing_fractions_term_stats(function, start_n, max_n):
 
 # Problem 60-69 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 64
+    problem_num = 65
 
     if problem_num == 60:
         print()
@@ -697,21 +761,40 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
     elif problem_num == 64:
         print()
         z = 23
-        zcoeff_list = sqrt_continuing_fraction_coeffs(z)
-        print('sqrt_continuing_fraction_coeffs(', z, ') :', zcoeff_list, '  counts: ',
-              continuing_fractions_term_counts(zcoeff_list))
+        zcoeff_list = sqrt_continued_fraction_coeffs(z)
+        print('sqrt_continued_fraction_coeffs(', z, ') :', zcoeff_list, '  counts: ',
+              continued_fractions_term_counts(zcoeff_list))
         print()
         for z in range(2, 14):
-            zcoeff_list = sqrt_continuing_fraction_coeffs(z)
-            print('sqrt_continuing_fraction_coeffs(', z, ') :', zcoeff_list, '  counts: ',
-                  continuing_fractions_term_counts(zcoeff_list))
+            zcoeff_list = sqrt_continued_fraction_coeffs(z)
+            print('sqrt_continued_fraction_coeffs(', z, ') :', zcoeff_list, '  counts: ',
+                  continued_fractions_term_counts(zcoeff_list))
         print()
-        print('continuing_fractions_term_stats(sqrt_continuing_fraction_coeffs, 2, 13) = ',
-              continuing_fractions_term_stats(sqrt_continuing_fraction_coeffs, 2, 13))
-        print('continuing_fractions_term_stats(sqrt_continuing_fraction_coeffs, 2, 10000) = ',
-              continuing_fractions_term_stats(sqrt_continuing_fraction_coeffs, 2, 10000))
+        print('continued_fractions_term_stats(sqrt_continued_fraction_coeffs, 2, 13) = ',
+              continued_fractions_term_stats(sqrt_continued_fraction_coeffs, 2, 13))
+        print('continued_fractions_term_stats(sqrt_continued_fraction_coeffs, 2, 10000) = ',
+              continued_fractions_term_stats(sqrt_continued_fraction_coeffs, 2, 10000))
     elif problem_num == 65:
         print()
+        zlast_index = 10
+        zcoeff_list = [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+        for z in range(1, zlast_index+1):
+            print(continued_fraction_approximation(zcoeff_list, z))
+        print()
+        zcoeff_list = [1, (2,)]
+        for z in range(1, zlast_index+1):
+            print(continued_fraction_approximation(zcoeff_list, z))
+        print()
+        zcoeff_list = [2, 1, 2, 1, 1, 4, 1, 1, 6, 1, 1, 8, 1, 1]
+        for z in range(1, zlast_index+1):
+            print(continued_fraction_approximation(zcoeff_list, z))
+        print()
+        for z in range(1, zlast_index+1):
+            print(z, generate_continued_fraction_coeffs_e(z))
+        print()
+        z = 100
+        zcoeff_list = generate_continued_fraction_coeffs_e(z)
+        print(z, continued_fraction_approximation(zcoeff_list, z))
     elif problem_num == 66:
         print()
     elif problem_num == 67:
