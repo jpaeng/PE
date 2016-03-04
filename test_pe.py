@@ -367,3 +367,8 @@ def test_p065():
 
 def test_p066():
     assert p06x.pells_equation_min_solutions2(61) == (1766319049, 226153980)
+
+
+def test_p067():
+    assert p06x.max_sum_triangle2([[3], [7, 4], [2, 4, 6], [8, 5, 9, 3]]) \
+           == [[3], [10, 7], [12, 14, 13], [20, 19, 23, 16]]

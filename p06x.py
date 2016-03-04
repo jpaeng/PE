@@ -696,19 +696,19 @@ def pells_equation_min_solutions(d, max_y =10 ** 6):
         y = 0
     return x, y
 
-def pells_equation_min_solutions2(d, max_loops = 100):
+def pells_equation_min_solutions2(d, max_n = 100):
     """Return the minimal x,y solution to Pell's equation (x**2 - Dy**2 = 1) for a given D.
     This version uses square root continued fraction approximation to generate (x, y) combinations to try.
 
     :param d:       D variable of Pell's equation above.
-    :param max_y:   Max y value to try
+    :param max_n:   Max number of continued fraction coefficents to try
     :return:        Minimal solution in the form (x, y)
     """
 
     coeff_list = sqrt_continued_fraction_coeffs(d)
 
     found = False
-    for n in range(1, max_loops):
+    for n in range(1, max_n):
         x, y, fraction = continued_fraction_approximation(coeff_list, n)
         if x*x - d*y*y == 1:
             found = True
@@ -733,6 +733,21 @@ def pells_equation_min_solutions2(d, max_loops = 100):
 #     It is not possible to try every route to solve this problem, as there are 2**99 altogether!
 #     If you could check one trillion (10**12) routes every second it would take over twenty billion years to check them all.
 #     There is an efficient algorithm to solve it. ;o)
+
+def max_sum_triangle2(tri_array):
+    """Given a number triangle, return a triangle with the maximnum sum of previous rows at each node.
+
+    :param tri_array:   array representing the number triangle
+    :return:            array with the maximum sum at each node
+    """
+
+    max_sum_array = [tri_array[0]]                  # row 0
+    for tri_row in tri_array[1:]:
+        max_sum_row = [tri_row[0] + max_sum_array[-1][0]]
+        for i in range(1, len(tri_row)):
+            max_sum_row.append(tri_row[i] + max(max_sum_array[-1][i-1:i+1]))
+        max_sum_array.append(max_sum_row)
+    return max_sum_array
 
 
 # 68 Magic 5-gon ring
@@ -777,7 +792,7 @@ def pells_equation_min_solutions2(d, max_loops = 100):
 
 # Problem 60-69 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 66
+    problem_num = 67
 
     if problem_num == 60:
         print()
@@ -857,6 +872,20 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print('max x = ', zmax)
     elif problem_num == 67:
         print()
+        #         3
+        #        7 4
+        #       2 4 6
+        #      8 5 9 3
+        zmax = max_sum_triangle2([[3], [7, 4], [2, 4, 6], [8, 5, 9, 3]])
+        print(zmax)
+        for z in zmax:
+            print(z)
+        print()
+        ztriangle = common.read_multi_line_text_file('p067_triangle.txt')
+        ztriangle = [list(map(int, z.split(' '))) for z in ztriangle]
+        zmax = max_sum_triangle2(ztriangle)
+        print(zmax[-1])
+        print(max(zmax[-1]))
     elif problem_num == 68:
         print()
     elif problem_num == 69:
