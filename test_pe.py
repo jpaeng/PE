@@ -363,3 +363,7 @@ def test_p065():
     assert p06x.continued_fraction_approximation([1, (2,)], 10) == (3363, 2378, 1.4142136248948696)
     assert p06x.continued_fraction_approximation(p06x.generate_continued_fraction_coeffs_e(10), 10) \
            == (1457, 536, 2.718283582089552)
+
+
+def test_p066():
+    assert p06x.pells_equation_min_solutions2(61) == (1766319049, 226153980)

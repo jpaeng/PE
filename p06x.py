@@ -600,7 +600,7 @@ def continued_fraction_approximation(coeff_list, n):
 
     :param coeff_list:  of the form [a1, a2, (b1, b2, b3, ...)] where there is at least one non-repeating coeff a1.
     :param n:           number of coefficients to use in the approximation
-    :return:            numerator, denominator, fractional approximation
+    :return:            (numerator, denominator, fractional approximation)
     """
 
     if isinstance(coeff_list[-1], tuple):
@@ -667,7 +667,56 @@ def generate_continued_fraction_coeffs_e(n):
 #     5**2 - 6x2**2 = 1
 #     8**2 - 7x3**2 = 1
 # Hence, by considering minimal solutions in x for D <= 7, the largest x is obtained when D=5.
-# Find the value of D = 1000 in minimal solutions of x for which the largest value of x is obtained.
+# Find the value of D <= 1000 in minimal solutions of x for which the largest value of x is obtained.
+
+def pells_equation_min_solutions(d, max_y =10 ** 6):
+    """Return the minimal x,y solution to Pell's equation (x**2 - Dy**2 = 1) for a given D.
+    This version single increments y to search.
+
+    :param d:       D variable of Pell's equation above.
+    :param max_y:   Max y value to try
+    :return:        Minimal solution in the form (x, y)
+    """
+
+    x = int(math.sqrt(d))
+    y = 1
+    found = False
+    while y < max_y:
+        ans = x*x - d*y*y
+        if ans == 1:
+            found = True
+            break
+        elif ans > 1:
+            y += 1
+            x = int(math.sqrt(d*y*y))
+        else:
+            x += 1
+    if not found:
+        x = 0
+        y = 0
+    return x, y
+
+def pells_equation_min_solutions2(d, max_loops = 100):
+    """Return the minimal x,y solution to Pell's equation (x**2 - Dy**2 = 1) for a given D.
+    This version uses square root continued fraction approximation to generate (x, y) combinations to try.
+
+    :param d:       D variable of Pell's equation above.
+    :param max_y:   Max y value to try
+    :return:        Minimal solution in the form (x, y)
+    """
+
+    coeff_list = sqrt_continued_fraction_coeffs(d)
+
+    found = False
+    for n in range(1, max_loops):
+        x, y, fraction = continued_fraction_approximation(coeff_list, n)
+        if x*x - d*y*y == 1:
+            found = True
+            break
+    if not found:
+        x = 0
+        y = 0
+    return x, y
 
 
 # 67 Maximum path sum II
@@ -728,7 +777,7 @@ def generate_continued_fraction_coeffs_e(n):
 
 # Problem 60-69 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 65
+    problem_num = 66
 
     if problem_num == 60:
         print()
@@ -797,6 +846,15 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print(z, continued_fraction_approximation(zcoeff_list, z))
     elif problem_num == 66:
         print()
+        zlistsq = [z*z for z in range(32)]
+        zlist = [z for z in range(1001) if z not in zlistsq]
+        zmax = (0, (0, 0))
+        for z in zlist:
+            zresult = pells_equation_min_solutions2(z)
+            if zresult[0] > zmax[1][0]:
+                zmax = (z, zresult)
+            print(z, zresult)
+        print('max x = ', zmax)
     elif problem_num == 67:
         print()
     elif problem_num == 68:
