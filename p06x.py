@@ -771,6 +771,143 @@ def max_sum_triangle2(tri_array):
 # Using the numbers 1 to 10, and depending on arrangements, it is possible to form 16- and 17-digit strings.
 # What is the maximum 16-digit string for a "magic" 5-gon ring?
 
+# Solution Strategy:
+# 1. Find the different combinations for the five external nodes
+# 2. Check the different permutations for the five internal nodes
+
+def find_magic_ring(ring_size, external_nodes, internal_nodes):
+    """Return a set of magic rings, each of which uses each external node once, and internal node once,
+    and have the same sum.
+
+    :param ring_size:       Number of inner nodes on the ring (same as the number of outer nodes)
+    :param external_nodes:  List of numbers to be used as external nodes.
+                            Each number on this list will be used once for each magic ring.
+    :param internal_nodes:  List of numbers to be used as internal nodes.
+                            Each number on this list will be used once for each magic ring.
+    :return:                List of magic rings having the specified external and internal nodes in the form:
+                            [[(external1, internal1, internal2), (external2, internal2, internal3), ... ring_size number of tuples], [next magic ring]...]
+    """
+
+    # Calculate the only possible magic sum for a given set of external/internal node values.
+    expected_magic_sum = (sum(external_nodes) + 2*sum(internal_nodes)) // ring_size
+
+    # Generate sets of nodes with the same sum
+    magic_sum_sets = []
+    for e_node in external_nodes:
+        for i_node1 in internal_nodes:
+            i_node2 = expected_magic_sum - e_node - i_node1
+            if i_node2 in internal_nodes and i_node2 != i_node1:
+                magic_sum_sets.append((e_node, i_node1, i_node2))
+
+    # Generate rings
+    magic_rings = []
+    if len(magic_sum_sets) >= ring_size:
+        external_node_permutations_count = common.permutations(ring_size-1, ring_size-1)
+        for permutation_index in range(external_node_permutations_count):
+            external_node_list =[external_nodes[0]]
+            external_node_list.extend(common.nth_permutation(permutation_index,external_nodes[1:]))
+            magic_rings.extend(next_magic_node([], external_node_list, magic_sum_sets))
+
+    # Delete sets that do not cycle back from last node to first node
+    for magic_ring in reversed(magic_rings):
+        if magic_ring[0][1] != magic_ring[-1][2]:
+            magic_rings.remove(magic_ring)
+
+    return magic_rings
+
+def next_magic_node(input_node_list, external_node_list, magic_sum_sets):
+    """Recursive function generating magic ring one node at a time.
+
+    :param input_node_list:     Partially completed node list.  Is empty list [] if first node.
+    :param external_node_list:  External node values yet to be added in correct order.
+                                Is empty list [] if magic ring is complete.
+    :param magic_sum_sets:      Sum sets in the form (external, internal1, internal2) to be used to construct magic ring.
+    :return:                    List of magic rings found for a given external/internal nodes list,
+                                or empty list [] if none found.
+    """
+
+    #
+    if external_node_list == []:
+        return [input_node_list]
+    elif input_node_list == []:
+        output_node_list = []
+        for index in range(len(magic_sum_sets)):
+            temp = input_node_list[:]
+            if external_node_list[0] == magic_sum_sets[index][0]:
+                temp.append(tuple(magic_sum_sets[index]))
+                temp = next_magic_node(temp[:], external_node_list[1:], magic_sum_sets[:index] + magic_sum_sets[index+1:])
+                output_node_list.extend(temp)
+        return output_node_list
+    else:
+        output_node_list = []
+        for index in range(len(magic_sum_sets)):
+            temp = input_node_list[:]
+            if (external_node_list[0] == magic_sum_sets[index][0]) and (temp[-1][2] == magic_sum_sets[index][1]):
+                temp.append(tuple(magic_sum_sets[index]))
+                temp = next_magic_node(temp[:], external_node_list[1:], magic_sum_sets[:index] + magic_sum_sets[index+1:])
+                output_node_list.extend(temp)
+        return output_node_list
+
+
+def generate_magic_rings(ring_size, number_list):
+    """Return all magic rings or a given ring_size composed of number_lists.
+    Each value in number_list is used just once per magic ring.
+
+    :param ring_size:       Number of inner nodes on the ring (same as the number of outer nodes)
+    :param number_list:     Values to be used to construct magic ring. Each value to be used at most once per ring.
+    :return:                List of all magic rings found.
+    """
+
+    # Generate sets of indices into number_list for ring of ring_size
+    combinations_list = common.generate_combinations_list(len(number_list), ring_size)
+
+    # Generate sets of external nodes
+    # For magic ring, each set of external nodes must sum to a multiple of ring_size
+    external_ring_list = []
+    for combination in combinations_list:
+        external_node_list = []
+        for index in combination:
+            external_node_list.append(number_list[index])
+        if sum(external_node_list)%ring_size == 0:
+            external_ring_list.append(external_node_list)
+
+    # Generate sets of internal node combinations
+    # For magic ring, each set of internal nodes must sum to a multiple of ring_size
+    internal_ring_list = []
+    for external_node_list in reversed(external_ring_list):
+        internal_node_list = [i for i in number_list if i not in external_node_list]
+        if sum(internal_node_list)%ring_size == 0:
+            internal_ring_list.insert(0, internal_node_list)
+        else:
+            external_ring_list.remove(external_node_list)
+
+    # Find all magic rings for a given external/internal ring combination
+    magic_ring_list = []
+    for index in range(len(external_ring_list)):
+        magic_ring_list.extend(find_magic_ring(ring_size, external_ring_list[index], internal_ring_list[index]))
+
+    # Sort magic_ring_list
+    changed = True
+    len_list = len(magic_ring_list)
+    while changed:
+        changed = False
+        for index1 in range(len_list-1):
+            found = False
+            for index2 in range(ring_size):
+                for index3 in range(3):
+                    if magic_ring_list[index1][index2][index3] > magic_ring_list[index1+1][index2][index3]:
+                        magic_ring_list[index1], magic_ring_list[index1+1] = magic_ring_list[index1+1], magic_ring_list[index1]
+                        changed = True
+                        found = True
+                        break
+                    elif magic_ring_list[index1][index2][index3] < magic_ring_list[index1+1][index2][index3]:
+                        found = True
+                        break
+                if found:
+                    break
+
+    return magic_ring_list
+
 
 # 69 Totient maximum
 # Euler's Totient function, f(n) [sometimes called the phi function], is used to determine the number of numbers
@@ -792,7 +929,7 @@ def max_sum_triangle2(tri_array):
 
 # Problem 60-69 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 67
+    problem_num = 68
 
     if problem_num == 60:
         print()
@@ -887,6 +1024,11 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print(zmax[-1])
         print(max(zmax[-1]))
     elif problem_num == 68:
-        print()
+        zresult = generate_magic_rings(3, [1, 2, 3, 4, 5, 6])
+#        zresult = generate_magic_rings(5, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+        for zset in zresult:
+            print()
+            for znode in zset:
+                print(sum(znode), znode)
     elif problem_num == 69:
         print()

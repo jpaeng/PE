@@ -384,9 +384,62 @@ def is_pandigital(str_n, str_digits):
 
 
 # = Combinations/Permutation Procedures ==============
-def combinations(n, r):
-    """Return nCr."""
-    return math.factorial(n)/math.factorial(r)/math.factorial(n-r)
+def combinations(n, k):
+    """Return C(n, k)."""
+    return math.factorial(n)//math.factorial(k)//math.factorial(n-k)
+
+
+def permutations(n, k):
+    """Return P(n, k)."""
+    return math.factorial(n)//math.factorial(n-k)
+
+
+def next_combination(x):
+    u = x & -x
+    v = u + x
+    if v == 0:
+        return 0
+    x = v + (((v^x)//u)>>2)
+    return x
+
+
+def generate_combinations_list(n, k):
+    """ Return list of combinations of n-items take k at a time.
+
+    Each item represented by an integer (0, 1, ...) which can be used as an index into a master list of items.
+    :param n:   number of different items
+    :param k:   number of items in each combination
+    :return:    list of combinations in the form [(a00, a01, a02, ..., a0k), (...), ...]
+    """
+
+    combination_list = []
+    binary_combination = 2**k-1
+    combination_count = combinations(n, k)
+    for loop in range(combination_count):
+        combination = []
+        for bit_position in range(n):
+            if (1<<bit_position) & binary_combination:
+                combination.append(bit_position)
+        combination_list.append(tuple(combination))
+        binary_combination = next_combination(binary_combination)
+    return combination_list
+
+
+def nth_permutation(n, element_list):
+    """ Return the nth permutation of element_list."""
+    element_count = len(element_list)
+    result = []
+    remainder = n
+    for position in reversed(range(element_count)):     # Start with msb and loop to lsb
+        divisor = math.factorial(position)              # Factorials:  1 2 6 24 120 ...
+        dividend = int(remainder/divisor)               # Determine which digit in list is next
+        remainder = remainder % divisor                 # Remainder calculated for next loop
+        result.append(element_list[dividend])           # Extend string to right
+        if dividend < len(element_list) - 1:               # Remove char just used from list
+            element_list = element_list[:dividend] + element_list[dividend+1:]
+        else:
+            element_list = element_list[:dividend]
+    return result
 
 
 def str_permutation(n, str_chars):
@@ -512,6 +565,28 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
     print()
     print(time1-start)  # in ms
     print(time2-time1)  # in ms
+
+    # Check next_combination()
+    print()
+    print('Check next_combination()')
+    zresult = 31
+    for z in range(10):
+        zresult = next_combination(zresult)
+        print(bin(zresult))
+
+    # Check generate_combinations_list()
+    print()
+    print('Check generate_combinations_list()')
+    zresult = generate_combinations_list(10, 5)
+    print(zresult)
+
+    # Check nth_permutation()
+    zlist = [i for i in range(1, 5)]
+    z_bit_count = len(zlist)
+    print()
+    print('Check nth_permutation()')
+    for z in range(math.factorial(z_bit_count)):
+        print(z, nth_permutation(z, zlist))
 
     # Check str_permutation()
     z_bit_count = 4

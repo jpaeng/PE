@@ -372,3 +372,8 @@ def test_p066():
 def test_p067():
     assert p06x.max_sum_triangle2([[3], [7, 4], [2, 4, 6], [8, 5, 9, 3]]) \
            == [[3], [10, 7], [12, 14, 13], [20, 19, 23, 16]]
+
+
+def test_p068():
+    assert p06x.generate_magic_rings(3, [1, 2, 3, 4, 5, 6])[3] == [(1, 6, 5), (3, 5, 4), (2, 4, 6)]
+    assert p06x.generate_magic_rings(3, [1, 2, 3, 4, 5, 6])[-1] == [(4, 3, 2), (6, 2, 1), (5, 1, 3)]
