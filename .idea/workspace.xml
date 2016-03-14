@@ -45,86 +45,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="p06x.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="p07x.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/p07x.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="2.0641465">
+              <caret line="106" column="0" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+              <folding>
+                <element signature="e#39#50#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="p06x.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/p06x.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.021113243">
-              <caret line="776" column="0" selection-start-line="776" selection-start-column="0" selection-end-line="776" selection-end-column="0" />
-              <folding>
-                <element signature="e#39#50#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="p05x.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/p05x.py">
-          <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="636" column="0" selection-start-line="626" selection-start-column="0" selection-end-line="636" selection-end-column="0" />
-              <folding>
-                <element signature="e#39#50#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="p04x.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/p04x.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
-              <folding>
-                <element signature="e#39#50#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="p03x.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/p03x.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="712" column="42" selection-start-line="712" selection-start-column="36" selection-end-line="712" selection-end-column="42" />
-              <folding>
-                <element signature="e#39#50#0" expanded="true" />
-                <element signature="e#20073#20321#0" expanded="false" />
-                <element signature="e#22188#22628#0" expanded="false" />
-                <element signature="e#22674#23143#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="p02x.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/p02x.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="360" column="0" selection-start-line="357" selection-start-column="0" selection-end-line="360" selection-end-column="0" />
-              <folding>
-                <element signature="e#39#50#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="p01x.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/p01x.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="333" column="0" selection-start-line="318" selection-start-column="0" selection-end-line="333" selection-end-column="0" />
-              <folding>
-                <element signature="e#39#50#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="p00x.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/p00x.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="311" column="29" selection-start-line="311" selection-start-column="29" selection-end-line="311" selection-end-column="29" />
+              <caret line="998" column="0" selection-start-line="998" selection-start-column="0" selection-end-line="1102" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -171,9 +108,10 @@
         <option value="$PROJECT_DIR$/p01x.py" />
         <option value="$PROJECT_DIR$/p00x.py" />
         <option value="$PROJECT_DIR$/p05x.py" />
-        <option value="$PROJECT_DIR$/p06x.py" />
         <option value="$PROJECT_DIR$/test_pe.py" />
         <option value="$PROJECT_DIR$/common.py" />
+        <option value="$PROJECT_DIR$/p06x.py" />
+        <option value="$PROJECT_DIR$/p07x.py" />
       </list>
     </option>
   </component>
@@ -208,8 +146,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -230,6 +166,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -558,24 +496,24 @@
     <frame x="-8" y="-8" width="1696" height="1036" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10952381" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.104166664" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28412876" sideWeight="0.50476193" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32148626" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39067703" sideWeight="0.4952381" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34295228" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39067703" sideWeight="0.4952381" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32852387" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34295228" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -603,14 +541,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/p00x.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="369" column="0" selection-start-line="353" selection-start-column="0" selection-end-line="369" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/common.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -636,7 +566,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#39#50#0" expanded="true" />
+            <element signature="e#39#50#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -646,7 +576,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
           <folding>
-            <element signature="e#39#50#0" expanded="true" />
+            <element signature="e#39#50#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -684,7 +614,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="55" column="15" selection-start-line="55" selection-start-column="15" selection-end-line="55" selection-end-column="15" />
           <folding>
-            <element signature="e#39#50#0" expanded="true" />
+            <element signature="e#39#50#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -694,7 +624,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
           <folding>
-            <element signature="e#39#50#0" expanded="true" />
+            <element signature="e#39#50#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -722,7 +652,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding>
-            <element signature="e#39#50#0" expanded="true" />
+            <element signature="e#39#50#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -740,7 +670,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="115" column="0" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
           <folding>
-            <element signature="e#39#50#0" expanded="true" />
+            <element signature="e#39#50#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -768,7 +698,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="362" column="59" selection-start-line="362" selection-start-column="59" selection-end-line="362" selection-end-column="59" />
           <folding>
-            <element signature="e#39#50#0" expanded="true" />
+            <element signature="e#39#50#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -796,7 +726,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#39#50#0" expanded="true" />
+            <element signature="e#39#50#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -824,7 +754,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="425" column="20" selection-start-line="425" selection-start-column="20" selection-end-line="425" selection-end-column="20" />
           <folding>
-            <element signature="e#39#50#0" expanded="true" />
+            <element signature="e#39#50#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -979,7 +909,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="636" column="0" selection-start-line="626" selection-start-column="0" selection-end-line="636" selection-end-column="0" />
           <folding>
-            <element signature="e#39#50#0" expanded="true" />
+            <element signature="e#39#50#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -989,7 +919,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
           <folding>
-            <element signature="e#39#50#0" expanded="true" />
+            <element signature="e#39#50#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -999,7 +929,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="712" column="42" selection-start-line="712" selection-start-column="36" selection-end-line="712" selection-end-column="42" />
           <folding>
-            <element signature="e#39#50#0" expanded="true" />
+            <element signature="e#39#50#0" expanded="false" />
             <element signature="e#20073#20321#0" expanded="false" />
             <element signature="e#22188#22628#0" expanded="false" />
             <element signature="e#22674#23143#0" expanded="false" />
@@ -1012,7 +942,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="360" column="0" selection-start-line="357" selection-start-column="0" selection-end-line="360" selection-end-column="0" />
           <folding>
-            <element signature="e#39#50#0" expanded="true" />
+            <element signature="e#39#50#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1022,7 +952,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="333" column="0" selection-start-line="318" selection-start-column="0" selection-end-line="333" selection-end-column="0" />
           <folding>
-            <element signature="e#39#50#0" expanded="true" />
+            <element signature="e#39#50#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1057,8 +987,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/p06x.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.021113243">
-          <caret line="776" column="0" selection-start-line="776" selection-start-column="0" selection-end-line="776" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="998" column="0" selection-start-line="998" selection-start-column="0" selection-end-line="1102" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/p07x.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.0641465">
+          <caret line="106" column="0" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
           <folding>
             <element signature="e#39#50#0" expanded="true" />
           </folding>

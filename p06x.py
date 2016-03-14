@@ -3,10 +3,10 @@
 
 
 import math
-import string
+# import string
 import common
 
-from timeit import default_timer as timer
+# from timeit import default_timer as timer
 
 
 # 60 Prime pair sets
