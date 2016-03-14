@@ -377,3 +377,7 @@ def test_p067():
 def test_p068():
     assert p06x.generate_magic_rings(3, [1, 2, 3, 4, 5, 6])[3] == [(1, 6, 5), (3, 5, 4), (2, 4, 6)]
     assert p06x.generate_magic_rings(3, [1, 2, 3, 4, 5, 6])[-1] == [(4, 3, 2), (6, 2, 1), (5, 1, 3)]
+
+
+def test_p069():
+    assert p06x.maximum_totient_ratio_prime(1000) == (210, 48, 4.375)

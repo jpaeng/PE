@@ -158,7 +158,29 @@ def get_factors(num):        # Valid for num > 1
     return result
 
 
+def get_gcd(a, b):          # Greatest Common Multiple using Euclidean Algorithm
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+
 # def get_prime_factors(num, prime_list): below in Prime Procedures section
+
+
+def phi(n):
+    """Euler's Totient Function
+    Return the count of numbers less than n which are coprime(relatively prime) to n.
+
+    :param n: number to be checked
+    :return:  count of values < n which have GCD == 1.
+    """
+    if n%2 == 0:    # for even n
+        # only odd numbers can be coprime with even n.
+        coprimes = [i for i in range(1, n, 2) if get_gcd(i, n) == 1]
+    else:           # for odd n
+        coprimes = [i for i in range(n) if get_gcd(i, n) == 1]
+
+    return len(coprimes)
 
 
 # = Prime Procedures =================================
@@ -348,19 +370,9 @@ def get_prime_factors(num, prime_list):
 
 # = Fraction Procedures ==============================
 def reduce_fraction(num, den):
-    """Return tuple of num and den reduced to lowest common terms."""
-    prime_list = sieve_erathosthenes(max(num, den))
-    num_factor_list = get_prime_factors(num, prime_list)
-    den_factor_list = get_prime_factors(den, prime_list)
-
-    for num_factor in num_factor_list:
-        if num_factor in den_factor_list:
-            while True:
-                num /= num_factor
-                den /= num_factor
-                if(num % num_factor) or (den % num_factor):
-                    break
-    return int(num), int(den)
+    """Return tuple of num and den reduced to lowest common terms using Euclidean Algorithm."""
+    gcd = get_gcd(num, den)
+    return num//gcd, den//gcd
 
 
 # = Palindrome Procedures ============================
@@ -552,7 +564,7 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
     zlist = [z for z in range(60)]
     zlist = [zlist[z:z+10] for z in range(10)]
     zlist = [zlist]*5
-    time_count = 1000
+    time_count = 100
 
     start = timer()
     for z in range(time_count):
@@ -616,9 +628,21 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
     zprime_list = sieve_erathosthenes(100)
     print(24, get_prime_factors(24, zprime_list))
 
+    # Check get_gcd()
+    print()
+    print('Check get_gcd()')
+    for z in range(2, 8):
+        print(z, z+2, get_gcd(z, z+2))
+
     # Check reduce_fraction()
     print()
     print('Check reduce_fraction()')
     y = 6
     for z in range(1, 13):
         print(y, z, reduce_fraction(y, z))
+
+    # Check phi()
+    print()
+    print('Check phi()')
+    for z in range(2, 11):
+        print(z, phi(z))

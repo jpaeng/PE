@@ -805,7 +805,7 @@ def find_magic_ring(ring_size, external_nodes, internal_nodes):
         external_node_permutations_count = common.permutations(ring_size-1, ring_size-1)
         for permutation_index in range(external_node_permutations_count):
             external_node_list =[external_nodes[0]]
-            external_node_list.extend(common.nth_permutation(permutation_index,external_nodes[1:]))
+            external_node_list.extend(common.nth_permutation(permutation_index, external_nodes[1:]))
             magic_rings.extend(next_magic_node([], external_node_list, magic_sum_sets))
 
     # Delete sets that do not cycle back from last node to first node
@@ -814,6 +814,7 @@ def find_magic_ring(ring_size, external_nodes, internal_nodes):
             magic_rings.remove(magic_ring)
 
     return magic_rings
+
 
 def next_magic_node(input_node_list, external_node_list, magic_sum_sets):
     """Recursive function generating magic ring one node at a time.
@@ -827,9 +828,9 @@ def next_magic_node(input_node_list, external_node_list, magic_sum_sets):
     """
 
     #
-    if external_node_list == []:
+    if not external_node_list:
         return [input_node_list]
-    elif input_node_list == []:
+    elif not input_node_list:
         output_node_list = []
         for index in range(len(magic_sum_sets)):
             temp = input_node_list[:]
@@ -868,7 +869,7 @@ def generate_magic_rings(ring_size, number_list):
         external_node_list = []
         for index in combination:
             external_node_list.append(number_list[index])
-        if sum(external_node_list)%ring_size == 0:
+        if sum(external_node_list) % ring_size == 0:
             external_ring_list.append(external_node_list)
 
     # Generate sets of internal node combinations
@@ -876,7 +877,7 @@ def generate_magic_rings(ring_size, number_list):
     internal_ring_list = []
     for external_node_list in reversed(external_ring_list):
         internal_node_list = [i for i in number_list if i not in external_node_list]
-        if sum(internal_node_list)%ring_size == 0:
+        if sum(internal_node_list) % ring_size == 0:
             internal_ring_list.insert(0, internal_node_list)
         else:
             external_ring_list.remove(external_node_list)
@@ -913,23 +914,91 @@ def generate_magic_rings(ring_size, number_list):
 # Euler's Totient function, f(n) [sometimes called the phi function], is used to determine the number of numbers
 # less than n which are relatively prime to n.
 # For example, as 1, 2, 4, 5, 7, and 8, are all less than nine and relatively prime to nine, f(9)=6.
-#     n	Relatively Prime	f(n)	n/f(n)
-#     2	1	1	2
-#     3	1,2	2	1.5
-#     4	1,3	2	2
-#     5	1,2,3,4	4	1.25
-#     6	1,5	2	3
-#     7	1,2,3,4,5,6	6	1.1666...
-#     8	1,3,5,7	4	2
-#     9	1,2,4,5,7,8	6	1.5
-#     10	1,3,7,9	4	2.5
+#     n	 Rel. Prime    f(n)	n/f(n)
+#     2	    1	        1	2
+#     3	    1,2	        2	1.5
+#     4	    1,3	        2	2
+#     5	    1,2,3,4	    4	1.25
+#     6	    1,5	        2	3
+#     7	    1,2,3,4,5,6	6	1.1666...
+#     8	    1,3,5,7	    4	2
+#     9	    1,2,4,5,7,8 6	1.5
+#     10	1,3,7,9	    4	2.5
 # It can be seen that n=6 produces a maximum n/f(n) for n <= 10.
 # Find the value of n <= 1,000,000 for which n/f(n) is a maximum.
+
+def maximum_totient_ratio_simple(max_n):
+    """Return number n < max_n with maximum n/phi(n) ratio.
+    Per analysis, the n with maximum n/phi(n) for any given range will be an even number.
+
+    :param max_n:   maximum n to check
+    :return:        n with the maximum n/phi(n) ratio in the form:  (n, phi(n), n/phi(n))
+    """
+    max_ratio = (0, 0, 0)
+    for n in range(2, max_n+1, 2):  # Check only even n
+        f = common.phi(n)
+        ratio = n/f
+        if max_ratio[2] < ratio:
+            max_ratio = (n, f, ratio)
+
+    return max_ratio
+
+
+def maximum_totient_ratio_odd(max_n):
+    """Return number n < max_n with maximum n/phi(n) ratio.
+    Per analysis, the n with maximum n/phi(n) for any given range will be an even number that is twice an odd number
+    because of the property:
+            phi(2m) = 2*phi(m) if m is even
+                    = phi(m) if m is odd
+
+    :param max_n:   maximum n to check
+    :return:        n with the maximum n/phi(n) ratio in the form:  (n, phi(n), n/phi(n))
+    """
+    max_ratio = (0, 0, 0)
+    for n in range(1, 1+max_n//2, 2):   # Only odd n
+        f = common.phi(n)
+        ratio_2n = 2*n/f
+        if max_ratio[2] < ratio_2n:
+            max_ratio = (2*n, f, ratio_2n)
+
+    return max_ratio
+
+
+def maximum_totient_ratio_prime(max_n):
+    """Return number n < max_n with maximum n/phi(n) ratio.
+    Euler's product formula:
+        n = (p1**k1) * (p2**k2) * ...
+        phi(n)  = n * (1 - 1/p1) * (1 - 1/p2) * ...
+                = n * (p1 - 1)/p1 * (p2 -1)/p2 * ...
+        n/phi(n) = (p1*p2*...)/((p1-1)*(p2-1)*...) -> increases as more prime are added.
+        where p1, p2, ... are primes.
+    Per analysis, the n with maximum n/phi(n) for any given range will be the product of primes since that number
+    has the maximum count of distinct primes p1, p2, ...
+
+    :param max_n:   maximum n to check
+    :return:        n with the maximum n/phi(n) ratio in the form:  (n, phi(n), n/phi(n))
+    """
+
+    prime_list = common.prime_list_mr(1000)
+
+    n = 1
+    ratio = 1.0
+    for prime in prime_list:
+        n *= prime
+        ratio *= prime/(prime-1)
+        if n > max_n:
+            n = n // prime
+            ratio *= (prime-1)/prime
+            break
+    f = int(0.5 + n/ratio)
+    max_ratio = (n, f, ratio)
+
+    return max_ratio
 
 
 # Problem 60-69 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 68
+    problem_num = 69
 
     if problem_num == 60:
         print()
@@ -1024,11 +1093,34 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print(zmax[-1])
         print(max(zmax[-1]))
     elif problem_num == 68:
-        zresult = generate_magic_rings(3, [1, 2, 3, 4, 5, 6])
-#        zresult = generate_magic_rings(5, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+        # zresult = generate_magic_rings(3, [1, 2, 3, 4, 5, 6])
+        zresult = generate_magic_rings(5, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
         for zset in zresult:
             print()
             for znode in zset:
                 print(sum(znode), znode)
     elif problem_num == 69:
-        print()
+        z = 10
+        print('maximum_totient_ratio_simple(', z, ') = ', maximum_totient_ratio_simple(z))
+        print('maximum_totient_ratio_odd(', z, ')    = ', maximum_totient_ratio_odd(z))
+        print('maximum_totient_ratio_prime(', z, ')  = ', maximum_totient_ratio_prime(z))
+        z = 100
+        print('maximum_totient_ratio_simple(', z, ') = ', maximum_totient_ratio_simple(z))
+        print('maximum_totient_ratio_odd(', z, ')    = ', maximum_totient_ratio_odd(z))
+        print('maximum_totient_ratio_prime(', z, ')  = ', maximum_totient_ratio_prime(z))
+        z = 1000
+        print('maximum_totient_ratio_simple(', z, ') = ', maximum_totient_ratio_simple(z))
+        print('maximum_totient_ratio_odd(', z, ')    = ', maximum_totient_ratio_odd(z))
+        print('maximum_totient_ratio_prime(', z, ')  = ', maximum_totient_ratio_prime(z))
+        z = 10000
+        # print('maximum_totient_ratio_simple(', z, ') = ', maximum_totient_ratio_simple(z))
+        # print('maximum_totient_ratio_odd(', z, ')    = ', maximum_totient_ratio_odd(z))
+        print('maximum_totient_ratio_prime(', z, ')  = ', maximum_totient_ratio_prime(z))
+        z = 100000
+        # print('maximum_totient_ratio_simple(', z, ') = ', maximum_totient_ratio_simple(z))
+        # print('maximum_totient_ratio_odd(', z, ')    = ', maximum_totient_ratio_odd(z))
+        print('maximum_totient_ratio_prime(', z, ')  = ', maximum_totient_ratio_prime(z))
+        z = 1000000
+        # print('maximum_totient_ratio_simple(', z, ') = ', maximum_totient_ratio_simple(z))
+        # print('maximum_totient_ratio_odd(', z, ')    = ', maximum_totient_ratio_odd(z))
+        print('maximum_totient_ratio_prime(', z, ')  = ', maximum_totient_ratio_prime(z))
