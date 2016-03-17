@@ -251,10 +251,16 @@ def is_prime_mr(n):
                 break
     return flag
 
-def prime_list_mr(n):
-    """ Return ordered list of primes up to n. Uses Miller-Rabin primality test."""
-    prime_list = [2]
-    for i in range(n+1):
+def prime_list_mr(min_n, max_n):
+    """ Return ordered list of primes up to max_n. Uses Miller-Rabin primality test."""
+
+    if min_n <= 2:
+        prime_list = [2]
+        min_n = 3
+    elif min_n % 2 == 0:
+        min_n += 1
+
+    for i in range(min_n, max_n+1, 2):
         if is_prime_mr(i):
             prime_list.append(i)
     return prime_list
@@ -620,7 +626,7 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
     z = 1000
     print(z, sieve_erathosthenes(z))
     print(z, sieve_erathosthenes2(z, 100))
-    print(z, prime_list_mr(z))
+    print(z, prime_list_mr(0, z))
 
     # Check get_factors()
     print()
@@ -645,4 +651,4 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
     print()
     print('Check phi()')
     for z in range(2, 11):
-        print(z, phi(z))
+        print(z, phi(z), z/phi(z))

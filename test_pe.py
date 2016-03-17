@@ -10,6 +10,7 @@ import p03x
 import p04x
 import p05x
 import p06x
+import p07x
 
 
 def test_common():
@@ -47,7 +48,7 @@ def test_common():
     assert common.sieve_erathosthenes(30) == prime_list_10
     assert common.sieve_erathosthenes(30) != ordered_list
     assert common.sieve_erathosthenes2(30) == prime_list_10
-    assert common.prime_list_mr(30) == prime_list_10
+    assert common.prime_list_mr(0, 30) == prime_list_10
 
     # get_prime_factors
     assert common.get_prime_factors(0, prime_list_10) == []
@@ -381,3 +382,7 @@ def test_p068():
 
 def test_p069():
     assert p06x.maximum_totient_ratio_prime(1000) == (210, 48, 4.375)
+
+
+def test_p070():
+    assert p07x.minimum_totient_ratio_permuation(10**5) == (149, 509, 75841, 75184, 1.0087385613960418)

@@ -58,8 +58,8 @@ def min_prime_pair_set(prime_count):
             if check_prime_pairs(next_prime_index, prime_set, prime_list):
                 prime_set.append(prime_list[next_prime_index])
                 prime_sum = sum(prime_set)
-                if len(prime_set) >= 4:
-                    print('    ', len(prime_set), prime_set)
+                # if len(prime_set) >= 4:
+                    # print('    ', len(prime_set), prime_set)
                 if prime_sum > min_prime_sum:
                     break
                 if len(prime_set) == prime_count:
@@ -117,8 +117,8 @@ def min_prime_pair_set_mr(prime_count):
             if check_prime_pairs_mr(prime_list[next_prime_index], prime_set):
                 prime_set.append(prime_list[next_prime_index])
                 prime_sum = sum(prime_set)
-                if len(prime_set) >= 4:
-                    print('    ', len(prime_set), prime_set)
+                # if len(prime_set) >= 4:
+                #    print('    ', len(prime_set), prime_set)
                 if prime_sum > min_prime_sum:
                     break
                 if len(prime_set) == prime_count:
@@ -938,7 +938,7 @@ def maximum_totient_ratio_simple(max_n):
     for n in range(2, max_n+1, 2):  # Check only even n
         f = common.phi(n)
         ratio = n/f
-        if max_ratio[2] < ratio:
+        if max_ratio[-1] < ratio:
             max_ratio = (n, f, ratio)
 
     return max_ratio
@@ -958,7 +958,7 @@ def maximum_totient_ratio_odd(max_n):
     for n in range(1, 1+max_n//2, 2):   # Only odd n
         f = common.phi(n)
         ratio_2n = 2*n/f
-        if max_ratio[2] < ratio_2n:
+        if max_ratio[-1] < ratio_2n:
             max_ratio = (2*n, f, ratio_2n)
 
     return max_ratio
@@ -979,7 +979,7 @@ def maximum_totient_ratio_prime(max_n):
     :return:        n with the maximum n/phi(n) ratio in the form:  (n, phi(n), n/phi(n))
     """
 
-    prime_list = common.prime_list_mr(1000)
+    prime_list = common.prime_list_mr(0, 1000)
 
     n = 1
     ratio = 1.0

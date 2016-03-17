@@ -15,7 +15,60 @@ from timeit import default_timer as timer
 # For example, as 1, 2, 4, 5, 7, and 8, are all less than nine and relatively prime to nine, f(9)=6.
 # The number 1 is considered to be relatively prime to every positive number, so f(1)=1.
 # Interestingly, f(87109)=79180, and it can be seen that 87109 is a permutation of 79180.
-# Find the value of n, 1 < n < 107, for which f(n) is a permutation of n and the ratio n/f(n) produces a minimum.
+# Find the value of n, 1 < n < 10**7, for which f(n) is a permutation of n and the ratio n/f(n) produces a minimum.
+# Considerations:
+#   1. n/phi(n) > 1.0 for all n > 1
+#   2. n/phi(n) decreases for prime n as n gets larger
+#   3. n/phi(n) is minimum for the largest prime in any given range.
+#   4. n and phi(n) cannot be permutations of each other because phi(n) = n-1 for primes.  n and n-1 are never
+#       permutations of each other.
+#   5. Try numbers that are composites of two primes.
+
+def minimum_totient_ratio_permuation(max_n):
+    """Return number n < max_n with minimum n/phi(n) ratio where n and phi(n) are permutations of each other.
+    Euler's product formula:
+        n = (p1**k1) * (p2**k2) * ...
+        phi(n)  = n * (1 - 1/p1) * (1 - 1/p2) * ...
+                = n * (p1 - 1)/p1 * (p2 -1)/p2 * ...
+        n/phi(n) = (p1*p2*...)/((p1-1)*(p2-1)*...) -> increases as more prime are added.
+        where p1, p2, ... are primes.
+
+    :param max_n:   maximum n to check
+    :return:        n with the minimum n/phi(n) ratio in the form:  (n, phi(n), n/phi(n))
+    """
+
+    prime_list = common.prime_list_mr(2, (max_n+1)//2)
+    
+    # Find index of prime closest to sqrt(max_n)
+    sqrt_max_n = math.sqrt(max_n)
+    a = int(sqrt_max_n)
+    while True:
+        if a in prime_list:
+            break
+        else:
+            a -= 1
+    index_mid = prime_list.index(a)
+    min_ratio = (0, 0, 0, 0, 10.0)
+
+    # a loops down from sqrt(max_n), b loops up from sqrt(max_n)
+    for index_a in reversed(range(index_mid//2, index_mid)):
+        for index_b in range(index_mid, len(prime_list)):
+            a = prime_list[index_a]
+            b = prime_list[index_b]
+            prod = a * b
+            if prod > max_n:
+                break
+            else:
+                ratio = a*b/((a-1)*(b-1))
+                f = int(0.5 + prod/ratio)
+                if common.is_permutation(str(prod), str(f)):
+                    # print(a, b, prod, f, ratio)
+                    if ratio < min_ratio[-1]:
+                        min_ratio = (a, b, prod, f, ratio)
+                    break
+
+    return min_ratio
+
 
 # 71. Ordered fractions
 # Consider the fraction, n/d, where n and d are positive integers.
@@ -119,7 +172,8 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
     problem_num = 70
 
     if problem_num == 70:
-        print()
+        print('minimum_totient_ratio_permuation(10**5) =', minimum_totient_ratio_permuation(10**5))
+        # print('minimum_totient_ratio_permuation(10**7) = ', minimum_totient_ratio_permuation(10**7))
     elif problem_num == 71:
         print()
     elif problem_num == 72:
