@@ -386,3 +386,7 @@ def test_p069():
 
 def test_p070():
     assert p07x.minimum_totient_ratio_permuation(10**5) == (149, 509, 75841, 75184, 1.0087385613960418)
+
+
+def test_p071():
+    assert p07x.left_ordered_fraction((3, 7), 8) == (2, 5)

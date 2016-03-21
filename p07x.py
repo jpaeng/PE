@@ -79,6 +79,29 @@ def minimum_totient_ratio_permuation(max_n):
 # By listing the set of reduced proper fractions for d <= 1,000,000 in ascending order of size,
 # find the numerator of the fraction immediately to the left of 3/7.
 
+def left_ordered_fraction(in_fraction, max_d):
+    """Return the numerator and denominator of the reduced fraction immediately below in_fraction in an ordered list
+    of fractions with d <= max_d.
+
+    :param in_fraction: reference fraction in the form (numerator, denominator)
+    :param max_d:       maximum denominator to check
+    :return:            reduced proper fraction of the form (numerator, denominator)
+    """
+
+    in_fraction = (in_fraction[0]/in_fraction[1], (in_fraction[0], in_fraction[1]))
+    min_delta = (in_fraction[0], (0, 0))
+
+    # Loop through all denominators checking just the fraction to the left of in_fraction
+    for d in range(2, max_d+1):
+        n = int(d * in_fraction[0])
+        fraction = n/d
+        delta = in_fraction[0] - fraction
+        if 0.0 < delta < min_delta[0]:
+            min_delta = (delta, (n, d))
+
+    return common.reduce_fraction(min_delta[1][0], min_delta[1][1])
+
+
 # 72. Counting fractions
 # Consider the fraction, n/d, where n and d are positive integers.
 # If n<d and HCF(n,d)=1, it is called a reduced proper fraction.
@@ -169,13 +192,24 @@ def minimum_totient_ratio_permuation(max_n):
 
 # Problem 70-79 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 70
+    problem_num = 71
 
     if problem_num == 70:
         print('minimum_totient_ratio_permuation(10**5) =', minimum_totient_ratio_permuation(10**5))
         # print('minimum_totient_ratio_permuation(10**7) = ', minimum_totient_ratio_permuation(10**7))
     elif problem_num == 71:
         print()
+        print('left_ordered_fraction((1, 7), 8) =', left_ordered_fraction((1, 7), 8))
+        print('left_ordered_fraction((1, 6), 8) =', left_ordered_fraction((1, 6), 8))
+        print('left_ordered_fraction((1, 5), 8) =', left_ordered_fraction((1, 5), 8))
+        print('left_ordered_fraction((1, 4), 8) =', left_ordered_fraction((1, 4), 8))
+        print('left_ordered_fraction((2, 7), 8) =', left_ordered_fraction((2, 7), 8))
+        print('left_ordered_fraction((1, 3), 8) =', left_ordered_fraction((1, 3), 8))
+        print('left_ordered_fraction((3, 8), 8) =', left_ordered_fraction((3, 8), 8))
+        print('left_ordered_fraction((2, 5), 8) =', left_ordered_fraction((2, 5), 8))
+        print('left_ordered_fraction((3, 7), 8) =', left_ordered_fraction((3, 7), 8))
+        print('left_ordered_fraction((1, 2), 8) =', left_ordered_fraction((1, 2), 8))
+        print('left_ordered_fraction((3, 7), 10**6) =', left_ordered_fraction((3, 7), 10**6))
     elif problem_num == 72:
         print()
     elif problem_num == 73:
