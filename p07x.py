@@ -10,31 +10,31 @@ from timeit import default_timer as timer
 
 
 # 70. Totient permutation
-# Euler's Totient function, f(n) [sometimes called the phi function], is used to determine the number of
+# Euler's Totient function, f(n) [sometimes called the totient function], is used to determine the number of
 # positive numbers less than or equal to n which are relatively prime to n.
 # For example, as 1, 2, 4, 5, 7, and 8, are all less than nine and relatively prime to nine, f(9)=6.
 # The number 1 is considered to be relatively prime to every positive number, so f(1)=1.
 # Interestingly, f(87109)=79180, and it can be seen that 87109 is a permutation of 79180.
 # Find the value of n, 1 < n < 10**7, for which f(n) is a permutation of n and the ratio n/f(n) produces a minimum.
 # Considerations:
-#   1. n/phi(n) > 1.0 for all n > 1
-#   2. n/phi(n) decreases for prime n as n gets larger
-#   3. n/phi(n) is minimum for the largest prime in any given range.
-#   4. n and phi(n) cannot be permutations of each other because phi(n) = n-1 for primes.  n and n-1 are never
+#   1. n/totient(n) > 1.0 for all n > 1
+#   2. n/totient(n) decreases for prime n as n gets larger
+#   3. n/totient(n) is minimum for the largest prime in any given range.
+#   4. n and totient(n) cannot be permutations of each other because totient(n) = n-1 for primes.  n and n-1 are never
 #       permutations of each other.
 #   5. Try numbers that are composites of two primes.
 
 def minimum_totient_ratio_permuation(max_n):
-    """Return number n < max_n with minimum n/phi(n) ratio where n and phi(n) are permutations of each other.
+    """Return number n < max_n with minimum n/totient(n) ratio where n and totient(n) are permutations of each other.
     Euler's product formula:
         n = (p1**k1) * (p2**k2) * ...
-        phi(n)  = n * (1 - 1/p1) * (1 - 1/p2) * ...
+        totient(n)  = n * (1 - 1/p1) * (1 - 1/p2) * ...
                 = n * (p1 - 1)/p1 * (p2 -1)/p2 * ...
-        n/phi(n) = (p1*p2*...)/((p1-1)*(p2-1)*...) -> increases as more prime are added.
+        n/totient(n) = (p1*p2*...)/((p1-1)*(p2-1)*...) -> increases as more prime are added.
         where p1, p2, ... are primes.
 
     :param max_n:   maximum n to check
-    :return:        n with the minimum n/phi(n) ratio in the form:  (n, phi(n), n/phi(n))
+    :return:        n with the minimum n/totient(n) ratio in the form:  (n, totient(n), n/totient(n))
     """
 
     prime_list = common.prime_list_mr(2, (max_n+1)//2)
@@ -109,6 +109,133 @@ def left_ordered_fraction(in_fraction, max_d):
 #     1/8, 1/7, 1/6, 1/5, 1/4, 2/7, 1/3, 3/8, 2/5, 3/7, 1/2, 4/7, 3/5, 5/8, 2/3, 5/7, 3/4, 4/5, 5/6, 6/7, 7/8
 # It can be seen that there are 21 elements in this set.
 # How many elements would be contained in the set of reduced proper fractions for d <= 1,000,000?
+
+def count_reduced_fractions(max_d):
+    count = 0
+
+    # Even denominators
+    for d in range(2, max_d+1, 2):
+        count += 1                  # always count 1/d.
+        for n in range(3, d, 2):    # Check only odd numerators
+            if common.get_gcd(n, d) == 1:
+                count += 1
+
+    # Odd denominators
+    for d in range(3, max_d+1, 2):
+        if common.is_prime_mr(d):
+            count += d - 1
+        else:
+            count += 2                  # always count 1/d and 2/d for odd d.
+            for n in range(3, d):
+                if common.get_gcd(n, d) == 1:
+                    count += 1
+
+    return count
+
+
+def list_reduced_fractions(d):
+    count = 1
+    fractions_list = [(1, d)]
+
+    for n in range(2, d):
+        if common.get_gcd(n, d) == 1:
+            count += 1
+            fractions_list.append((n, d))
+    return (count, fractions_list)
+
+
+def generate_totient_list(max_n):
+    """
+
+    totient(m*n) = totient(m)*totient(n)*(d/totient(d))   where d = gcd(m, n)
+    totient(2*m) = 2*totient(m) if m is even
+             = totient(m) if m is odd
+    totient(n^m) == n^(m-1) * totient(n)
+    :param max_n:
+    :return:
+    """
+    totient_list = [0] * (max_n+1)
+    prime_list = [2]
+
+    # Process 2 and multiples of 2 first
+    n = 2
+    totient_list[n] = n - 1
+    prev_phi = totient_list[n]
+    n2 = 2 * n
+    while n2 < max_n:
+        totient_list[n2] = 2 * prev_phi
+        prev_phi = totient_list[n2]
+        n2 *= 2
+
+    # Loop through rest of numbers
+    for n in range(3, max_n+1):
+        if totient_list[n] == 0:
+            if common.is_prime_mr(n):   # all primes > 2 are odd
+                totient_list[n] = n - 1
+                n2 = 2 * n
+                if n2 < max_n:
+                    totient_list[n2] = totient_list[n]
+                    prev_phi = totient_list[n]
+                    n2 *= 2
+                    while n2 < max_n:
+                        totient_list[n2] = 2 * prev_phi
+                        prev_phi = totient_list[n2]
+                        n2 *= 2
+                    # for p in prime_list:
+                    #     index = p * n
+                    #     if index < max_n:
+                    #         totient_list[index] = totient_list[p] * totient_list[n]
+                    #     else:
+                    #         break
+                    # prime_list.append(n)
+                    m = 2
+                    index_prev = n**(m - 1)
+                    index = n**m
+                    while index < max_n:
+                        if totient_list[index] == 0:
+                            totient_list[index] = index_prev * totient_list[n]
+                        m += 1
+                        index_prev = index
+                        index = n**m
+                    for m in range(3, n):
+                        index = n * m
+                        if index < max_n:
+                            if totient_list[index] == 0:
+                                totient_list[index] = totient_list[m] * totient_list[n]
+                        else:
+                            break
+            else:   # n is not prime
+                totient_list[n] = common.totient(n)
+                prev_phi = totient_list[n]
+                n2 = 2 * n
+                if (n % 2 == 0) and (n2 < max_n):  # if n is odd
+                    if totient_list[n2] == 0:
+                        totient_list[n2] = prev_phi
+                    n2 *= 2
+                while n2 < max_n:
+                    if totient_list[n2] == 0:
+                        totient_list[n2] = 2 * prev_phi
+                    prev_phi = totient_list[n2]
+                    n2 *= 2
+        else:
+            prev_phi = totient_list[n]
+            n2 = 2 * n
+            if (n % 2 == 1) and (n2 < max_n):  # if n is odd
+                if totient_list[n2] == 0:
+                    totient_list[n2] = prev_phi
+                n2 *= 2
+            while n2 < max_n:
+                if totient_list[n2] == 0:
+                    totient_list[n2] = 2 * prev_phi
+                prev_phi = totient_list[n2]
+                n2 *= 2
+
+    return totient_list
+
+
+
+
+
 
 # 73. Counting fractions in a range
 # Consider the fraction, n/d, where n and d are positive integers.
@@ -192,7 +319,7 @@ def left_ordered_fraction(in_fraction, max_d):
 
 # Problem 70-79 Checks
 if __name__ == '__main__':  # only if run as a script, skip when imported as module
-    problem_num = 71
+    problem_num = 72
 
     if problem_num == 70:
         print('minimum_totient_ratio_permuation(10**5) =', minimum_totient_ratio_permuation(10**5))
@@ -212,6 +339,19 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
         print('left_ordered_fraction((3, 7), 10**6) =', left_ordered_fraction((3, 7), 10**6))
     elif problem_num == 72:
         print()
+        for z in range(2, 9):
+            print('count_reduced_fractions(', z, ') =', count_reduced_fractions(z))
+#        print('count_reduced_fractions(10**3) =', count_reduced_fractions(10**3))
+        print()
+        for z in range(2, 9):
+            print('list_reduced_fractions(', z, ') =', list_reduced_fractions(z))
+        print()
+        zlist = generate_totient_list(40)
+        for z in range(2, 41):
+            print('    ', z, zlist[z], common.totient(z))
+        print()
+        z = 10**3
+        print('sum(generate_totient_list(', z, ')) =', sum(generate_totient_list(z)))
     elif problem_num == 73:
         print()
     elif problem_num == 74:

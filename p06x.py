@@ -911,7 +911,7 @@ def generate_magic_rings(ring_size, number_list):
 
 
 # 69 Totient maximum
-# Euler's Totient function, f(n) [sometimes called the phi function], is used to determine the number of numbers
+# Euler's Totient function, f(n) [sometimes called the totient function], is used to determine the number of numbers
 # less than n which are relatively prime to n.
 # For example, as 1, 2, 4, 5, 7, and 8, are all less than nine and relatively prime to nine, f(9)=6.
 #     n	 Rel. Prime    f(n)	n/f(n)
@@ -928,15 +928,15 @@ def generate_magic_rings(ring_size, number_list):
 # Find the value of n <= 1,000,000 for which n/f(n) is a maximum.
 
 def maximum_totient_ratio_simple(max_n):
-    """Return number n < max_n with maximum n/phi(n) ratio.
-    Per analysis, the n with maximum n/phi(n) for any given range will be an even number.
+    """Return number n < max_n with maximum n/totient(n) ratio.
+    Per analysis, the n with maximum n/totient(n) for any given range will be an even number.
 
     :param max_n:   maximum n to check
-    :return:        n with the maximum n/phi(n) ratio in the form:  (n, phi(n), n/phi(n))
+    :return:        n with the maximum n/totient(n) ratio in the form:  (n, totient(n), n/totient(n))
     """
     max_ratio = (0, 0, 0)
     for n in range(2, max_n+1, 2):  # Check only even n
-        f = common.phi(n)
+        f = common.totient(n)
         ratio = n/f
         if max_ratio[-1] < ratio:
             max_ratio = (n, f, ratio)
@@ -945,18 +945,18 @@ def maximum_totient_ratio_simple(max_n):
 
 
 def maximum_totient_ratio_odd(max_n):
-    """Return number n < max_n with maximum n/phi(n) ratio.
-    Per analysis, the n with maximum n/phi(n) for any given range will be an even number that is twice an odd number
+    """Return number n < max_n with maximum n/totient(n) ratio.
+    Per analysis, the n with maximum n/totient(n) for any given range will be an even number that is twice an odd number
     because of the property:
-            phi(2m) = 2*phi(m) if m is even
-                    = phi(m) if m is odd
+            totient(2m) = 2*totient(m) if m is even
+                    = totient(m) if m is odd
 
     :param max_n:   maximum n to check
-    :return:        n with the maximum n/phi(n) ratio in the form:  (n, phi(n), n/phi(n))
+    :return:        n with the maximum n/totient(n) ratio in the form:  (n, totient(n), n/totient(n))
     """
     max_ratio = (0, 0, 0)
     for n in range(1, 1+max_n//2, 2):   # Only odd n
-        f = common.phi(n)
+        f = common.totient(n)
         ratio_2n = 2*n/f
         if max_ratio[-1] < ratio_2n:
             max_ratio = (2*n, f, ratio_2n)
@@ -965,18 +965,18 @@ def maximum_totient_ratio_odd(max_n):
 
 
 def maximum_totient_ratio_prime(max_n):
-    """Return number n < max_n with maximum n/phi(n) ratio.
+    """Return number n < max_n with maximum n/totient(n) ratio.
     Euler's product formula:
         n = (p1**k1) * (p2**k2) * ...
-        phi(n)  = n * (1 - 1/p1) * (1 - 1/p2) * ...
+        totient(n)  = n * (1 - 1/p1) * (1 - 1/p2) * ...
                 = n * (p1 - 1)/p1 * (p2 -1)/p2 * ...
-        n/phi(n) = (p1*p2*...)/((p1-1)*(p2-1)*...) -> increases as more prime are added.
+        n/totient(n) = (p1*p2*...)/((p1-1)*(p2-1)*...) -> increases as more prime are added.
         where p1, p2, ... are primes.
-    Per analysis, the n with maximum n/phi(n) for any given range will be the product of primes since that number
+    Per analysis, the n with maximum n/totient(n) for any given range will be the product of primes since that number
     has the maximum count of distinct primes p1, p2, ...
 
     :param max_n:   maximum n to check
-    :return:        n with the maximum n/phi(n) ratio in the form:  (n, phi(n), n/phi(n))
+    :return:        n with the maximum n/totient(n) ratio in the form:  (n, totient(n), n/totient(n))
     """
 
     prime_list = common.prime_list_mr(0, 1000)

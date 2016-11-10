@@ -167,13 +167,14 @@ def get_gcd(a, b):          # Greatest Common Multiple using Euclidean Algorithm
 # def get_prime_factors(num, prime_list): below in Prime Procedures section
 
 
-def phi(n):
+def totient(n):
     """Euler's Totient Function
     Return the count of numbers less than n which are coprime(relatively prime) to n.
 
     :param n: number to be checked
     :return:  count of values < n which have GCD == 1.
     """
+
     if n%2 == 0:    # for even n
         # only odd numbers can be coprime with even n.
         coprimes = [i for i in range(1, n, 2) if get_gcd(i, n) == 1]
@@ -647,8 +648,8 @@ if __name__ == '__main__':  # only if run as a script, skip when imported as mod
     for z in range(1, 13):
         print(y, z, reduce_fraction(y, z))
 
-    # Check phi()
+    # Check totient()
     print()
-    print('Check phi()')
-    for z in range(2, 11):
-        print(z, phi(z), z/phi(z))
+    print('Check totient()')
+    for z in range(2, 30):
+        print(z, totient(z), z / totient(z))
